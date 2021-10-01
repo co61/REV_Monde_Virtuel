@@ -163,7 +163,40 @@ function creerEscalier(nom,opts,scn){
 }
 
 
+function createDoorWall(nom, opts, scn)//, {hauteur:5.0, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauCloison }, scene) )
+{
+	let options   = opts || {} ; 
 
+	let hauteur   = options.hauteur || 5.0; 
+	let largeur   = options.largeur || 10.0 ; 
+	let hauteurPorte = options.hauteurPorte || 2.5;
+	let largeurPorte = options.largeurPorte || 3.0;
+
+	let materiau = options.materiau || new BABYLON.StandardMaterial("materiau-pos"+nom,scn);
+	let groupe = new BABYLON.TransformNode("groupe-"+nom) ;
+
+	const corners = [ new BABYLON.Vector2(largeur/2, 0),
+		new BABYLON.Vector2(largeur/2, hauteur),
+		new BABYLON.Vector2(-largeur/2, hauteur),
+		new BABYLON.Vector2(-largeur/2, 0)
+	];
+
+	const hole = [ new BABYLON.Vector2(largeurPorte/2, 0),
+		new BABYLON.Vector2(largeurPorte/2, hauteurPorte),
+		new BABYLON.Vector2(-largeurPorte/2, hauteurPorte),
+		new BABYLON.Vector2(-largeurPorte/2, 0)
+	];          
+
+	const doorWall = new BABYLON.PolygonMeshBuilder("doorWall",corners, scn);
+	doorWall.addHole(hole);
+	const polygon = doorWall.build(false, 0.3); //updatable or not, depth
+
+	polygon.material= materiau ;
+	polygon.parent=groupe;
+
+	return groupe ;  
+
+};
 
 
 
