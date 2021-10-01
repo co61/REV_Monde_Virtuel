@@ -11,7 +11,13 @@ function init(){
 
 	camera = creerCamera("camera",{}, scene) ; 
 
-	
+	scene.gravity = new BABYLON.Vector3(0, -0.30, 0);
+	camera.applyGravity = true;
+	camera.ellipsoid = new BABYLON.Vector3(1, 1, 1); 
+
+	scene.collisionsEnabled = true;
+	camera.checkCollisions = true;	
+
 	createLights() ;
 	peuplerScene() ;  
 
@@ -24,7 +30,14 @@ function init(){
 
 
 function createLights(){
-	var light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(5,5,5), scene) ; 
+	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
+
+	// https://doc.babylonjs.com/divingDeeper/lights/shadows
+	var lightHall = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,0,15), scene) ; 
+	var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ; 
+	// var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
+	// var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
+	// var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
 }
 
 function murs(){
@@ -83,6 +96,10 @@ function peuplerScene(){
 	var cloisonFloor = creerCloison("cloisonFloor",{hauteur:15.0, largeur:30.0,materiau:materiauCloison},scene) ;
 	cloisonFloor.position = new BABYLON.Vector3(15,5,0) ; 
 	cloisonFloor.rotation.x = 1/2*Math.PI;
+
+	var plafond = creerCloison("plafond",{hauteur:30.0, largeur:30.0,materiau:materiauCloison},scene) ;
+	plafond.position = new BABYLON.Vector3(15,10,0) ; 
+	plafond.rotation.x = 1/2*Math.PI;
 
 	var escalier = creerEscalier("escalier",{hauteur:5, largeur:3.0, longueur : 10.0, nbmarches:25,materiau:materiauCloison},scene) ;
 	escalier.position = new BABYLON.Vector3(28.5,0,25) ; 
