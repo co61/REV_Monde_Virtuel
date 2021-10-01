@@ -11,8 +11,8 @@ function creerCamera(name,options,scn){
 	// Création de la caméra
 	// =====================
 
-	camera = new BABYLON.UniversalCamera(name,new BABYLON.Vector3(10,1.7,5),scn) ;
-	camera.setTarget(new BABYLON.Vector3(0.0,0.7,0.0)) ; 
+	camera = new BABYLON.UniversalCamera(name,new BABYLON.Vector3(15,45,15),scn) ;
+	camera.setTarget(new BABYLON.Vector3(15,0,15)) ; 
 
 	camera.keysUp = [90,38];
 	camera.keysDown = [40,83];
