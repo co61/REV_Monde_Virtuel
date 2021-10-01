@@ -84,8 +84,9 @@ function peuplerScene(){
 	cloisonFloor.position = new BABYLON.Vector3(15,5,0) ; 
 	cloisonFloor.rotation.x = 1/2*Math.PI;
 
-
-
+	var escalier = creerEscalier("escalier",{hauteur:5, largeur:3.0, longueur : 10.0, nbmarches:25,materiau:materiauCloison},scene) ;
+	escalier.position = new BABYLON.Vector3(28.5,0,25) ; 
+	escalier.rotation.y = Math.PI;
 
 	/*for(var i=0; i< 10; i++){
 		var cl= creerCloison("cloison-"+i, {materiau:materiauCloison}, scene) ; 
@@ -93,10 +94,10 @@ function peuplerScene(){
 	}*/ 
 
 	// Création d un tableau
-	var tableau = creerPoster("tableau1",{tableau:"assets/tableaux/Berthe.jpg"},scene) ;
-	tableau.parent = cloisonUp ; // on accroche le tableau à la cloison 
-	tableau.position.z = -0.1  ;  
-	tableau.position.y = 1.7 ; 
+	// var tableau = creerPoster("tableau1",{tableau:"assets/tableaux/Berthe.jpg"},scene) ;
+	// tableau.parent = cloisonUp ; // on accroche le tableau à la cloison 
+	// tableau.position.z = -0.1  ;  
+	// tableau.position.y = 1.7 ; 
 	
 
 
