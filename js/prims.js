@@ -11,7 +11,7 @@ function creerCamera(name,options,scn){
 	// Création de la caméra
 	// =====================
 
-	camera = new BABYLON.UniversalCamera(name,new BABYLON.Vector3(15,45,15),scn) ;
+	camera = new BABYLON.UniversalCamera(name,new BABYLON.Vector3(15,2,25),scn) ;
 	camera.setTarget(new BABYLON.Vector3(15,0,15)) ; 
 
 	camera.keysUp = [90,38];
@@ -53,6 +53,9 @@ function creerSol(name,options,scn){
 	sol.material.ambientTexture.vScale = 10.0;
 	sol.receiveShadows = true;
 	sol.metadata = {"type": 'ground'}
+
+	sol.checkCollisions = true;
+
 	return sol
 }
 
@@ -125,6 +128,34 @@ function creerCloison(nom,opts,scn){
 	cloison.material = materiau ; 
 	cloison.parent = groupe ; 
 	cloison.position.y = hauteur / 2.0 ; 
+
+	cloison.checkCollisions = true;
+
+    return groupe ;  
+}
+
+function creerEscalier(nom,opts,scn){
+	
+	let options   = opts || {} ; 
+	let hauteur   = options.hauteur || 3.0 ; 
+	let largeur   = options.largeur || 5.0 ; 
+	let longueur   = options.longueur || 10.0 ; 
+	let nbMarche  = options.nbmarches || 20.0 ;	
+	let epaisseur = options.epaisseur || 0.1 ;
+
+
+	let materiau   = options.materiau || new BABYLON.StandardMaterial("materiau-pos"+nom,scn); 
+
+    	let groupe = new BABYLON.TransformNode("groupe-"+nom) ; 
+
+	for (let i = 0 ; i< nbMarche; i++){
+		// creerCloison("cloisonFloor",{hauteur:15.0, largeur:30.0,materiau:materiauCloison},scene) ;
+		let marche = creerCloison("marche"+i,{largeur:largeur,hauteur:longueur/nbMarche,depth:epaisseur, materiau:materiau},scn) ;
+		marche.position = new BABYLON.Vector3(0,hauteur/nbMarche*i,longueur/nbMarche*i) ; 
+		marche.rotation.x = 1/2*Math.PI
+		marche.material = materiau ; 
+		marche.parent = groupe ;
+	}
 
 
 
