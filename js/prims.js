@@ -79,7 +79,7 @@ function creerMateriauSimple(nom,options,scn){
 function creerSphere(nom,opts,scn){
 
 	let options  = opts || {} ; 
-	let diametre = options.diametre || 1.0 ; 
+	let diametre = options.diametre || 1.0 ;
 
 	let sph = BABYLON.Mesh.CreateSphere(nom,diametre,1,scn) ;
 	sph.material              = new BABYLON.StandardMaterial("blanc",scene) ;
@@ -194,6 +194,7 @@ function createDoorWall(nom, opts, scn)//, {hauteur:5.0, largeur:10.0, hauteurPo
 	polygon.material= materiau ;
 	polygon.parent=groupe;
 
+	polygon.checkCollisions = true;
 	return groupe ;  
 
 };
