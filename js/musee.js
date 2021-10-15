@@ -43,42 +43,18 @@ function createLights(){
 	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
 
 	// https://doc.babylonjs.com/divingDeeper/lights/shadows
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 10, 15), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(180) , 0.1, scene);
-	var lightScene = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(30,30,30), scene) ; 
-	var lightScene = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(0,30,0), scene) ; 
-	// var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(29.5, 9.8, 29.5), new BABYLON.Vector3(-1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0.5, 9.8, 29.5), new BABYLON.Vector3(1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(29.5, 9.8, 0.5), new BABYLON.Vector3(1, -0.5, 1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0.5, 9.8, 0.5), new BABYLON.Vector3(-1, -0.5, 1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
-	// var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
-	// var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
-	// lightEntrance.intensity=2;
-	// lightSalle1.intensity=0.5;
-	// lightSalle2.intensity=0.5;
-	// lightSalle3.intensity=0.5;
-
+	var lightHall = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,0,15), scene) ; 
+	var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
+	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 9.8, 22.5), new BABYLON.Vector3(0, -1, 0), Math.PI , 0.5, scene);
+	var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
+	var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
+	var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
+	lightHall.intensity=0.5;
+	lightSalle1.intensity=0.5;
+	lightSalle2.intensity=0.5;
+	lightSalle3.intensity=0.5;
 }
 
-
-// // mesh labels
-//     meshes.forEach((m) => {
-//         //rajouter if box camera dans box tableau alors afficher pancarte
-//         header = BABYLON.GUI.Button.CreateSimpleButton(m.name, m.name);
-
-//         header.width = "150px";
-//         header.height = "35px";
-//         header.color = "white";
-//         header.background = "green";
-//         header.cornerRadius = 10;
-
-//         advancedTexture.addControl(header);
-
-//         header.linkWithMesh(m);
-//         header.linkOffsetY = 50;
-//     });
-    
 
 function peuplerScene(){
 
@@ -91,6 +67,7 @@ function peuplerScene(){
 	materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
 	materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
 	materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
+	materiauNoir= creerMateriauSimple("mat-noir",{couleur:new BABYLON.Color3(0.1,0.1,0.1)},scene);
 
 	sol.receiveShadows = true;
 
@@ -198,7 +175,7 @@ function peuplerScene(){
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
 
-	//shadow Hall
+		//shadow Hall
 	// shadowGeneratorHall = new BABYLON.ShadowGenerator(1024, lightHall);
 	// shadowGeneratorHall.usePoissonSampling = true;
  //    shadowGeneratorHall.transparencyShadow = true;
@@ -233,8 +210,10 @@ function peuplerScene(){
 
 	
 	//creation d'une porte
-	createCentraleDoor();
-	createRoomDoors();	
+	createCentraleDoor(scene);
+	createRoomDoors(scene);	
+
+	creerPendule("pendule",scene);
 }
 
 
@@ -308,6 +287,10 @@ function set_FPS_mode(scene, canvas, camera){
 	alpha = 0;
 	porte1=false;
 	porte2=false;
+	gauche=true;
+	tape2=false;
+	beta=0;
+	beta2=-1;
     scene.registerBeforeRender( function()  {
 		if(boxCamera.intersectsMesh(contactBoxPorte,false)){ i=1;	}
 		else if(boxCamera.intersectsMesh(contactBoxPorte2,false)){ i=2; }
@@ -397,6 +380,34 @@ function set_FPS_mode(scene, canvas, camera){
 
 		porteCentrale.rotation.y=alpha;
 		porteCentrale2.rotation.y=-alpha;
+
+		if (beta2<=	0 && !tape2 && gauche==true){
+			beta2+=0.03;
+		}
+		else if (!tape2 && beta2>-1 && gauche==false){
+			beta2-=0.03;
+		}
+		if (beta2>=0 && gauche==true){
+			tape2=true;
+		}
+		else if (beta2<=-1 && gauche==false){
+			gauche=true;
+		}
+		if (tape2 && beta<1 && gauche==true){
+			beta+=0.03;
+		}
+		else if (tape2 && beta>=0 && gauche==false ){
+			beta-=0.03;
+		}
+		if (gauche==false && beta<=0 ){
+			tape2=false;
+		}
+		else if (beta>=1 && gauche==true){
+			gauche=false;
+		}
+		fil1.rotation.z=beta2;
+		fil4.rotation.z=beta;
+		
 	});
 	// Event listener when the pointerlock is updated (or removed by pressing ESC for example).
 	var pointerlockchange = function () {
