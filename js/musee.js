@@ -43,18 +43,42 @@ function createLights(){
 	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
 
 	// https://doc.babylonjs.com/divingDeeper/lights/shadows
-	var lightHall = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,0,15), scene) ; 
-	var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 9.8, 22.5), new BABYLON.Vector3(0, -1, 0), Math.PI , 0.5, scene);
-	var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
-	var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
-	var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
-	lightHall.intensity=0.5;
-	lightSalle1.intensity=0.5;
-	lightSalle2.intensity=0.5;
-	lightSalle3.intensity=0.5;
+	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 10, 15), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(180) , 0.1, scene);
+	var lightScene = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(30,30,30), scene) ; 
+	var lightScene = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(0,30,0), scene) ; 
+	// var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
+	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(29.5, 9.8, 29.5), new BABYLON.Vector3(-1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
+	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0.5, 9.8, 29.5), new BABYLON.Vector3(1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
+	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(29.5, 9.8, 0.5), new BABYLON.Vector3(1, -0.5, 1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
+	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0.5, 9.8, 0.5), new BABYLON.Vector3(-1, -0.5, 1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
+	// var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
+	// var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
+	// var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
+	// lightEntrance.intensity=2;
+	// lightSalle1.intensity=0.5;
+	// lightSalle2.intensity=0.5;
+	// lightSalle3.intensity=0.5;
+
 }
 
+
+// // mesh labels
+//     meshes.forEach((m) => {
+//         //rajouter if box camera dans box tableau alors afficher pancarte
+//         header = BABYLON.GUI.Button.CreateSimpleButton(m.name, m.name);
+
+//         header.width = "150px";
+//         header.height = "35px";
+//         header.color = "white";
+//         header.background = "green";
+//         header.cornerRadius = 10;
+
+//         advancedTexture.addControl(header);
+
+//         header.linkWithMesh(m);
+//         header.linkOffsetY = 50;
+//     });
+    
 
 function peuplerScene(){
 
@@ -174,7 +198,7 @@ function peuplerScene(){
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
 
-		//shadow Hall
+	//shadow Hall
 	// shadowGeneratorHall = new BABYLON.ShadowGenerator(1024, lightHall);
 	// shadowGeneratorHall.usePoissonSampling = true;
  //    shadowGeneratorHall.transparencyShadow = true;
