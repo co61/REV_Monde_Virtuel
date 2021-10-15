@@ -11,7 +11,7 @@ function creerCamera(name,options,scn){
 	// Création de la caméra
 	// =====================
 
-	camera = new BABYLON.UniversalCamera(name,new BABYLON.Vector3(15,2,25),scn) ;
+	camera = new BABYLON.UniversalCamera(name,new BABYLON.Vector3(15,1.7,40),scn) ;
 	camera.setTarget(new BABYLON.Vector3(15,0,15)) ; 
 
 	camera.keysUp = [90,38];
@@ -52,11 +52,27 @@ function creerSol(name,options,scn){
 	sol.material.ambientTexture.uScale = 10.0;
 	sol.material.ambientTexture.vScale = 10.0;
 	sol.receiveShadows = true;
-	sol.metadata = {"type": 'ground'}
+	sol.metadata = {"type": 'ground'};
 
 	sol.checkCollisions = true;
 
 	return sol
+}
+
+function creerCiel(nom,scn){
+
+	let scene = scn;
+
+	var skybox = BABYLON.MeshBuilder.CreateBox(nom, { size: 1000.0 }, scene);
+	var skyboxMaterial = new BABYLON.StandardMaterial("skyBox"+nom, scene);
+	skyboxMaterial.backFaceCulling = false;
+	skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/skybox/skybox", scene);
+	skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+	skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+	skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+	skybox.material = skyboxMaterial;
+	//skybox.metadata = {"Type": 'sky'};
+	return skybox;
 }
 
 function creerMateriauSimple(nom,options,scn){
@@ -121,17 +137,43 @@ function creerCloison(nom,opts,scn){
 	let epaisseur = options.epaisseur || 0.1 ;
 
 	let materiau   = options.materiau || new BABYLON.StandardMaterial("materiau-pos"+nom,scn); 
+	let materiau2   = options.materiau2 || options.materiau; 
 
-    	let groupe = new BABYLON.TransformNode("groupe-"+nom) ; 
+    let groupe = new BABYLON.TransformNode("groupe-"+nom) ; 
 
-	let cloison = BABYLON.MeshBuilder.CreateBox(nom,{width:largeur,height:hauteur,depth:epaisseur},scn) ;
-	cloison.material = materiau ; 
-	cloison.parent = groupe ; 
-	cloison.position.y = hauteur / 2.0 ; 
+	let cloison1 = BABYLON.MeshBuilder.CreateBox(nom,{width:largeur,height:hauteur,depth:epaisseur/2},scn) ;
+	cloison1.material = materiau ; 
+	cloison1.parent = groupe ; 
+	cloison1.position.z=-epaisseur/4;
+	cloison1.position.y = hauteur / 2.0 ; 
+	cloison1.checkCollisions = true;
 
-	cloison.checkCollisions = true;
+	let cloison2 = BABYLON.MeshBuilder.CreateBox(nom,{width:largeur,height:hauteur,depth:epaisseur/2},scn) ;
+	cloison2.material = materiau2 ; 
+	cloison2.parent = groupe ; 
+	cloison2.position.z=epaisseur/4;
+	cloison2.position.y = hauteur / 2.0 ; 
+	cloison2.rotation.z=Math.PI;
+	cloison2.checkCollisions = true;
+	
 
     return groupe ;  
+}
+
+function creerPorte(nom,opts,scn){
+	let options   = opts || {} ; 
+	let hauteur   = options.hauteur || 3.0 ; 
+	let largeur   = options.largeur || 5.0 ;
+	let epaisseur = options.epaisseur || 0.1 ;
+
+	let materiau   = options.materiau || new BABYLON.StandardMaterial("materiau-pos"+nom,scn); 
+	let materiau2   = options.materiau2 || options.materiau; 
+	let groupe = new BABYLON.TransformNode("groupe-"+nom) ;
+
+	let porte = creerCloison("marche",{largeur:largeur,hauteur:hauteur,depth:epaisseur, materiau:materiau,materiau2:materiau2},scn) ;
+	porte.parent=groupe;
+	porte.checkCollisions = true;
+	return groupe;
 }
 
 function creerEscalier(nom,opts,scn){
@@ -145,15 +187,14 @@ function creerEscalier(nom,opts,scn){
 
 
 	let materiau   = options.materiau || new BABYLON.StandardMaterial("materiau-pos"+nom,scn); 
+	let materiau2   = options.materiau2 || options.materiau; 
 
     	let groupe = new BABYLON.TransformNode("groupe-"+nom) ; 
 
 	for (let i = 0 ; i< nbMarche; i++){
-		// creerCloison("cloisonFloor",{hauteur:15.0, largeur:30.0,materiau:materiauCloison},scene) ;
-		let marche = creerCloison("marche"+i,{largeur:largeur,hauteur:longueur/nbMarche,depth:epaisseur, materiau:materiau},scn) ;
+		let marche = creerCloison("marche"+i,{largeur:largeur,hauteur:longueur/nbMarche,depth:epaisseur, materiau:materiau,materiau2:materiau2},scn) ;
 		marche.position = new BABYLON.Vector3(0,hauteur/nbMarche*i,longueur/nbMarche*i) ; 
 		marche.rotation.x = 1/2*Math.PI
-		marche.material = materiau ; 
 		marche.parent = groupe ;
 	}
 
@@ -171,8 +212,10 @@ function createDoorWall(nom, opts, scn)//, {hauteur:5.0, largeur:10.0, hauteurPo
 	let largeur   = options.largeur || 10.0 ; 
 	let hauteurPorte = options.hauteurPorte || 2.5;
 	let largeurPorte = options.largeurPorte || 3.0;
+	let epaisseur = options.epaisseur || 0.1;
 
 	let materiau = options.materiau || new BABYLON.StandardMaterial("materiau-pos"+nom,scn);
+	let materiau2= options.materiau2 || options.materiau; 
 	let groupe = new BABYLON.TransformNode("groupe-"+nom) ;
 
 	const corners = [ new BABYLON.Vector2(largeur/2, 0),
@@ -189,10 +232,18 @@ function createDoorWall(nom, opts, scn)//, {hauteur:5.0, largeur:10.0, hauteurPo
 
 	const doorWall = new BABYLON.PolygonMeshBuilder("doorWall",corners, scn);
 	doorWall.addHole(hole);
-	const polygon = doorWall.build(false, 0.3); //updatable or not, depth
-
+	const polygon = doorWall.build(false, epaisseur/2); //updatable or not, depth
 	polygon.material= materiau ;
+	polygon.position.z=-epaisseur/4;
 	polygon.parent=groupe;
+	polygon.checkCollisions = true;
+
+	const polygon2 = doorWall.build(false, epaisseur/2); //updatable or not, depth
+	polygon2.material= materiau2 ;
+	polygon2.position.z=epaisseur/4;
+	polygon2.rotation.z=Math.PI;
+	polygon2.parent=groupe;
+	polygon2.checkCollisions = true;
 
 	polygon.checkCollisions = true;
 	return groupe ;  
@@ -222,6 +273,7 @@ function set_FPS_mode(scene, canvas, camera){
 		//evt === 1 (mouse wheel click (not scrolling))
 		//evt === 2 (right mouse click)
 	};
+
 
 	// Event listener when the pointerlock is updated (or removed by pressing ESC for example).
 	var pointerlockchange = function () {
