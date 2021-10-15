@@ -16,12 +16,13 @@ function init(){
 
 	scene.gravity = new BABYLON.Vector3(0, -0.10, 0);
 	camera.applyGravity = true;
-  camera._needMoveForGravity = true;
+  	camera._needMoveForGravity = true;
 	camera.ellipsoid = new BABYLON.Vector3(1.1, .8, 1.1); 
 	boxCamera=BABYLON.Mesh.CreateBox("boxCamera",1,scene);
 	boxCamera.scaling=new BABYLON.Vector3(2,2,2);
 	boxCamera.position = new BABYLON.Vector3(camera.position.x,camera.position.y-0.5,camera.position.z);
 	boxCamera.setParent(camera);
+	boxCamera.isPickable=false;
 
 
 	scene.collisionsEnabled = true;
@@ -42,7 +43,7 @@ function createLights(){
 	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
 
 	// https://doc.babylonjs.com/divingDeeper/lights/shadows
-	//var lightHall = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,0,15), scene) ; 
+	var lightHall = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,0,15), scene) ; 
 	var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
 	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 9.8, 22.5), new BABYLON.Vector3(0, -1, 0), Math.PI , 0.5, scene);
 	var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
@@ -62,17 +63,17 @@ function peuplerScene(){
 	var ciel=creerCiel("ciel",scene);
 	
 	//création de matériaux
-	var materiauPorte = creerMateriauSimple("mat-porte",{texture:"assets/textures/porte.jpeg"},scene) ;
-	var materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
-	var materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
-	var materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
+	materiauPorte = creerMateriauSimple("mat-porte",{texture:"assets/textures/porte.jpeg"},scene) ;
+	materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
+	materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
+	materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
 
 	sol.receiveShadows = true;
 
-	var materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/murs.jpg"}, scene) ; 
-	var materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
-	var materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
-	var materiauIllusion = creerMateriauSimple("mat-illusion",{texture:"assets/textures/illusion.jpg"}, scene) ;
+	materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/murs.jpg"}, scene) ; 
+	materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
+	materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
+	materiauIllusion = creerMateriauSimple("mat-illusion",{texture:"assets/textures/illusion.jpg"}, scene) ;
 
 	// Création d'une cloison
 	var cloisonUpRight = creerCloison("cloisonUpRight",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
@@ -173,11 +174,7 @@ function peuplerScene(){
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
 
-	var escalier = creerEscalier("escalier",{hauteur:5, largeur:3.0, longueur : 10.0, nbmarches:35,materiau:materiauCloison},scene) ;
-	escalier.position = new BABYLON.Vector3(28.5,0,25) ; 
-	escalier.rotation.y = Math.PI;
-
-	//shadow Hall
+		//shadow Hall
 	// shadowGeneratorHall = new BABYLON.ShadowGenerator(1024, lightHall);
 	// shadowGeneratorHall.usePoissonSampling = true;
  //    shadowGeneratorHall.transparencyShadow = true;
@@ -212,30 +209,10 @@ function peuplerScene(){
 
 	
 	//creation d'une porte
-	porteCentrale=creerPorte("porteCentrale",{hauteur:3.8, largeur:3,materiau2:materiauPorte,materiau:materiauPorteG},scene);
-	porteCentrale.position=new BABYLON.Vector3(13.5,0,30);
-	const porteCentralepivotAt = new BABYLON.Vector3(12, 0, 30);
-	const porteCentralerelativePosition = porteCentralepivotAt.subtract(porteCentrale.position)
-	porteCentrale.setPivotPoint(porteCentralerelativePosition);
-
-	porteCentrale2=creerPorte("porteCentrale2",{hauteur:3.8, largeur:3,materiau2:materiauPorteG,materiau:materiauPorte},scene);
-	porteCentrale2.position=new BABYLON.Vector3(16.5,0,30);
-	const porteCentrale2pivotAt = new BABYLON.Vector3(18, 0, 30);
-	const porteCentrale2relativePosition = porteCentrale2pivotAt.subtract(porteCentrale2.position)
-	porteCentrale2.setPivotPoint(porteCentrale2relativePosition);
-
-	contactBoxDoorCentrale1=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale1", 1,scene);
-	contactBoxDoorCentrale1.scaling = new BABYLON.Vector3(6,8,2.5);
-	contactBoxDoorCentrale1.position=new BABYLON.Vector3(15,0,31.25);
-	contactBoxDoorCentrale1.visibility = 0;
-
-	contactBoxDoorCentrale2=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale2", 1,scene);
-	contactBoxDoorCentrale2.scaling = new BABYLON.Vector3(6,8,2.5);
-	contactBoxDoorCentrale2.position=new BABYLON.Vector3(15,0,28.75);
-	contactBoxDoorCentrale2.visibility = 0;
-
-	
+	createCentraleDoor();
+	createRoomDoors();	
 }
+
 
 var isLocked = false ;
 
@@ -257,6 +234,7 @@ function set_FPS_mode(scene, canvas, camera){
 				canvas.requestPointerLock();
 			}
 		}
+		console.log(pickResult.pickedMesh.name);
 		if(pickResult.pickedMesh.name=='sphere1' || pickResult.pickedMesh.name=='sphere2'){
 			camera.position= new BABYLON.Vector3(pickResult.pickedMesh.position.x,pickResult.pickedMesh.position.y+1,pickResult.pickedMesh.position.z);
 		}
@@ -300,10 +278,47 @@ function set_FPS_mode(scene, canvas, camera){
 		//evt === 1 (mouse wheel click (not scrolling))
 		//evt === 2 (right mouse click)
 	};
+	posLimite=0;
+	i=0;
+	pos=0;
 	alpha = 0;
 	porte1=false;
 	porte2=false;
     scene.registerBeforeRender( function()  {
+		if(boxCamera.intersectsMesh(contactBoxPorte,false)){ i=1;	}
+		else if(boxCamera.intersectsMesh(contactBoxPorte2,false)){ i=2; }
+		else if(boxCamera.intersectsMesh(contactBoxPorte3,false)){ i=3; }
+
+		if(boxCamera.intersectsMesh(contactBoxPorte,false) || boxCamera.intersectsMesh(contactBoxPorte2,false) || boxCamera.intersectsMesh(contactBoxPorte3,false)){
+			if (posLimite<1.6){
+				pos=0.05;
+				posLimite+=pos;
+			}
+			else{
+				pos=0;
+			}
+		}else{
+			if (posLimite>0){
+				pos=-0.05;
+				posLimite+=pos;
+			}
+			else{
+				pos=0;
+			}
+		}
+		if (i==1){
+			porteGauche.position.x+=pos;
+			porteDroite.position.x-=pos;
+		}
+		else if (i==2){
+			porteGauche2.position.x+=pos;
+			porteDroite2.position.x-=pos;
+		}
+		else if (i==3){
+			porteGauche3.position.x+=pos;
+			porteDroite3.position.x-=pos;
+		}
+		
 		
         //Balloon 1 intersection -- Precise = false
         if (boxCamera.intersectsMesh(contactBoxDoorCentrale1, false)) {

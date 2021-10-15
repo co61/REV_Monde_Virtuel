@@ -170,10 +170,67 @@ function creerPorte(nom,opts,scn){
 	let materiau2   = options.materiau2 || options.materiau; 
 	let groupe = new BABYLON.TransformNode("groupe-"+nom) ;
 
-	let porte = creerCloison("marche",{largeur:largeur,hauteur:hauteur,depth:epaisseur, materiau:materiau,materiau2:materiau2},scn) ;
+	let porte = creerCloison(nom,{largeur:largeur,hauteur:hauteur,epaisseur:epaisseur, materiau:materiau,materiau2:materiau2},scn) ;
 	porte.parent=groupe;
 	porte.checkCollisions = true;
 	return groupe;
+}
+function createCentraleDoor(){
+	porteCentrale=creerPorte("porteCentrale",{hauteur:3.8, largeur:3,materiau2:materiauPorte,materiau:materiauPorteG},scene);
+	porteCentrale.position=new BABYLON.Vector3(13.5,0,30);
+	const porteCentralepivotAt = new BABYLON.Vector3(12, 0, 30);
+	const porteCentralerelativePosition = porteCentralepivotAt.subtract(porteCentrale.position)
+	porteCentrale.setPivotPoint(porteCentralerelativePosition);
+
+	porteCentrale2=creerPorte("porteCentrale2",{hauteur:3.8, largeur:3,materiau2:materiauPorteG,materiau:materiauPorte},scene);
+	porteCentrale2.position=new BABYLON.Vector3(16.5,0,30);
+	const porteCentrale2pivotAt = new BABYLON.Vector3(18, 0, 30);
+	const porteCentrale2relativePosition = porteCentrale2pivotAt.subtract(porteCentrale2.position)
+	porteCentrale2.setPivotPoint(porteCentrale2relativePosition);
+
+	contactBoxDoorCentrale1=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale1", 1,scene);
+	contactBoxDoorCentrale1.scaling = new BABYLON.Vector3(6,4,2.5);
+	contactBoxDoorCentrale1.position=new BABYLON.Vector3(15,0,31.25);
+	contactBoxDoorCentrale1.visibility = 0;
+
+	contactBoxDoorCentrale2=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale2", 1,scene);
+	contactBoxDoorCentrale2.scaling = new BABYLON.Vector3(6,4,2.5);
+	contactBoxDoorCentrale2.position=new BABYLON.Vector3(15,0,28.75);
+	contactBoxDoorCentrale2.visibility = 0;
+}
+function createRoomDoors(){
+	porteGauche=creerPorte("porteGauche",{hauteur:2.52, largeur:1.5,epaisseur:0.04,materiau2:materiauPorteG,materiau:materiauPorte},scene);
+	porteDroite=creerPorte("porteDroite",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
+	porteGauche.position=new BABYLON.Vector3(25.75,-0.2,15.085);
+	porteGauche.rotation.x=-3*Math.PI/20;
+	porteDroite.position=new BABYLON.Vector3(24.25,-0.2,15.085);
+	porteDroite.rotation.x=-3*Math.PI/20;
+	contactBoxPorte=BABYLON.Mesh.CreateBox("contactBoxPorte", 1,scene);
+	contactBoxPorte.scaling = new BABYLON.Vector3(1.5,3,3);
+	contactBoxPorte.position=new BABYLON.Vector3(25.75,-0.2,15.085);
+	contactBoxPorte.visibility = 0;
+
+	porteGauche2=creerPorte("porteGauche2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
+	porteDroite2=creerPorte("porteDroite2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
+	porteGauche2.position=new BABYLON.Vector3(15.75,-0.2,15.075);
+	porteGauche2.rotation.x=-3*Math.PI/20;
+	porteDroite2.position=new BABYLON.Vector3(14.25,-0.2,15.075);
+	porteDroite2.rotation.x=-3*Math.PI/20;	
+	contactBoxPorte2=BABYLON.Mesh.CreateBox("contactBoxPorte2", 1,scene);
+	contactBoxPorte2.scaling = new BABYLON.Vector3(1.5,3,3);
+	contactBoxPorte2.position=new BABYLON.Vector3(15.75,-0.2,15.075);
+	contactBoxPorte2.visibility = 0;
+
+	porteGauche3=creerPorte("porteGauche3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
+	porteDroite3=creerPorte("porteDroite3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
+	porteGauche3.position=new BABYLON.Vector3(5.75,-0.2,15.075);
+	porteGauche3.rotation.x=-3*Math.PI/20;
+	porteDroite3.position=new BABYLON.Vector3(4.25,-0.2,15.075);
+	porteDroite3.rotation.x=-3*Math.PI/20;
+	contactBoxPorte3=BABYLON.Mesh.CreateBox("contactBoxPorte3", 1,scene);
+	contactBoxPorte3.scaling = new BABYLON.Vector3(1.5,3,3);
+	contactBoxPorte3.position=new BABYLON.Vector3(5.75,-0.2,15.075);
+	contactBoxPorte3.visibility = 0;
 }
 
 function creerEscalier(nom,opts,scn){
