@@ -4,6 +4,8 @@ var scene, camera ;
 let cloisons;
 var cloison;
 
+
+
 function init(){
 	canvas = document.getElementById("renderCanvas") ; 
 	engine = new BABYLON.Engine(canvas,true) ; 
@@ -14,12 +16,12 @@ function init(){
 
 	scene.gravity = new BABYLON.Vector3(0, -0.10, 0);
 	camera.applyGravity = true;
+  camera._needMoveForGravity = true;
 	camera.ellipsoid = new BABYLON.Vector3(1.1, .8, 1.1); 
 	boxCamera=BABYLON.Mesh.CreateBox("boxCamera",1,scene);
 	boxCamera.scaling=new BABYLON.Vector3(2,2,2);
 	boxCamera.position = new BABYLON.Vector3(camera.position.x,camera.position.y-0.5,camera.position.z);
 	boxCamera.setParent(camera);
-
 
 
 	scene.collisionsEnabled = true;
@@ -40,16 +42,18 @@ function createLights(){
 	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
 
 	// https://doc.babylonjs.com/divingDeeper/lights/shadows
-	var lightHall = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,0,15), scene) ; 
-	var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ; 
-	// var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
-	// var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
-	// var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
+	//var lightHall = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,0,15), scene) ; 
+	var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
+	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 9.8, 22.5), new BABYLON.Vector3(0, -1, 0), Math.PI , 0.5, scene);
+	var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
+	var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
+	var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
+	lightHall.intensity=0.5;
+	lightSalle1.intensity=0.5;
+	lightSalle2.intensity=0.5;
+	lightSalle3.intensity=0.5;
 }
 
-function murs(){
-	
-}
 
 function peuplerScene(){
 
@@ -62,6 +66,9 @@ function peuplerScene(){
 	var materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
 	var materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
 	var materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
+
+	sol.receiveShadows = true;
+
 	var materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/murs.jpg"}, scene) ; 
 	var materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
 	var materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
@@ -101,6 +108,7 @@ function peuplerScene(){
 	cloisonLeftHall.position = new BABYLON.Vector3(30,0,22.5) ; 
 	cloisonLeftHall.rotation.y = Math.PI/2;
 
+
 	var cloisonNord1 = creerCloison("cloisonNord1",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonNord1.position = new BABYLON.Vector3(10,0,7.5) ; 
 	cloisonNord1.rotation.y = 1/2*Math.PI;
@@ -125,7 +133,6 @@ function peuplerScene(){
 	var cloisonFloorSalle3 = creerCloison("cloisonFloorSalle3",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle3.position = new BABYLON.Vector3(25,0,0) ; 
 	cloisonFloorSalle3.rotation.x = 1/2*Math.PI;
-
 
 	//CRéation d'un mur avec une porte
 	var cloisonDown = createDoorWall("cloisonDown",{hauteur:10.2, largeur:30.0,hauteurPorte:4, largeurPorte:6,materiau:materiauCloison},scene) ;
@@ -166,6 +173,23 @@ function peuplerScene(){
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
 
+	var escalier = creerEscalier("escalier",{hauteur:5, largeur:3.0, longueur : 10.0, nbmarches:35,materiau:materiauCloison},scene) ;
+	escalier.position = new BABYLON.Vector3(28.5,0,25) ; 
+	escalier.rotation.y = Math.PI;
+
+	//shadow Hall
+	// shadowGeneratorHall = new BABYLON.ShadowGenerator(1024, lightHall);
+	// shadowGeneratorHall.usePoissonSampling = true;
+ //    shadowGeneratorHall.transparencyShadow = true;
+ //    shadowGeneratorHall.enableSoftTransparentShadow = true;
+	// shadowGeneratorHall.addShadowCaster(cloisonDown);
+	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonFloor);
+	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonLeft);
+	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonRight);
+	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallLeft);
+	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallMid);
+	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallRight);
+
 
 	// Création d un tableau
 	var tableau = creerPoster("tableau1",{tableau:"assets/tableaux/Berthe.jpg"},scene) ;
@@ -178,8 +202,14 @@ function peuplerScene(){
 
 
 	// Création d une sphere
-	var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:1.0}, scene) ; 
-	sphere.material = new BABYLON.StandardMaterial("materiau1", scene) ; 
+	var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere1", {diameter:1.0}, scene) ; 
+	sphere1.material = new BABYLON.StandardMaterial("materiau1", scene) ;
+	sphere1.position = new BABYLON.Vector3(15,6,14);
+
+	var sphere2 = BABYLON.MeshBuilder.CreateSphere("sphere2", {diameter:1.0}, scene) ; 
+	sphere2.material = new BABYLON.StandardMaterial("materiau1", scene) ;
+	sphere2.position = new BABYLON.Vector3(3,1,27);
+
 	
 	//creation d'une porte
 	porteCentrale=creerPorte("porteCentrale",{hauteur:3.8, largeur:3,materiau2:materiauPorte,materiau:materiauPorteG},scene);
@@ -207,13 +237,19 @@ function peuplerScene(){
 	
 }
 
-var isLocked = false ; 
+var isLocked = false ;
+
+function vecToLocal(vector, mesh){
+    var m = mesh.getWorldMatrix();
+    var v = BABYLON.Vector3.TransformCoordinates(vector, m);
+	return v;		 
+}
 
 function set_FPS_mode(scene, canvas, camera){
-
+	// https://stackoverflow.com/questions/47116383/babylonjs-how-to-move-the-camera-in-front-of-a-mesh
+	// https://www.babylonjs-playground.com/#ZHDBJ#37
 	// On click event, request pointer lock
-	scene.onPointerDown = function (evt) {
-
+	scene.onPointerDown = function (evt, pickResult) {
 		//true/false check if we're locked, faster than checking pointerlock on each single click.
 		if (!isLocked) {
 			canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock || false;
@@ -221,7 +257,44 @@ function set_FPS_mode(scene, canvas, camera){
 				canvas.requestPointerLock();
 			}
 		}
+		if(pickResult.pickedMesh.name=='sphere1' || pickResult.pickedMesh.name=='sphere2'){
+			camera.position= new BABYLON.Vector3(pickResult.pickedMesh.position.x,pickResult.pickedMesh.position.y+1,pickResult.pickedMesh.position.z);
+		}
 
+		
+		
+		// // console.log(pickResult.pickedMesh.name);
+		// // raycast from camera into scene
+  //       // first calculate raycast vector direction out of camera
+  //       var origin = camera.position;
+  //       var forward = new BABYLON.Vector3(0,0,1);
+  //       forward = vecToLocal(forward, camera);
+  //       var direction = forward.subtract(origin);
+  //       direction = BABYLON.Vector3.Normalize(direction);
+
+  //       console.log("Raycasting Origin Vector: [" + origin.x + ", " + origin.y + ", " + origin.z + "]\n" + "Direction Vector: [" + direction.x + ", " + direction.y + ", " + direction.z + "]");
+
+  //       // now raycast
+  //       var length = 10;
+  //       var ray = new BABYLON.Ray();
+
+  //       var rayHelper = new BABYLON.RayHelper(ray);
+  //       rayHelper.attachToMesh(camera,origin, direction, length);
+  //       // rayHelper.show(scene);
+        
+  //       // If we hit a pickable mesh in scene, then add a decal at the collision point
+		// var pickInfo = scene.pickWithRay(ray);
+		// if (pickInfo.hit) {
+		// 	console.log("hit!");
+		// 	console.log(pickInfo.pickedMesh.name);
+		// 	if (pickInfo.pickedMesh.name=='sphere'){
+		// 		camera.position= pickInfo.pickedMesh.position;
+		// 	}
+		
+		// }else{
+  //           console.log("miss!");
+  //       }
+		
 		//continue with shooting requests or whatever :P
 		//evt === 0 (left mouse click)
 		//evt === 1 (mouse wheel click (not scrolling))
