@@ -1,9 +1,9 @@
 //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array
 var canvas, engine ;
 var scene, camera ;
-let cloisons;
-var cloison;
-
+var Tableaux= new Array();
+var Headers= new Array();
+var Descriptions= new Array();
 
 
 function init(){
@@ -16,9 +16,9 @@ function init(){
 
 	scene.gravity = new BABYLON.Vector3(0, -0.10, 0);
 	camera.applyGravity = true;
-  	camera._needMoveForGravity = true;
+	camera._needMoveForGravity = true;
 	camera.ellipsoid = new BABYLON.Vector3(1.1, .8, 1.1); 
-	boxCamera=BABYLON.Mesh.CreateBox("boxCamera",1,scene);
+	boxCamera=BABYLON.Mesh.CreateBox("boxCamera",0.5,scene);
 	boxCamera.scaling=new BABYLON.Vector3(2,2,2);
 	boxCamera.position = new BABYLON.Vector3(camera.position.x,camera.position.y-0.5,camera.position.z);
 	boxCamera.setParent(camera);
@@ -44,8 +44,8 @@ function createLights(){
 
 	// https://doc.babylonjs.com/divingDeeper/lights/shadows
 	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 10, 15), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(180) , 0.1, scene);
-	var lightScene = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(30,30,30), scene) ; 
-	var lightScene = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(0,30,0), scene) ; 
+	var lightScene1 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(30,30,30), scene) ; 
+	var lightScene2 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(0,30,0), scene) ; 
 	// var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
 	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(29.5, 9.8, 29.5), new BABYLON.Vector3(-1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
 	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0.5, 9.8, 29.5), new BABYLON.Vector3(1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
@@ -198,6 +198,13 @@ function peuplerScene(){
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
 
+
+	advancedDynamicTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
+	curs = new BABYLON.GUI.Rectangle("curs");
+	curs.width='10px';
+	curs.height='10px';
+	curs.color='red';
+	advancedDynamicTexture.addControl(curs);
 	//shadow Hall
 	// shadowGeneratorHall = new BABYLON.ShadowGenerator(1024, lightHall);
 	// shadowGeneratorHall.usePoissonSampling = true;
@@ -211,32 +218,77 @@ function peuplerScene(){
 	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallMid);
 	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallRight);
 
-
-	// Création d un tableau
-	var tableau = creerPoster("tableau1",{tableau:"assets/tableaux/Berthe.jpg"},scene) ;
-	tableau.parent = cloisonRightHall ; // on accroche le tableau à la cloison 
-	tableau.rotation.y=Math.PI;
-	tableau.position.x = -6.6   ;  
-	tableau.position.y = 1.5 ; 
-	tableau.position.z=0.2;
 	
-
+	// Création des tableaux
+	// function (name, file, parent, position, rotation)
+	placeTableau("tableau1", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-6.6,1.5,0.2), Math.PI );
+	placeTableau("tableau2", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
+	placeTableau("tableau2", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-0.6,1.5,0.2), Math.PI );
 
 	// Création d une sphere
 	var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere1", {diameter:1.0}, scene) ; 
-	sphere1.material = new BABYLON.StandardMaterial("materiau1", scene) ;
+	sphere1.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
 	sphere1.position = new BABYLON.Vector3(15,6,14);
+	sphere1.visibility=0.7;
 
 	var sphere2 = BABYLON.MeshBuilder.CreateSphere("sphere2", {diameter:1.0}, scene) ; 
-	sphere2.material = new BABYLON.StandardMaterial("materiau1", scene) ;
+	sphere2.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
 	sphere2.position = new BABYLON.Vector3(3,1,27);
-
+	sphere2.visibility=0.7;
 	
 	//creation d'une porte
 	createCentraleDoor();
 	createRoomDoors();	
 }
+function placeTableau(name, file, parent, position, rotation){
+	var tableau = creerPoster(name,{tableau:file},scene) ;
+	tableau.parent = parent ; // on accroche le tableau à la cloison parent
+	tableau.rotation.y=rotation;
+	tableau.position = position;
+	// console.log(tableau.name);
+	var boxCollision = BABYLON.MeshBuilder.CreateBox("box_"+name, {width:2,height:4,depth:3}, scene);
+	boxCollision.position=new BABYLON.Vector3(0,0,-2);
+	boxCollision.isPickable=false;
+	boxCollision.parent = tableau;
+	boxCollision.visibility = 0;
+	var plane = BABYLON.Mesh.CreatePlane("plane",0.1);
+	plane.parent=tableau;
+	plane.position.y = -0.07;
+	plane.visibility = 0; 
+	plane.isPickable=false;
+	var header = BABYLON.GUI.Button.CreateSimpleButton(name, name);
+    header.width = "150px";
+    header.height = "20px";
+    header.color = "black";
+    header.fontSize = 18 ;
+    header.background = "cyan";
+    header.cornerRadius = 10;
+    // header.onPointerClickObservable.add(() => {alert("clicked image")});
+    header.isVisible = false;
+    advancedDynamicTexture.addControl(header);
+    header.linkWithMesh(plane);
+    var planedescription = BABYLON.Mesh.CreatePlane("planedescription",0.1);
+	planedescription.parent=tableau;
+	planedescription.position.y = -0.35;
+	planedescription.visibility = 0; 
+	planedescription.isPickable=false;
+    var description = BABYLON.GUI.Button.CreateSimpleButton(name, "C'est un très beau tableau qui représente une dame");
+    description.width = "300px";
+    description.height = "100px";
+    description.color = "white";
+    description.fontSize = 10 ;
+    description.background = "green";
+    description.cornerRadius = 10;
+    description.isVisible = false;
+    advancedDynamicTexture.addControl(description);
+    description.linkWithMesh(planedescription);
 
+    
+    // console.log(tableau.getChildren());
+	Tableaux.push(tableau);
+	Headers.push(header);
+	Descriptions.push(description);
+}
 
 var isLocked = false ;
 
@@ -259,49 +311,22 @@ function set_FPS_mode(scene, canvas, camera){
 			}
 		}
 		console.log(pickResult.pickedMesh.name);
-		if(pickResult.pickedMesh.name=='sphere1' || pickResult.pickedMesh.name=='sphere2'){
-			camera.position= new BABYLON.Vector3(pickResult.pickedMesh.position.x,pickResult.pickedMesh.position.y+1,pickResult.pickedMesh.position.z);
+		var resultat = scene.pick(window.innerWidth/2, window.innerHeight/2);
+		if(resultat.pickedMesh.name=='sphere1' || resultat.pickedMesh.name=='sphere2'){
+			camera.position= new BABYLON.Vector3(resultat.pickedMesh.position.x,resultat.pickedMesh.position.y+1,resultat.pickedMesh.position.z);
 		}
+		Tableaux.forEach(function (item, i){
+			if(resultat.pickedMesh.name==item.getChildren()[0].name){
+				console.log("hit "+item.name);
+				console.log("hit "+Headers[i].isVisible);
 
-		
-		
-		// // console.log(pickResult.pickedMesh.name);
-		// // raycast from camera into scene
-  //       // first calculate raycast vector direction out of camera
-  //       var origin = camera.position;
-  //       var forward = new BABYLON.Vector3(0,0,1);
-  //       forward = vecToLocal(forward, camera);
-  //       var direction = forward.subtract(origin);
-  //       direction = BABYLON.Vector3.Normalize(direction);
+			}else{
+			}
+		});
 
-  //       console.log("Raycasting Origin Vector: [" + origin.x + ", " + origin.y + ", " + origin.z + "]\n" + "Direction Vector: [" + direction.x + ", " + direction.y + ", " + direction.z + "]");
-
-  //       // now raycast
-  //       var length = 10;
-  //       var ray = new BABYLON.Ray();
-
-  //       var rayHelper = new BABYLON.RayHelper(ray);
-  //       rayHelper.attachToMesh(camera,origin, direction, length);
-  //       // rayHelper.show(scene);
-        
-  //       // If we hit a pickable mesh in scene, then add a decal at the collision point
-		// var pickInfo = scene.pickWithRay(ray);
-		// if (pickInfo.hit) {
-		// 	console.log("hit!");
-		// 	console.log(pickInfo.pickedMesh.name);
-		// 	if (pickInfo.pickedMesh.name=='sphere'){
-		// 		camera.position= pickInfo.pickedMesh.position;
-		// 	}
-		
-		// }else{
-  //           console.log("miss!");
-  //       }
-		
-		//continue with shooting requests or whatever :P
-		//evt === 0 (left mouse click)
-		//evt === 1 (mouse wheel click (not scrolling))
-		//evt === 2 (right mouse click)
 	};
+	
+	///Intéraction porte
 	posLimite=0;
 	i=0;
 	pos=0;
@@ -397,6 +422,19 @@ function set_FPS_mode(scene, canvas, camera){
 
 		porteCentrale.rotation.y=alpha;
 		porteCentrale2.rotation.y=-alpha;
+		
+
+		Tableaux.forEach(function (item, i){
+			if(boxCamera.intersectsMesh(item.getChildren()[1] )){
+				// console.log("intersection "+item.name);
+				Headers[i].isVisible = true;
+				Descriptions[i].isVisible = true;
+			}else{
+				Headers[i].isVisible = false;
+				Descriptions[i].isVisible = false;
+			}
+		});
+
 	});
 	// Event listener when the pointerlock is updated (or removed by pressing ESC for example).
 	var pointerlockchange = function () {
