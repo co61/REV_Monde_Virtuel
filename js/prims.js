@@ -98,13 +98,27 @@ function creerSphere(nom,opts,scn){
 	let diametre = options.diametre || 1.0 ;
 
 	let sph = BABYLON.Mesh.CreateSphere(nom,diametre,1,scn) ;
-	sph.material              = new BABYLON.StandardMaterial("blanc",scene) ;
-	sph.material.diffuseColor  = new BABYLON.Color3(1.0,1.0,1.0) ;
+	sph.material              = options.materiau || new BABYLON.StandardMaterial("blanc",scene) ;
+	//sph.material.diffuseColor  = new BABYLON.Color3(1.0,1.0,1.0) ;
 
 
 	sph.metadata = {"type": 'sphere'}
 	return sph;
 
+}
+function creerCylindre(nom,opts,scn){
+
+	let options  = opts || {} ; 
+	let height = options.height || 2.0 ;
+	let diameter = options.diameter || 1.0;
+	let diameterTop = options.diameterTop || diameter;
+	let diameterBottom = options.diameterBottom || diameter;
+	let materiau = options.materiau || new BABYLON.StandardMaterial("noir"+nom,scn);
+
+	let cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height:height,diameter:diameter,diameterTop:diameterTop,diameterBottom:diameterBottom},scn);
+	cylinder.material              = materiau;
+	//cylinder.material.diffuseColor  = new BABYLON.Color3(1.0,1.0,1.0) ;
+	return cylinder;
 }
 
 function creerPoster(nom,opts,scn){
@@ -175,7 +189,7 @@ function creerPorte(nom,opts,scn){
 	porte.checkCollisions = true;
 	return groupe;
 }
-function createCentraleDoor(){
+function createCentraleDoor(scene){
 	porteCentrale=creerPorte("porteCentrale",{hauteur:3.8, largeur:3,materiau2:materiauPorte,materiau:materiauPorteG},scene);
 	porteCentrale.position=new BABYLON.Vector3(13.5,0,30);
 	const porteCentralepivotAt = new BABYLON.Vector3(12, 0, 30);
@@ -198,7 +212,7 @@ function createCentraleDoor(){
 	contactBoxDoorCentrale2.position=new BABYLON.Vector3(15,0,28.75);
 	contactBoxDoorCentrale2.visibility = 0;
 }
-function createRoomDoors(){
+function createRoomDoors(scene){
 	porteGauche=creerPorte("porteGauche",{hauteur:2.52, largeur:1.5,epaisseur:0.04,materiau2:materiauPorteG,materiau:materiauPorte},scene);
 	porteDroite=creerPorte("porteDroite",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
 	porteGauche.position=new BABYLON.Vector3(25.75,-0.2,15.085);
@@ -206,7 +220,7 @@ function createRoomDoors(){
 	porteDroite.position=new BABYLON.Vector3(24.25,-0.2,15.085);
 	porteDroite.rotation.x=-3*Math.PI/20;
 	contactBoxPorte=BABYLON.Mesh.CreateBox("contactBoxPorte", 1,scene);
-	contactBoxPorte.scaling = new BABYLON.Vector3(1.5,3,3);
+	contactBoxPorte.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte.position=new BABYLON.Vector3(25.75,-0.2,15.085);
 	contactBoxPorte.visibility = 0;
 
@@ -217,7 +231,7 @@ function createRoomDoors(){
 	porteDroite2.position=new BABYLON.Vector3(14.25,-0.2,15.075);
 	porteDroite2.rotation.x=-3*Math.PI/20;	
 	contactBoxPorte2=BABYLON.Mesh.CreateBox("contactBoxPorte2", 1,scene);
-	contactBoxPorte2.scaling = new BABYLON.Vector3(1.5,3,3);
+	contactBoxPorte2.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte2.position=new BABYLON.Vector3(15.75,-0.2,15.075);
 	contactBoxPorte2.visibility = 0;
 
@@ -228,7 +242,7 @@ function createRoomDoors(){
 	porteDroite3.position=new BABYLON.Vector3(4.25,-0.2,15.075);
 	porteDroite3.rotation.x=-3*Math.PI/20;
 	contactBoxPorte3=BABYLON.Mesh.CreateBox("contactBoxPorte3", 1,scene);
-	contactBoxPorte3.scaling = new BABYLON.Vector3(1.5,3,3);
+	contactBoxPorte3.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte3.position=new BABYLON.Vector3(5.75,-0.2,15.075);
 	contactBoxPorte3.visibility = 0;
 }
@@ -251,12 +265,17 @@ function creerEscalier(nom,opts,scn){
 	for (let i = 0 ; i< nbMarche; i++){
 		let marche = creerCloison("marche"+i,{largeur:largeur,hauteur:longueur/nbMarche,depth:epaisseur, materiau:materiau,materiau2:materiau2},scn) ;
 		marche.position = new BABYLON.Vector3(0,hauteur/nbMarche*i,longueur/nbMarche*i) ; 
-		marche.rotation.x = 1/2*Math.PI
+		marche.rotation.x = 1/2*Math.PI;
 		marche.parent = groupe ;
+
+		let poteaud= creerCylindre("poteaud"+i,{height:1, diameter: 0.09,materiau:materiauNoir});
+		poteaud.position = new BABYLON.Vector3(largeur/2-0.08,hauteur/nbMarche*i+1/2,longueur/nbMarche*i+hauteur/nbMarche) ; 
+		poteaud.parent=groupe;
+
+		let poteaug= creerCylindre("poteaug"+i,{height:1, diameter: 0.09,materiau:materiauNoir});
+		poteaug.position = new BABYLON.Vector3(-largeur/2+0.08,hauteur/nbMarche*i+1/2,longueur/nbMarche*i+hauteur/nbMarche) ; 
+		poteaug.parent=groupe;
 	}
-
-
-
     return groupe ;  
 }
 
@@ -308,9 +327,47 @@ function createDoorWall(nom, opts, scn)//, {hauteur:5.0, largeur:10.0, hauteurPo
 };
 
 
+function creerPendule(nom,scn){
+
+	sphere1 =  BABYLON.MeshBuilder.CreateSphere("sphere1"+nom,{diameter:1.0},scn);
+	sphere2 =  BABYLON.MeshBuilder.CreateSphere("sphere2"+nom,{diameter:1.0},scn);
+	sphere3 =  BABYLON.MeshBuilder.CreateSphere("sphere3"+nom,{diameter:1.0},scn);
+	sphere4 =  BABYLON.MeshBuilder.CreateSphere("sphere4"+nom,{diameter:1.0},scn);
+	sphere1.material = materiauNoir;
+	sphere2.material = materiauNoir;
+	sphere3.material = materiauNoir;
+	sphere4.material = materiauNoir;
+	fil1 = creerCylindre("fil1"+nom,{height: 3, diameter: 0.15,materiau:materiauNoir});
+	fil2 = creerCylindre("fil2"+nom,{height: 3, diameter: 0.15,materiau:materiauNoir});
+	fil3 = creerCylindre("fil3"+nom,{height: 3, diameter: 0.15,materiau:materiauNoir});
+	fil4 = creerCylindre("fil4"+nom,{height: 3, diameter: 0.15,materiau:materiauNoir});
+	sphere1.parent=fil1;
+	sphere2.parent=fil2;
+	sphere3.parent=fil3;
+	sphere4.parent=fil4;
+	sphere1.position.y=-1.5;
+	sphere2.position.y=-1.5;
+	sphere3.position.y=-1.5;
+	sphere4.position.y=-1.5;
+
+	socle=creerCylindre("socle"+nom,{height:5, diameter: 0.6, materiau:materiauWood});
+	socle.position=new BABYLON.Vector3(15,10.13,22);
+	socle.rotation.z=1.57;
 
 
+	fil1.position=new BABYLON.Vector3(13.5,8.5,22);
+	const fil1pivotAt = new BABYLON.Vector3(13.5,9.9,22);
+	const fil1relativePosition = fil1pivotAt.subtract(fil1.position)
+	fil1.setPivotPoint(fil1relativePosition);
+	fil2.position=new BABYLON.Vector3(14.5,8.5,22);
+	fil3.position=new BABYLON.Vector3(15.5,8.5,22);
+	fil4.position=new BABYLON.Vector3(16.5,8.5,22);
+	const fil4pivotAt = new BABYLON.Vector3(16.5,9.9,22);
+	const fil4relativePosition = fil4pivotAt.subtract(fil4.position)
+	fil4.setPivotPoint(fil4relativePosition);
+	fil1.rotation.z=-1;
 
+}
 
 function set_FPS_mode(scene, canvas, camera){
 

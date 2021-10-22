@@ -67,24 +67,6 @@ function createLights(){
 }
 
 
-// // mesh labels
-//     meshes.forEach((m) => {
-//         //rajouter if box camera dans box tableau alors afficher pancarte
-//         header = BABYLON.GUI.Button.CreateSimpleButton(m.name, m.name);
-
-//         header.width = "150px";
-//         header.height = "35px";
-//         header.color = "white";
-//         header.background = "green";
-//         header.cornerRadius = 10;
-
-//         advancedTexture.addControl(header);
-
-//         header.linkWithMesh(m);
-//         header.linkOffsetY = 50;
-//     });
-    
-
 function peuplerScene(){
 
 	// Création du sol global
@@ -96,6 +78,7 @@ function peuplerScene(){
 	materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
 	materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
 	materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
+	materiauNoir= creerMateriauSimple("mat-noir",{couleur:new BABYLON.Color3(0.1,0.1,0.1)},scene);
 
 	sol.receiveShadows = true;
 
@@ -186,8 +169,8 @@ function peuplerScene(){
 	plafond.rotation.x = 1/2*Math.PI;
 
 	//creation d'un escalier
-	var escalier2 = creerEscalier("escalier",{hauteur:3.25, largeur:3.0, longueur : 7, nbmarches:12,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
-	escalier2.position = new BABYLON.Vector3(15,0.1,25) ; 
+	var escalier2 = creerEscalier("escalier",{hauteur:3.25, largeur:3.0, longueur : 6, nbmarches:12,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
+	escalier2.position = new BABYLON.Vector3(15,0.1,24) ; 
 	escalier2.rotation.y = Math.PI;
 	var escalier3 = creerEscalier("escalier",{hauteur:1.75, largeur:3.0, longueur : 12.0, nbmarches:12,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
 	escalier3.position = new BABYLON.Vector3(15,3.25,16.5) ; 
@@ -202,7 +185,6 @@ function peuplerScene(){
 	var cloisonFloorEscalier2 = creerCloison("cloisonFloorEscalier2",{hauteur:3.0, largeur:3.0,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
-
 
 	advancedDynamicTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
 	curs = new BABYLON.GUI.Rectangle("curs");
@@ -293,8 +275,17 @@ function peuplerScene(){
 	sphere2.visibility=0.7;
 	
 	//creation d'une porte
-	createCentraleDoor();
-	createRoomDoors();	
+	createCentraleDoor(scene);
+	createRoomDoors(scene);	
+
+	creerPendule("pendule",scene);
+
+	
+	// BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){
+	// 	result.scaling=new BABYLON.Vector3(0.5,0.5,0.5);
+	// 	result.position=new BABYLON.Vector3(35,2,-3);});
+	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "solar_system.glb", scene, function (meshes) { 
+	//});
 }
 
 function placeTableau(name, file, parent, position, rotation){
@@ -314,33 +305,33 @@ function placeTableau(name, file, parent, position, rotation){
 	plane.visibility = 0; 
 	plane.isPickable=false;
 	var header = BABYLON.GUI.Button.CreateSimpleButton(name, name);
-    header.width = "200px";
-    header.height = "25px";
-    header.color = "black";
-    header.fontSize = 18 ;
-    header.background = "white";
-    // header.cornerRadius = 10;
-    // header.onPointerClickObservable.add(() => {alert("clicked image")});
-    header.isVisible = false;
-    advancedDynamicTexture.addControl(header);
-    header.linkWithMesh(plane);
-    var planedescription = BABYLON.Mesh.CreatePlane("planedescription",0.1);
-	planedescription.parent=tableau;
-	planedescription.position.y = -0.35;
-	planedescription.visibility = 0; 
-	planedescription.isPickable=false;
-    var description = BABYLON.GUI.Button.CreateSimpleButton(name, "C'est un très beau tableau qui représente une dame");
-    description.width = "350px";
-    description.height = "120px";
-    description.color = "white";
-    description.fontSize = 15 ;
-    // description.paddingRightInPixels = 10 ;
-    // description.paddingLeftInPixels = 10 ;
-    description.background = "green";
-    description.cornerRadius = 10;
-    description.isVisible = false;
-    advancedDynamicTexture.addControl(description);
-    description.linkWithMesh(planedescription);
+  header.width = "200px";
+  header.height = "25px";
+  header.color = "black";
+  header.fontSize = 18 ;
+  header.background = "white";
+  // header.cornerRadius = 10;
+  // header.onPointerClickObservable.add(() => {alert("clicked image")});
+  header.isVisible = false;
+  advancedDynamicTexture.addControl(header);
+  header.linkWithMesh(plane);
+  var planedescription = BABYLON.Mesh.CreatePlane("planedescription",0.1);
+  planedescription.parent=tableau;
+  planedescription.position.y = -0.35;
+  planedescription.visibility = 0; 
+  planedescription.isPickable=false;
+  var description = BABYLON.GUI.Button.CreateSimpleButton(name, "C'est un très beau tableau qui représente une dame");
+  description.width = "350px";
+  description.height = "120px";
+  description.color = "white";
+  description.fontSize = 15 ;
+  // description.paddingRightInPixels = 10 ;
+  // description.paddingLeftInPixels = 10 ;
+  description.background = "green";
+  description.cornerRadius = 10;
+  description.isVisible = false;
+  advancedDynamicTexture.addControl(description);
+  description.linkWithMesh(planedescription);
 
     //sound and lights
     // var sound = new BABYLON.Sound("gunshot", "assets/NorthAmerica/Sounds/creepySoundsTest.mp3", scene);
@@ -397,14 +388,22 @@ function set_FPS_mode(scene, canvas, camera){
 	alpha = 0;
 	porte1=false;
 	porte2=false;
+	gauche=true;
+	tape2=false;
+	beta=0;
+	beta2=-1;
+
+
     scene.registerBeforeRender( function()  {
+
+		//animation 3 portes
 		if(boxCamera.intersectsMesh(contactBoxPorte,false)){ i=1;	}
 		else if(boxCamera.intersectsMesh(contactBoxPorte2,false)){ i=2; }
 		else if(boxCamera.intersectsMesh(contactBoxPorte3,false)){ i=3; }
 
 		if(boxCamera.intersectsMesh(contactBoxPorte,false) || boxCamera.intersectsMesh(contactBoxPorte2,false) || boxCamera.intersectsMesh(contactBoxPorte3,false)){
 			if (posLimite<1.6){
-				pos=0.05;
+				pos=0.07;
 				posLimite+=pos;
 			}
 			else{
@@ -412,7 +411,7 @@ function set_FPS_mode(scene, canvas, camera){
 			}
 		}else{
 			if (posLimite>0){
-				pos=-0.05;
+				pos=-0.07;
 				posLimite+=pos;
 			}
 			else{
@@ -433,7 +432,7 @@ function set_FPS_mode(scene, canvas, camera){
 		}
 		
 		
-        //Balloon 1 intersection -- Precise = false
+        //animation porte centrale
         if (boxCamera.intersectsMesh(contactBoxDoorCentrale1, false)) {
 			if (!porte2)
 			{
@@ -473,11 +472,11 @@ function set_FPS_mode(scene, canvas, camera){
 			}
 			else
 			{	
-				if(alpha<-0.05){
+				if(alpha<-0.02){
 					alpha+=0.05;
 				}
 
-				else if(alpha>0.05){
+				else if(alpha>0.02){
 					alpha-=0.05;
 				}
 			}
@@ -500,6 +499,35 @@ function set_FPS_mode(scene, canvas, camera){
 				Descriptions[i].isVisible = false;
 			}
 		});
+
+
+		//animation pendule
+		if (beta2<=	0 && !tape2 && gauche==true){
+			beta2+=0.04;
+		}
+		else if (!tape2 && beta2>-1 && gauche==false){
+			beta2-=0.04;
+		}
+		if (beta2>=0 && gauche==true){
+			tape2=true;
+		}
+		else if (beta2<=-1 && gauche==false){
+			gauche=true;
+		}
+		if (tape2 && beta<1 && gauche==true){
+			beta+=0.04;
+		}
+		else if (tape2 && beta>=0 && gauche==false ){
+			beta-=0.04;
+		}
+		if (gauche==false && beta<=0 ){
+			tape2=false;
+		}
+		else if (beta>=1 && gauche==true){
+			gauche=false;
+		}
+		fil1.rotation.z=beta2;
+		fil4.rotation.z=beta;
 
 	});
 	// Event listener when the pointerlock is updated (or removed by pressing ESC for example).
