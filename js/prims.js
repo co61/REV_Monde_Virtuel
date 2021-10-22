@@ -128,7 +128,7 @@ function creerPoster(nom,opts,scn){
 	let largeur = options["largeur"] || 1.0 ; 	
 	let textureName = options["tableau"] || ""; 
 
-	var group = new BABYLON.TransformNode("group-"+nom)
+	var group = new BABYLON.TransformNode(nom)
 	var tableau1 = BABYLON.MeshBuilder.CreatePlane("tableau-" + nom, {width:largeur,height:hauteur}, scn);
 	tableau1.parent = group ; 
 	tableau1.position.y = hauteur/2.0 ; 
