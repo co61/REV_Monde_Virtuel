@@ -158,8 +158,8 @@ function peuplerScene(){
 	plafond.rotation.x = 1/2*Math.PI;
 
 	//creation d'un escalier
-	var escalier2 = creerEscalier("escalier",{hauteur:3.25, largeur:3.0, longueur : 7, nbmarches:12,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
-	escalier2.position = new BABYLON.Vector3(15,0.1,25) ; 
+	var escalier2 = creerEscalier("escalier",{hauteur:3.25, largeur:3.0, longueur : 6, nbmarches:12,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
+	escalier2.position = new BABYLON.Vector3(15,0.1,24) ; 
 	escalier2.rotation.y = Math.PI;
 	var escalier3 = creerEscalier("escalier",{hauteur:1.75, largeur:3.0, longueur : 12.0, nbmarches:12,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
 	escalier3.position = new BABYLON.Vector3(15,3.25,16.5) ; 
@@ -214,6 +214,13 @@ function peuplerScene(){
 	createRoomDoors(scene);	
 
 	creerPendule("pendule",scene);
+
+	
+	// BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){
+	// 	result.scaling=new BABYLON.Vector3(0.5,0.5,0.5);
+	// 	result.position=new BABYLON.Vector3(35,2,-3);});
+	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "solar_system.glb", scene, function (meshes) { 
+	//});
 }
 
 
@@ -291,14 +298,18 @@ function set_FPS_mode(scene, canvas, camera){
 	tape2=false;
 	beta=0;
 	beta2=-1;
+
+
     scene.registerBeforeRender( function()  {
+
+		//animation 3 portes
 		if(boxCamera.intersectsMesh(contactBoxPorte,false)){ i=1;	}
 		else if(boxCamera.intersectsMesh(contactBoxPorte2,false)){ i=2; }
 		else if(boxCamera.intersectsMesh(contactBoxPorte3,false)){ i=3; }
 
 		if(boxCamera.intersectsMesh(contactBoxPorte,false) || boxCamera.intersectsMesh(contactBoxPorte2,false) || boxCamera.intersectsMesh(contactBoxPorte3,false)){
 			if (posLimite<1.6){
-				pos=0.05;
+				pos=0.07;
 				posLimite+=pos;
 			}
 			else{
@@ -306,7 +317,7 @@ function set_FPS_mode(scene, canvas, camera){
 			}
 		}else{
 			if (posLimite>0){
-				pos=-0.05;
+				pos=-0.07;
 				posLimite+=pos;
 			}
 			else{
@@ -327,7 +338,7 @@ function set_FPS_mode(scene, canvas, camera){
 		}
 		
 		
-        //Balloon 1 intersection -- Precise = false
+        //animation porte centrale
         if (boxCamera.intersectsMesh(contactBoxDoorCentrale1, false)) {
 			if (!porte2)
 			{
@@ -367,11 +378,11 @@ function set_FPS_mode(scene, canvas, camera){
 			}
 			else
 			{	
-				if(alpha<-0.05){
+				if(alpha<-0.02){
 					alpha+=0.05;
 				}
 
-				else if(alpha>0.05){
+				else if(alpha>0.02){
 					alpha-=0.05;
 				}
 			}
@@ -381,11 +392,12 @@ function set_FPS_mode(scene, canvas, camera){
 		porteCentrale.rotation.y=alpha;
 		porteCentrale2.rotation.y=-alpha;
 
+		//animation pendule
 		if (beta2<=	0 && !tape2 && gauche==true){
-			beta2+=0.03;
+			beta2+=0.04;
 		}
 		else if (!tape2 && beta2>-1 && gauche==false){
-			beta2-=0.03;
+			beta2-=0.04;
 		}
 		if (beta2>=0 && gauche==true){
 			tape2=true;
@@ -394,10 +406,10 @@ function set_FPS_mode(scene, canvas, camera){
 			gauche=true;
 		}
 		if (tape2 && beta<1 && gauche==true){
-			beta+=0.03;
+			beta+=0.04;
 		}
 		else if (tape2 && beta>=0 && gauche==false ){
-			beta-=0.03;
+			beta-=0.04;
 		}
 		if (gauche==false && beta<=0 ){
 			tape2=false;
