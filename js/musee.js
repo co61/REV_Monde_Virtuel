@@ -257,7 +257,7 @@ function peuplerScene(){
 	placeTableau("Atolls de Scilly", "assets/Oceanie/Images/Atolls de Scilly.jpg", cloisonUpTop, new BABYLON.Vector3(4,1.5,0.2), Math.PI );
 	placeTableau("Desert Australie", "assets/Oceanie/Images/Desert Australie.jpg", cloisonUpTop, new BABYLON.Vector3(10,1.5,0.2), Math.PI );
 	placeTableau("Ile de tasmanie", "assets/Oceanie/Images/Ile de tasmanie.jpg", cloisonUpTop, new BABYLON.Vector3(-4,1.5,0.2), Math.PI );
-	placeTableau("Niagara Falls", "assets/Oceanie/Images/Niagara Falls.jpg", cloisonUpTop, new BABYLON.Vector3(-10,1.5,0.2), Math.PI );
+	placeTableau("Moeraki Boulders", "assets/Oceanie/Images/Moeraki Boulders.jpg", cloisonUpTop, new BABYLON.Vector3(-10,1.5,0.2), Math.PI );
 	placeTableau("Nouvelle zélande", "assets/Oceanie/Images/Nouvelle zélande.jpg", cloisonRightMezzanine, new BABYLON.Vector3(2.5,1.5,0.2), Math.PI );
 	placeTableau("Sidney", "assets/Oceanie/Images/Sidney.jpg", cloisonRightMezzanine, new BABYLON.Vector3(-2.5,1.5,0.2), Math.PI);
 	placeTableau("Polynésie française", "assets/Oceanie/Images/Polynésie française.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(2.5,1.5,-0.2), 0 );
