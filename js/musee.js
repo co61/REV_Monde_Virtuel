@@ -4,6 +4,7 @@ var scene, camera ;
 var Tableaux= new Array();
 var Headers= new Array();
 var Descriptions= new Array();
+var Sounds= new Array();
 
 
 function init(){
@@ -23,6 +24,10 @@ function init(){
 	boxCamera.position = new BABYLON.Vector3(camera.position.x,camera.position.y-0.5,camera.position.z);
 	boxCamera.setParent(camera);
 	boxCamera.isPickable=false;
+	boxFeet=BABYLON.Mesh.CreateBox("boxCamera",0.5,scene);
+	boxFeet.position = new BABYLON.Vector3(camera.position.x,camera.position.y-0.8,camera.position.z);
+	boxFeet.setParent(camera);
+	boxFeet.isPickable=false;
 
 
 	scene.collisionsEnabled = true;
@@ -208,8 +213,8 @@ function peuplerScene(){
 	//shadow Hall
 	// shadowGeneratorHall = new BABYLON.ShadowGenerator(1024, lightHall);
 	// shadowGeneratorHall.usePoissonSampling = true;
- //    shadowGeneratorHall.transparencyShadow = true;
- //    shadowGeneratorHall.enableSoftTransparentShadow = true;
+ 	// shadowGeneratorHall.transparencyShadow = true;
+ 	// shadowGeneratorHall.enableSoftTransparentShadow = true;
 	// shadowGeneratorHall.addShadowCaster(cloisonDown);
 	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonFloor);
 	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonLeft);
@@ -221,9 +226,60 @@ function peuplerScene(){
 	
 	// Création des tableaux
 	// function (name, file, parent, position, rotation)
-	placeTableau("tableau1", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-6.6,1.5,0.2), Math.PI );
-	placeTableau("tableau2", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
-	placeTableau("tableau2", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-0.6,1.5,0.2), Math.PI );
+	// placeTableau("tableau1", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-6.6,1.5,0.2), Math.PI );
+	// placeTableau("tableau2", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
+	// placeTableau("tableau3", "assets/tableaux/Berthe.jpg", cloisonRightHall, new BABYLON.Vector3(-0.6,1.5,0.2), Math.PI );
+
+	//North America
+	placeTableau("Cap Canaveral", "assets/NorthAmerica/Images/Cap Canaveral.jpg", cloisonRightSalle3, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
+	placeTableau("Grand Canyon", "assets/NorthAmerica/Images/Grand Canyon.jpg", cloisonRightSalle3, new BABYLON.Vector3(0,1.5,0.2), Math.PI );
+	placeTableau("Nationnal Park", "assets/NorthAmerica/Images/Nationnal Park.jpg", cloisonRightSalle3, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
+	placeTableau("Niagara Falls", "assets/NorthAmerica/Images/Niagara Falls.jpg", cloisonUpRight, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI );
+	placeTableau("Pentagone", "assets/NorthAmerica/Images/Pentagone.jpg", cloisonUpRight, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI );
+	placeTableau("San Francisco Bridge", "assets/NorthAmerica/Images/San Francisco Bridge.jpg", cloisonNord1, new BABYLON.Vector3(3.6,1.5,-0.2), 0);
+	placeTableau("Yellowstone", "assets/NorthAmerica/Images/Yellowstone.jpg", cloisonNord1, new BABYLON.Vector3(0,1.5,-0.2), 0 );
+	placeTableau("Yosemite", "assets/NorthAmerica/Images/Yosemite.jpg", cloisonNord1, new BABYLON.Vector3(-3.6,1.5,-0.2), 0 );
+
+	//South America
+	placeTableau("Amazone", "assets/SouthAmerica/Images/Amazone.jpg", cloisonNord1, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
+	placeTableau("Chute d'Iguazu", "assets/SouthAmerica/Images/Chute d'Iguazu.jpg", cloisonNord1, new BABYLON.Vector3(0,1.5,0.2), Math.PI );
+	placeTableau("Machu Picchu", "assets/SouthAmerica/Images/Machu Picchu.jpg", cloisonNord1, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
+	placeTableau("Perito Moreno Glacier", "assets/SouthAmerica/Images/Perito Moreno Glacier.jpg", cloisonUpMid, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI );
+	placeTableau("Rio", "assets/SouthAmerica/Images/Rio.jpg", cloisonUpMid, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI );
+	placeTableau("Salar d'Uyuni", "assets/SouthAmerica/Images/Salar d'Uyuni.jpg", cloisonNord2, new BABYLON.Vector3(3.6,1.5,-0.2), 0);
+	placeTableau("Yellowstone", "assets/SouthAmerica/Images/Yellowstone.jpg", cloisonNord2, new BABYLON.Vector3(0,1.5,-0.2), 0 );
+	placeTableau("Yosemite", "assets/SouthAmerica/Images/Yosemite.jpg", cloisonNord2, new BABYLON.Vector3(-3.6,1.5,-0.2), 0 );
+
+	//Asia
+	placeTableau("Cap Canaveral", "assets/Asia/Images/Cap Canaveral.jpg", cloisonNord2, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
+	placeTableau("Grand Canyon", "assets/Asia/Images/Grand Canyon.jpg", cloisonNord2, new BABYLON.Vector3(0,1.5,0.2), Math.PI );
+	placeTableau("Nationnal Park", "assets/Asia/Images/Nationnal Park.jpg", cloisonNord2, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
+	placeTableau("Niagara Falls", "assets/Asia/Images/Niagara Falls.jpg", cloisonUpLeft, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI );
+	placeTableau("Pentagone", "assets/Asia/Images/Pentagone.jpg", cloisonUpLeft, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI );
+	placeTableau("San Francisco Bridge", "assets/Asia/Images/San Francisco Bridge.jpg", cloisonLeftSalle1, new BABYLON.Vector3(3.6,1.5,-0.2), 0);
+	placeTableau("Yellowstone", "assets/Asia/Images/Yellowstone.jpg", cloisonLeftSalle1, new BABYLON.Vector3(0,1.5,-0.2), 0 );
+	placeTableau("Yosemite", "assets/Asia/Images/Yosemite.jpg", cloisonLeftSalle1, new BABYLON.Vector3(-3.6,1.5,-0.2), 0 );
+
+	//Africa
+	placeTableau("Cap Canaveral", "assets/Africa/Images/Cap Canaveral.jpg", cloisonRightHall, new BABYLON.Vector3(5,1.5,0.2), Math.PI );
+	placeTableau("Grand Canyon", "assets/Africa/Images/Grand Canyon.jpg", cloisonRightHall, new BABYLON.Vector3(2,1.5,0.2), Math.PI );
+	placeTableau("Nationnal Park", "assets/Africa/Images/Nationnal Park.jpg", cloisonRightHall, new BABYLON.Vector3(-1,1.5,0.2), Math.PI );
+	placeTableau("Niagara Falls", "assets/Africa/Images/Niagara Falls.jpg", cloisonRightHall, new BABYLON.Vector3(-4,1.5,0.2), Math.PI );
+	placeTableau("Pentagone", "assets/Africa/Images/Pentagone.jpg", cloisonLeftHall, new BABYLON.Vector3(5,1.5,-0.2), 0 );
+	placeTableau("San Francisco Bridge", "assets/Africa/Images/San Francisco Bridge.jpg", cloisonLeftHall, new BABYLON.Vector3(2,1.5,-0.2), 0);
+	placeTableau("Yellowstone", "assets/Africa/Images/Yellowstone.jpg", cloisonLeftHall, new BABYLON.Vector3(-1,1.5,-0.2), 0 );
+	placeTableau("Yosemite", "assets/Africa/Images/Yosemite.jpg", cloisonLeftHall, new BABYLON.Vector3(-4,1.5,-0.2), 0 );
+
+
+	//Oceanie
+	placeTableau("Cap Canaveral", "assets/Oceanie/Images/Cap Canaveral.jpg", cloisonUpTop, new BABYLON.Vector3(4,1.5,0.2), Math.PI );
+	placeTableau("Grand Canyon", "assets/Oceanie/Images/Grand Canyon.jpg", cloisonUpTop, new BABYLON.Vector3(10,1.5,0.2), Math.PI );
+	placeTableau("Nationnal Park", "assets/Oceanie/Images/Nationnal Park.jpg", cloisonUpTop, new BABYLON.Vector3(-4,1.5,0.2), Math.PI );
+	placeTableau("Niagara Falls", "assets/Oceanie/Images/Niagara Falls.jpg", cloisonUpTop, new BABYLON.Vector3(-10,1.5,0.2), Math.PI );
+	placeTableau("Pentagone", "assets/Oceanie/Images/Pentagone.jpg", cloisonRightMezzanine, new BABYLON.Vector3(2.5,1.5,0.2), Math.PI );
+	placeTableau("San Francisco Bridge", "assets/Oceanie/Images/San Francisco Bridge.jpg", cloisonRightMezzanine, new BABYLON.Vector3(-2.5,1.5,0.2), Math.PI);
+	placeTableau("Yellowstone", "assets/Oceanie/Images/Yellowstone.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(2.5,1.5,-0.2), 0 );
+	placeTableau("Yosemite", "assets/Oceanie/Images/Yosemite.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(-2.5,1.5,-0.2), 0 );
 
 	// Création d une sphere
 	var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere1", {diameter:1.0}, scene) ; 
@@ -240,6 +296,7 @@ function peuplerScene(){
 	createCentraleDoor();
 	createRoomDoors();	
 }
+
 function placeTableau(name, file, parent, position, rotation){
 	var tableau = creerPoster(name,{tableau:file},scene) ;
 	tableau.parent = parent ; // on accroche le tableau à la cloison parent
@@ -257,12 +314,12 @@ function placeTableau(name, file, parent, position, rotation){
 	plane.visibility = 0; 
 	plane.isPickable=false;
 	var header = BABYLON.GUI.Button.CreateSimpleButton(name, name);
-    header.width = "150px";
-    header.height = "20px";
+    header.width = "200px";
+    header.height = "25px";
     header.color = "black";
     header.fontSize = 18 ;
-    header.background = "cyan";
-    header.cornerRadius = 10;
+    header.background = "white";
+    // header.cornerRadius = 10;
     // header.onPointerClickObservable.add(() => {alert("clicked image")});
     header.isVisible = false;
     advancedDynamicTexture.addControl(header);
@@ -273,21 +330,27 @@ function placeTableau(name, file, parent, position, rotation){
 	planedescription.visibility = 0; 
 	planedescription.isPickable=false;
     var description = BABYLON.GUI.Button.CreateSimpleButton(name, "C'est un très beau tableau qui représente une dame");
-    description.width = "300px";
-    description.height = "100px";
+    description.width = "350px";
+    description.height = "120px";
     description.color = "white";
-    description.fontSize = 10 ;
+    description.fontSize = 15 ;
+    // description.paddingRightInPixels = 10 ;
+    // description.paddingLeftInPixels = 10 ;
     description.background = "green";
     description.cornerRadius = 10;
     description.isVisible = false;
     advancedDynamicTexture.addControl(description);
     description.linkWithMesh(planedescription);
 
-    
+    //sound and lights
+    // var sound = new BABYLON.Sound("gunshot", "assets/NorthAmerica/Sounds/creepySoundsTest.mp3", scene);
+    // sound.play();
+
     // console.log(tableau.getChildren());
 	Tableaux.push(tableau);
 	Headers.push(header);
 	Descriptions.push(description);
+	// Sounds.push(sound);
 }
 
 var isLocked = false ;
@@ -310,15 +373,16 @@ function set_FPS_mode(scene, canvas, camera){
 				canvas.requestPointerLock();
 			}
 		}
-		console.log(pickResult.pickedMesh.name);
+		// console.log(pickResult.pickedMesh.name);
 		var resultat = scene.pick(window.innerWidth/2, window.innerHeight/2);
 		if(resultat.pickedMesh.name=='sphere1' || resultat.pickedMesh.name=='sphere2'){
 			camera.position= new BABYLON.Vector3(resultat.pickedMesh.position.x,resultat.pickedMesh.position.y+1,resultat.pickedMesh.position.z);
 		}
 		Tableaux.forEach(function (item, i){
 			if(resultat.pickedMesh.name==item.getChildren()[0].name){
-				console.log("hit "+item.name);
-				console.log("hit "+Headers[i].isVisible);
+				// console.log("hit "+item.name);
+				// console.log("hit "+Headers[i].isVisible);
+				Descriptions[i].isVisible = !Descriptions[i].isVisible ;
 
 			}else{
 			}
@@ -423,12 +487,14 @@ function set_FPS_mode(scene, canvas, camera){
 		porteCentrale.rotation.y=alpha;
 		porteCentrale2.rotation.y=-alpha;
 		
+		// console.log(scene.getTransfomNode());
+		// if(boxCamera.intersectsMesh(scene.getChildren,false)){ i=1;	}
 
 		Tableaux.forEach(function (item, i){
 			if(boxCamera.intersectsMesh(item.getChildren()[1] )){
 				// console.log("intersection "+item.name);
 				Headers[i].isVisible = true;
-				Descriptions[i].isVisible = true;
+				// Descriptions[i].isVisible = true;
 			}else{
 				Headers[i].isVisible = false;
 				Descriptions[i].isVisible = false;
