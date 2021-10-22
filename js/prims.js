@@ -276,6 +276,10 @@ function creerEscalier(nom,opts,scn){
 		poteaug.position = new BABYLON.Vector3(-largeur/2+0.08,hauteur/nbMarche*i+1/2,longueur/nbMarche*i+hauteur/nbMarche) ; 
 		poteaug.parent=groupe;
 	}
+	let barreg =creerCylindre("barreg",{height:longueur, diameter: 0.12,materiau:materiauWood});
+	barreg.position = new BABYLON.Vector3(-largeur/2-0.08,hauteur/2,1/2) ; 
+	barreg.rotation.x=Math.atan(hauteur/longueur);
+	barreg.parent=groupe;
     return groupe ;  
 }
 

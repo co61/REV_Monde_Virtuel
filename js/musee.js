@@ -1,4 +1,5 @@
 //https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array
+
 var canvas, engine ;
 var scene, camera ;
 var Tableaux= new Array();
@@ -143,11 +144,16 @@ function peuplerScene(){
 	var cloisonFloorSalle2 = creerCloison("cloisonFloorSalle2",{hauteur:15.0, largeur:10.0,materiau:materiauIllusion},scene) ;
 	cloisonFloorSalle2.position = new BABYLON.Vector3(15,0,0) ; 
 	cloisonFloorSalle2.rotation.x = 1/2*Math.PI;
+
+	var southAmericaSound = new BABYLON.Sound("southAmericaSound", "assets/sound/southAmerica.mp3", scene, function(){
+		southAmericaSound.play();},{spatialSound:true, loop:true,maxDistance:7}); 
+	southAmericaSound.setPosition(new BABYLON.Vector3(15,0,7.5))
+
 	var cloisonFloorSalle3 = creerCloison("cloisonFloorSalle3",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle3.position = new BABYLON.Vector3(25,0,0) ; 
 	cloisonFloorSalle3.rotation.x = 1/2*Math.PI;
 
-	//CRéation d'un mur avec une porte
+	//Création d'un mur avec une porte
 	var cloisonDown = createDoorWall("cloisonDown",{hauteur:10.2, largeur:30.0,hauteurPorte:4, largeurPorte:6,materiau:materiauCloison},scene) ;
 	cloisonDown.position = new BABYLON.Vector3(15,-0.2,30) ; 
 	cloisonDown.rotation.x=-Math.PI/2;
@@ -281,7 +287,7 @@ function peuplerScene(){
 	creerPendule("pendule",scene);
 
 	
-	// BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){
+	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){});
 	// 	result.scaling=new BABYLON.Vector3(0.5,0.5,0.5);
 	// 	result.position=new BABYLON.Vector3(35,2,-3);});
 	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "solar_system.glb", scene, function (meshes) { 
