@@ -189,11 +189,23 @@ function peuplerScene(){
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
 
+
+
 	//create box collision for rooms
 	contactBoxSalleDroite=BABYLON.Mesh.CreateBox("contactBoxSalleDroite", 1,scene);
-	contactBoxSalleDroite.scaling = new BABYLON.Vector3(15,10,4);
-	contactBoxSalleDroite.position=new BABYLON.Vector3(0,0,0);
+	contactBoxSalleDroite.scaling = new BABYLON.Vector3(10,4,15);
+	contactBoxSalleDroite.position=new BABYLON.Vector3(5,2,7.5);
 	contactBoxSalleDroite.visibility = 0;
+
+	contactBoxSalleMilieu=BABYLON.Mesh.CreateBox("contactBoxSalleMilieu", 1,scene);
+	contactBoxSalleMilieu.scaling = new BABYLON.Vector3(10,4,15);
+	contactBoxSalleMilieu.position=new BABYLON.Vector3(15,2,7.5);
+	contactBoxSalleMilieu.visibility = 0;
+
+	contactBoxSalleGauche=BABYLON.Mesh.CreateBox("contactBoxSalleGauche", 1,scene);
+	contactBoxSalleGauche.scaling = new BABYLON.Vector3(10,4,15);
+	contactBoxSalleGauche.position=new BABYLON.Vector3(25,2,7.5);
+	contactBoxSalleGauche.visibility = 0;
 
 
 
@@ -284,9 +296,8 @@ function peuplerScene(){
 	createCentraleDoor(scene);
 	createRoomDoors(scene);	
 
-	soundCheck();
-
 	creerPendule("pendule",scene);
+	creerSons();
 	
 	
 	// BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){
@@ -297,14 +308,37 @@ function peuplerScene(){
 	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "solar_system.glb", scene, function (meshes) { 
 	//});
 }
+function creerSons(){
+	southAmericaSound = new BABYLON.Sound("southAmericaSound", "assets/sound/southAmericaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	northAmericaSound = new BABYLON.Sound("northAmericaSound", "assets/sound/northAmericaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	asiaSound = new BABYLON.Sound("asiaSound", "assets/sound/asiaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	africaSound = new BABYLON.Sound("africaSound", "assets/sound/africaSound.mp3", scene,{loop:true, autoPlay:false}); 
+}
 
 function soundCheck(){
-
-	if(boxCamera.intersectsMesh(contactBoxSalleDroite,false)){
-		var southAmericaSound = new BABYLON.Sound("southAmericaSound", "assets/sound/southAmerica.mp3", scene, function(){
-			southAmericaSound.play();},{spatialSound:true, loop:true,maxDistance:7}); 
-		southAmericaSound.setPosition(new BABYLON.Vector3(5,0,7.5))
+	
+	if(boxCamera.intersectsMesh(contactBoxSalleDroite,false) && !northAmericaSound.isPlaying){
+		northAmericaSound.play() ;
 	}
+	else if (!boxCamera.intersectsMesh(contactBoxSalleDroite,false) && northAmericaSound.isPlaying){
+		northAmericaSound.stop();
+	}
+
+	if(boxCamera.intersectsMesh(contactBoxSalleMilieu,false) && !southAmericaSound.isPlaying){
+		southAmericaSound.play() ;
+	}
+	else if (!boxCamera.intersectsMesh(contactBoxSalleMilieu,false) && southAmericaSound.isPlaying){
+		southAmericaSound.stop();
+	}
+
+	if(boxCamera.intersectsMesh(contactBoxSalleGauche,false) && !asiaSound.isPlaying){
+		asiaSound.play() ;
+	}
+	else if (!boxCamera.intersectsMesh(contactBoxSalleGauche,false) && asiaSound.isPlaying){
+		asiaSound.stop();
+	}
+
+
 }
 
 function placeTableau(name, file, parent, position, rotation){
@@ -501,6 +535,8 @@ function set_FPS_mode(scene, canvas, camera){
 
 		porteCentrale.rotation.y=alpha;
 		porteCentrale2.rotation.y=-alpha;
+
+		soundCheck();
 		
 		// console.log(scene.getTransfomNode());
 		// if(boxCamera.intersectsMesh(scene.getChildren,false)){ i=1;	}
