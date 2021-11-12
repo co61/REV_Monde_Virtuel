@@ -145,9 +145,6 @@ function peuplerScene(){
 	cloisonFloorSalle2.position = new BABYLON.Vector3(15,0,0) ; 
 	cloisonFloorSalle2.rotation.x = 1/2*Math.PI;
 
-	var southAmericaSound = new BABYLON.Sound("southAmericaSound", "assets/sound/southAmerica.mp3", scene, function(){
-		southAmericaSound.play();},{spatialSound:true, loop:true,maxDistance:7}); 
-	southAmericaSound.setPosition(new BABYLON.Vector3(15,0,7.5))
 
 	var cloisonFloorSalle3 = creerCloison("cloisonFloorSalle3",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle3.position = new BABYLON.Vector3(25,0,0) ; 
@@ -192,6 +189,15 @@ function peuplerScene(){
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
 
+	//create box collision for rooms
+	contactBoxSalleDroite=BABYLON.Mesh.CreateBox("contactBoxSalleDroite", 1,scene);
+	contactBoxSalleDroite.scaling = new BABYLON.Vector3(15,10,4);
+	contactBoxSalleDroite.position=new BABYLON.Vector3(0,0,0);
+	contactBoxSalleDroite.visibility = 0;
+
+
+
+
 	advancedDynamicTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
 	curs = new BABYLON.GUI.Rectangle("curs");
 	curs.width='10px';
@@ -221,7 +227,7 @@ function peuplerScene(){
 	//North America
 	placeTableau("Cap Canaveral", "assets/NorthAmerica/Images/Cap Canaveral.jpg", cloisonRightSalle3, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
 	placeTableau("Grand Canyon", "assets/NorthAmerica/Images/Grand Canyon.jpg", cloisonRightSalle3, new BABYLON.Vector3(0,1.5,0.2), Math.PI );
-	placeTableau("Nationnal Park", "assets/NorthAmerica/Images/Nationnal Park.jpg", cloisonRightSalle3, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
+	placeTableau("National Park", "assets/NorthAmerica/Images/Nationnal Park.jpg", cloisonRightSalle3, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
 	placeTableau("Niagara Falls", "assets/NorthAmerica/Images/Niagara Falls.jpg", cloisonUpRight, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI );
 	placeTableau("Pentagone", "assets/NorthAmerica/Images/Pentagone.jpg", cloisonUpRight, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI );
 	placeTableau("San Francisco Bridge", "assets/NorthAmerica/Images/San Francisco Bridge.jpg", cloisonNord1, new BABYLON.Vector3(3.6,1.5,-0.2), 0);
@@ -284,14 +290,27 @@ function peuplerScene(){
 	createCentraleDoor(scene);
 	createRoomDoors(scene);	
 
-	creerPendule("pendule",scene);
+	soundCheck();
 
+	creerPendule("pendule",scene);
 	
-	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){});
-	// 	result.scaling=new BABYLON.Vector3(0.5,0.5,0.5);
-	// 	result.position=new BABYLON.Vector3(35,2,-3);});
+	
+	// BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){
+	//  	result[0].scaling=new BABYLON.Vector3(0.5,0.5,0.5);
+	//  	result[0].position=new BABYLON.Vector3(35,2,-3);
+	// });
+
 	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "solar_system.glb", scene, function (meshes) { 
 	//});
+}
+
+function soundCheck(){
+
+	if(boxCamera.intersectsMesh(contactBoxSalleDroite,false)){
+		var southAmericaSound = new BABYLON.Sound("southAmericaSound", "assets/sound/southAmerica.mp3", scene, function(){
+			southAmericaSound.play();},{spatialSound:true, loop:true,maxDistance:7}); 
+		southAmericaSound.setPosition(new BABYLON.Vector3(5,0,7.5))
+	}
 }
 
 function placeTableau(name, file, parent, position, rotation){
