@@ -72,61 +72,49 @@ function peuplerScene(){
 
 	// Création du sol global
 	var sol = creerSol("sol",{},scene) ; 
-	var ciel=creerCiel("ciel",scene);
-	
-	//création de matériaux
-	materiauPorte = creerMateriauSimple("mat-porte",{texture:"assets/textures/porte.jpeg"},scene) ;
-	materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
-	materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
-	materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
-	materiauNoir= creerMateriauSimple("mat-noir",{couleur:new BABYLON.Color3(0.1,0.1,0.1)},scene);
-
 	sol.receiveShadows = true;
 
-	materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/murs.jpg"}, scene) ; 
-	materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
-	materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
-	materiauIllusion = creerMateriauSimple("mat-illusion",{texture:"assets/textures/illusion.jpg"}, scene) ;
+	creerMateriau();
 
 	// Création d'une cloison
-	var cloisonUpRight = creerCloison("cloisonUpRight",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
+	cloisonUpRight = creerCloison("cloisonUpRight",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
 	cloisonUpRight.position = new BABYLON.Vector3(5,0,0) ; 
 	cloisonUpRight.rotation.y = 0*Math.PI ;
-	var cloisonUpMid = creerCloison("cloisonUpMid",{hauteur:5.0, largeur:10.0,materiau:materiauCloison,materiau2:materiauIllusion2},scene) ;
+	cloisonUpMid = creerCloison("cloisonUpMid",{hauteur:5.0, largeur:10.0,materiau:materiauCloison,materiau2:materiauIllusion2},scene) ;
 	cloisonUpMid.position = new BABYLON.Vector3(15,0,0) ; 
 	cloisonUpMid.rotation.y = 0*Math.PI ;
-	var cloisonUpLeft = creerCloison("cloisonUpLeft",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
+	cloisonUpLeft = creerCloison("cloisonUpLeft",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
 	cloisonUpLeft.position = new BABYLON.Vector3(25,0,0) ; 
 	cloisonUpLeft.rotation.y = 0*Math.PI ;
-	var cloisonUpTop = creerCloison("cloisonUpTop",{hauteur:5.0, largeur:30.0,materiau:materiauCloison},scene) ;
+	cloisonUpTop = creerCloison("cloisonUpTop",{hauteur:5.0, largeur:30.0,materiau:materiauCloison},scene) ;
 	cloisonUpTop.position = new BABYLON.Vector3(15,5,0) ; 
 	cloisonUpTop.rotation.y = 0*Math.PI ;
 
-	var cloisonRightSalle3 = creerCloison("cloisonRightSalle3",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonRightSalle3 = creerCloison("cloisonRightSalle3",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonRightSalle3.position = new BABYLON.Vector3(0,0,7.5) ; 
 	cloisonRightSalle3.rotation.y = Math.PI/2;
-	var cloisonRightMezzanine = creerCloison("cloisonRightMezzanine",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonRightMezzanine = creerCloison("cloisonRightMezzanine",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonRightMezzanine.position = new BABYLON.Vector3(0,5,7.5) ; 
 	cloisonRightMezzanine.rotation.y = Math.PI/2;
-	var cloisonRightHall = creerCloison("cloisonRightHall",{hauteur:10.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonRightHall = creerCloison("cloisonRightHall",{hauteur:10.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonRightHall.position = new BABYLON.Vector3(0,0,22.5) ; 
 	cloisonRightHall.rotation.y = Math.PI/2;
 
-	var cloisonLeftSalle1 = creerCloison("cloisonLeftSalle1",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonLeftSalle1 = creerCloison("cloisonLeftSalle1",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonLeftSalle1.position = new BABYLON.Vector3(30,0,7.5) ; 
 	cloisonLeftSalle1.rotation.y = Math.PI/2;
-	var cloisonLeftMezzanine = creerCloison("cloisonLeftMezzanine",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonLeftMezzanine = creerCloison("cloisonLeftMezzanine",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonLeftMezzanine.position = new BABYLON.Vector3(30,5,7.5) ; 
 	cloisonLeftMezzanine.rotation.y = Math.PI/2;
-	var cloisonLeftHall = creerCloison("cloisonLeftHall",{hauteur:10.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonLeftHall = creerCloison("cloisonLeftHall",{hauteur:10.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonLeftHall.position = new BABYLON.Vector3(30,0,22.5) ; 
 	cloisonLeftHall.rotation.y = Math.PI/2;
 
 
-	var cloisonNord1 = creerCloison("cloisonNord1",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonNord1 = creerCloison("cloisonNord1",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonNord1.position = new BABYLON.Vector3(10,0,7.5) ; 
 	cloisonNord1.rotation.y = 1/2*Math.PI;
-	var cloisonNord2 = creerCloison("cloisonNord1",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
+	cloisonNord2 = creerCloison("cloisonNord1",{hauteur:5.0, largeur:15.0,materiau:materiauCloison},scene) ;
 	cloisonNord2.position = new BABYLON.Vector3(20,0,7.5) ; 
 	cloisonNord2.rotation.y = 1/2*Math.PI;
 
@@ -191,25 +179,6 @@ function peuplerScene(){
 
 
 
-	//create box collision for rooms
-	contactBoxSalleDroite=BABYLON.Mesh.CreateBox("contactBoxSalleDroite", 1,scene);
-	contactBoxSalleDroite.scaling = new BABYLON.Vector3(10,4,15);
-	contactBoxSalleDroite.position=new BABYLON.Vector3(5,2,7.5);
-	contactBoxSalleDroite.visibility = 0;
-
-	contactBoxSalleMilieu=BABYLON.Mesh.CreateBox("contactBoxSalleMilieu", 1,scene);
-	contactBoxSalleMilieu.scaling = new BABYLON.Vector3(10,4,15);
-	contactBoxSalleMilieu.position=new BABYLON.Vector3(15,2,7.5);
-	contactBoxSalleMilieu.visibility = 0;
-
-	contactBoxSalleGauche=BABYLON.Mesh.CreateBox("contactBoxSalleGauche", 1,scene);
-	contactBoxSalleGauche.scaling = new BABYLON.Vector3(10,4,15);
-	contactBoxSalleGauche.position=new BABYLON.Vector3(25,2,7.5);
-	contactBoxSalleGauche.visibility = 0;
-
-
-
-
 	advancedDynamicTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
 	curs = new BABYLON.GUI.Rectangle("curs");
 	curs.width='10px';
@@ -229,6 +198,222 @@ function peuplerScene(){
 	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallMid);
 	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallRight);
 
+	// Création d une sphere
+	var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere1", {diameter:1.0}, scene) ; 
+	sphere1.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
+	sphere1.position = new BABYLON.Vector3(15,6,14);
+	sphere1.visibility=0.7;
+
+	var sphere2 = BABYLON.MeshBuilder.CreateSphere("sphere2", {diameter:1.0}, scene) ; 
+	sphere2.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
+	sphere2.position = new BABYLON.Vector3(3,1,27);
+	sphere2.visibility=0.7;
+
+	//creation d'une porte
+	createCentraleDoor(scene);
+	createRoomDoors(scene);	
+
+	creerContactBoxes();
+
+	creerTableaux();
+
+	creerPendule("pendule",scene);
+	var penduleBox = BABYLON.Mesh.CreateBox("penduleBox",1, scene); 
+	penduleBox.scaling = new BABYLON.Vector3(5,4,2);
+	penduleBox.position = new BABYLON.Vector3(15,8,22);
+	penduleBox.visibility=0;
+	creerSons();
+
+	creerEntree();
+
+	
+	// BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){
+	//  	result[0].scaling=new BABYLON.Vector3(0.5,0.5,0.5);
+	//  	result[0].position=new BABYLON.Vector3(35,2,-3);
+	// });
+
+	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "solar_system.glb", scene, function (meshes) { 
+	//});
+}
+function creerMateriau(){
+		//création de matériaux
+		materiauPorte = creerMateriauSimple("mat-porte",{texture:"assets/textures/porte.jpeg"},scene) ;
+		materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
+		materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
+		materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
+		materiauNoir= creerMateriauSimple("mat-noir",{couleur:new BABYLON.Color3(0.1,0.1,0.1)},scene);
+		materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/murs.jpg"}, scene) ; 
+		materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
+		materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
+		materiauIllusion = creerMateriauSimple("mat-illusion",{texture:"assets/textures/illusion.jpg"}, scene) ;
+}
+function creerSons(){
+	southAmericaSound = new BABYLON.Sound("southAmericaSound", "assets/sound/southAmericaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	northAmericaSound = new BABYLON.Sound("northAmericaSound", "assets/sound/northAmericaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	asiaSound = new BABYLON.Sound("asiaSound", "assets/sound/asiaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	africaSound = new BABYLON.Sound("africaSound", "assets/sound/africaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	oceaniaSound= new BABYLON.Sound("oceaniaSound", "assets/sound/oceaniaSound.mp3", scene,{loop:true, autoPlay:false}); 
+	newton1Sound= new BABYLON.Sound("newton1Sound", "assets/sound/newtonSound1.mp3", scene,{loop:false, autoPlay:false}); 
+	newton2Sound= new BABYLON.Sound("newton2Sound", "assets/sound/newtonSound2.mp3", scene,{loop:false, autoPlay:false}); 
+	doorSound= new BABYLON.Sound("doorSound", "assets/sound/doorSound.mp3", scene,{loop:false, autoPlay:false}); 
+
+	oceaniaSound.setVolume(0.5);
+	asiaSound.setVolume(0.7);
+}
+
+function creerEntree(){
+
+	var plafondEntree = creerCloison("plafondEntree",{hauteur:4.5, largeur:10,materiau:materiauCloison},scene) ;
+	plafondEntree.position = new BABYLON.Vector3(15,4.6,30) ; 
+	plafondEntree.rotation.x = 1/2*Math.PI;
+
+	var solEntree = creerCloison("solEntree",{hauteur:4.5, largeur:10,materiau:materiauWood},scene) ;
+	solEntree.position = new BABYLON.Vector3(15,0,30) ; 
+	solEntree.rotation.x = 1/2*Math.PI;
+
+	var plafondGAucheEntree = creerCloison("plafondGAucheEntree",{hauteur:Math.sqrt(28), largeur:4.5,materiau:materiauCloison},scene) ;
+	plafondGAucheEntree.position = new BABYLON.Vector3(20,4.6,32.25) ; 
+	plafondGAucheEntree.rotation = new BABYLON.Vector3(-0.15*Math.PI-Math.PI/4,1/2*Math.PI,0);
+
+	var plafondDroiteEntree = creerCloison("plafondDroiteEntree",{hauteur:Math.sqrt(28), largeur:4.5,materiau:materiauCloison},scene) ;
+	plafondDroiteEntree.position = new BABYLON.Vector3(10,4.6,32.25) ; 
+	plafondDroiteEntree.rotation = new BABYLON.Vector3(0.15*Math.PI+Math.PI/4,1/2*Math.PI,0);
+
+	const corners = [ new BABYLON.Vector2(4.9, 0),
+		new BABYLON.Vector2(0, 1.5),
+		new BABYLON.Vector2(-4.9, 0)
+	];        
+
+	const triangle = new BABYLON.PolygonMeshBuilder("triangleEntree",corners, scene);
+	const triangleEntree = triangle.build(false, 0.1); //updatable or not, depth
+	triangleEntree.rotation.x=-Math.PI/2;
+	triangleEntree.material=new BABYLON.StandardMaterial("materiauCloison", scene) ;
+	triangleEntree.position= new BABYLON.Vector3(15,4.6,34.2) ; 
+
+
+	discGaucheSol = BABYLON.MeshBuilder.CreateDisc("discGaucheSol", {radius:1.02},scene);
+	discGaucheSol.material=new BABYLON.StandardMaterial("materiauNoir", scene) ;
+	discGaucheSol.position = new BABYLON.Vector3(18.7,0.08,33) ;
+	discGaucheSol.rotation.x = 1/2*Math.PI;
+
+	discGauchePlafond = BABYLON.MeshBuilder.CreateDisc("discGauchePlafond", {radius:1.02},scene);
+	discGauchePlafond.material=new BABYLON.StandardMaterial("materiauWood", scene) ;
+	discGauchePlafond.position = new BABYLON.Vector3(18.7,4.54,33) ;
+	discGauchePlafond.rotation.x = -1/2*Math.PI;
+
+	discDroiteSol = BABYLON.MeshBuilder.CreateDisc("discDroiteSol", {radius:1.02},scene);
+	discDroiteSol.material=new BABYLON.StandardMaterial("materiauNoir", scene) ;
+	discDroiteSol.position = new BABYLON.Vector3(11.2,0.08,33) ;
+	discDroiteSol.rotation.x = 1/2*Math.PI;
+
+	discDroitePlafond = BABYLON.MeshBuilder.CreateDisc("discDroitePlafond", {radius:1.02},scene);
+	discDroitePlafond.material=new BABYLON.StandardMaterial("materiauWood", scene) ;
+	discDroitePlafond.position = new BABYLON.Vector3(11.2,4.54,33) ;
+	discDroitePlafond.rotation.x = -1/2*Math.PI;
+
+
+	// simple helix, single path
+	pathHelix = [];
+	let v;
+	for (let i = 0; i <= 70; i++) {
+		v = 2.0 * Math.PI * i / 20;
+		pathHelix.push( new BABYLON.Vector3(1 * Math.cos(v), i/15, 1 * Math.sin(v)) );
+	}
+
+	//show pathHelix
+	helix1 = BABYLON.MeshBuilder.CreateLines("helix1", {points: pathHelix});
+	helix1.color = BABYLON.Color3.Black();
+	helix1.position = new BABYLON.Vector3(18.7,-.1,33);
+	helix1.checkCollisions = true;
+	//create ribbon
+	ribbon1 = BABYLON.MeshBuilder.CreateRibbon("ribbon1", {pathArray: [pathHelix], offset: 10, closeArray: true});
+	ribbon1.position = new BABYLON.Vector3(18.7,-.1,33);
+	ribbon1.checkCollisions = true;
+
+	//show pathHelix
+	helix2 = BABYLON.MeshBuilder.CreateLines("helix2", {points: pathHelix});
+	helix2.color = BABYLON.Color3.Black();
+	helix2.position = new BABYLON.Vector3(11.2,-.1,33);
+	helix2.checkCollisions = true;
+	//create ribbon
+	ribbon2 = BABYLON.MeshBuilder.CreateRibbon("ribbon2", {pathArray: [pathHelix], offset: 10, closeArray: true});
+	ribbon2.position = new BABYLON.Vector3(11.2,-.1,33);
+	ribbon2.checkCollisions = true;
+}
+function soundCheck(){
+	
+	if(boxCamera.intersectsMesh(contactBoxSalleDroite,false) && !northAmericaSound.isPlaying){
+		northAmericaSound.play() ;
+	}
+	else if (!boxCamera.intersectsMesh(contactBoxSalleDroite,false) && northAmericaSound.isPlaying){
+		northAmericaSound.stop();
+	}
+
+	if(boxCamera.intersectsMesh(contactBoxSalleMilieu,false) && !southAmericaSound.isPlaying){
+		southAmericaSound.play() ;
+	}
+	else if (!boxCamera.intersectsMesh(contactBoxSalleMilieu,false) && southAmericaSound.isPlaying){
+		southAmericaSound.stop();
+	}
+
+	if(boxCamera.intersectsMesh(contactBoxSalleGauche,false) && !asiaSound.isPlaying){
+		asiaSound.play() ;
+	}
+	else if (!boxCamera.intersectsMesh(contactBoxSalleGauche,false) && asiaSound.isPlaying){
+		asiaSound.stop();
+	}
+
+	if(boxCamera.intersectsMesh(contactBoxHall,false) && !africaSound.isPlaying){
+		africaSound.play() ;
+		
+	}
+	else if (!boxCamera.intersectsMesh(contactBoxHall,false) && africaSound.isPlaying){
+		africaSound.stop();
+	}
+
+	if(boxCamera.intersectsMesh(contactBoxMezzanine,false) && !oceaniaSound.isPlaying){
+		oceaniaSound.play() ;
+	}
+	else if (!boxCamera.intersectsMesh(contactBoxMezzanine,false) && oceaniaSound.isPlaying){
+		oceaniaSound.stop();
+	}
+
+
+}
+function creerContactBoxes(){
+		//create box collision for rooms
+		contactBoxSalleDroite=BABYLON.Mesh.CreateBox("contactBoxSalleDroite", 1,scene);
+		contactBoxSalleDroite.scaling = new BABYLON.Vector3(10,4,15);
+		contactBoxSalleDroite.position=new BABYLON.Vector3(5,2,7.5);
+		contactBoxSalleDroite.visibility = 0;
+		contactBoxSalleDroite.isPickable=false;
+	
+		contactBoxSalleMilieu=BABYLON.Mesh.CreateBox("contactBoxSalleMilieu", 1,scene);
+		contactBoxSalleMilieu.scaling = new BABYLON.Vector3(10,4,15);
+		contactBoxSalleMilieu.position=new BABYLON.Vector3(15,2,7.5);
+		contactBoxSalleMilieu.visibility = 0;
+		contactBoxSalleMilieu.isPickable=false;
+	
+		contactBoxSalleGauche=BABYLON.Mesh.CreateBox("contactBoxSalleGauche", 1,scene);
+		contactBoxSalleGauche.scaling = new BABYLON.Vector3(10,4,15);
+		contactBoxSalleGauche.position=new BABYLON.Vector3(25,2,7.5);
+		contactBoxSalleGauche.visibility = 0;
+		contactBoxSalleGauche.isPickable=false;
+
+		contactBoxHall=BABYLON.Mesh.CreateBox("contactBoxHall", 1,scene);
+		contactBoxHall.scaling = new BABYLON.Vector3(30,5,15);
+		contactBoxHall.position=new BABYLON.Vector3(15,2.5,22.5);
+		contactBoxHall.visibility = 0;
+		contactBoxHall.isPickable=false;
+
+		contactBoxMezzanine=BABYLON.Mesh.CreateBox("contactBoxMezzanine", 1,scene);
+		contactBoxMezzanine.scaling = new BABYLON.Vector3(30,5,15);
+		contactBoxMezzanine.position=new BABYLON.Vector3(15,7.5,7.5);
+		contactBoxMezzanine.visibility = 0;
+		contactBoxMezzanine.isPickable=false;
+}
+function creerTableaux(){
+	
 	
 	//North America salle droite
 	placeTableau("Cap Canaveral", "assets/NorthAmerica/Images/Cap Canaveral.jpg", cloisonRightSalle3, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
@@ -280,64 +465,6 @@ function peuplerScene(){
 	placeTableau("Sidney", "assets/Oceanie/Images/Sidney.jpg", cloisonRightMezzanine, new BABYLON.Vector3(-2.5,1.5,0.2), Math.PI);
 	placeTableau("Polynésie française", "assets/Oceanie/Images/Polynésie française.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(2.5,1.5,-0.2), 0 );
 	placeTableau("Philipines", "assets/Oceanie/Images/Philipines.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(-2.5,1.5,-0.2), 0 );
-
-	// Création d une sphere
-	var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere1", {diameter:1.0}, scene) ; 
-	sphere1.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
-	sphere1.position = new BABYLON.Vector3(15,6,14);
-	sphere1.visibility=0.7;
-
-	var sphere2 = BABYLON.MeshBuilder.CreateSphere("sphere2", {diameter:1.0}, scene) ; 
-	sphere2.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
-	sphere2.position = new BABYLON.Vector3(3,1,27);
-	sphere2.visibility=0.7;
-	
-	//creation d'une porte
-	createCentraleDoor(scene);
-	createRoomDoors(scene);	
-
-	creerPendule("pendule",scene);
-	creerSons();
-	
-	
-	// BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "fish.glb", scene, function (result){
-	//  	result[0].scaling=new BABYLON.Vector3(0.5,0.5,0.5);
-	//  	result[0].position=new BABYLON.Vector3(35,2,-3);
-	// });
-
-	//BABYLON.SceneLoader.ImportMesh("", "assets/meshes/", "solar_system.glb", scene, function (meshes) { 
-	//});
-}
-function creerSons(){
-	southAmericaSound = new BABYLON.Sound("southAmericaSound", "assets/sound/southAmericaSound.mp3", scene,{loop:true, autoPlay:false}); 
-	northAmericaSound = new BABYLON.Sound("northAmericaSound", "assets/sound/northAmericaSound.mp3", scene,{loop:true, autoPlay:false}); 
-	asiaSound = new BABYLON.Sound("asiaSound", "assets/sound/asiaSound.mp3", scene,{loop:true, autoPlay:false}); 
-	africaSound = new BABYLON.Sound("africaSound", "assets/sound/africaSound.mp3", scene,{loop:true, autoPlay:false}); 
-}
-
-function soundCheck(){
-	
-	if(boxCamera.intersectsMesh(contactBoxSalleDroite,false) && !northAmericaSound.isPlaying){
-		northAmericaSound.play() ;
-	}
-	else if (!boxCamera.intersectsMesh(contactBoxSalleDroite,false) && northAmericaSound.isPlaying){
-		northAmericaSound.stop();
-	}
-
-	if(boxCamera.intersectsMesh(contactBoxSalleMilieu,false) && !southAmericaSound.isPlaying){
-		southAmericaSound.play() ;
-	}
-	else if (!boxCamera.intersectsMesh(contactBoxSalleMilieu,false) && southAmericaSound.isPlaying){
-		southAmericaSound.stop();
-	}
-
-	if(boxCamera.intersectsMesh(contactBoxSalleGauche,false) && !asiaSound.isPlaying){
-		asiaSound.play() ;
-	}
-	else if (!boxCamera.intersectsMesh(contactBoxSalleGauche,false) && asiaSound.isPlaying){
-		asiaSound.stop();
-	}
-
 
 }
 
@@ -401,6 +528,7 @@ function vecToLocal(vector, mesh){
     var v = BABYLON.Vector3.TransformCoordinates(vector, m);
 	return v;		 
 }
+var stopNewton=false;
 
 function set_FPS_mode(scene, canvas, camera){
 	// https://stackoverflow.com/questions/47116383/babylonjs-how-to-move-the-camera-in-front-of-a-mesh
@@ -415,9 +543,13 @@ function set_FPS_mode(scene, canvas, camera){
 			}
 		}
 		// console.log(pickResult.pickedMesh.name);
+		
 		var resultat = scene.pick(window.innerWidth/2, window.innerHeight/2);
 		if(resultat.pickedMesh.name=='sphere1' || resultat.pickedMesh.name=='sphere2'){
 			camera.position= new BABYLON.Vector3(resultat.pickedMesh.position.x,resultat.pickedMesh.position.y+1,resultat.pickedMesh.position.z);
+		}
+		if (resultat.pickedMesh.name=="penduleBox"){
+			stopNewton=!stopNewton;
 		}
 		Tableaux.forEach(function (item, i){
 			if(resultat.pickedMesh.name==item.getChildren()[0].name){
@@ -443,8 +575,26 @@ function set_FPS_mode(scene, canvas, camera){
 	beta=0;
 	beta2=-1;
 
+	alphaRibbon=0;
+	alphaRibbon2=100;
+
 
     scene.registerBeforeRender( function()  {
+		
+		if (alphaRibbon<=100)
+		{
+			alphaRibbon+=0.2;
+			alphaRibbon2-=0.2;
+		}
+		else{
+			alphaRibbon=0;
+			alphaRibbon2=100;
+		}
+
+		helix1.rotation.y=alphaRibbon;
+		ribbon1.rotation.y=alphaRibbon;
+		helix2.rotation.y=alphaRibbon;
+		ribbon2.rotation.y=alphaRibbon;
 
 		//animation 3 portes
 		if(boxCamera.intersectsMesh(contactBoxPorte,false)){ i=1;	}
@@ -487,9 +637,20 @@ function set_FPS_mode(scene, canvas, camera){
 			if (!porte2)
 			{
 				porte1=true;
+
+				if(!africaSound.isPlaying){
+					africaSound.play();
+				}
+
+				if (!doorSound.isPlaying){
+					doorSound.play();
+				}
 				
 				if(alpha<Math.PI/2){
 					alpha+=0.05;
+				}
+				else {
+					doorSound.stop();
 				}
 			}
         }
@@ -497,8 +658,14 @@ function set_FPS_mode(scene, canvas, camera){
 		{
 			if (!porte1){
 				porte2=true; 
+				if (!doorSound.isPlaying){
+					doorSound.play();}
+
 				if(alpha>-Math.PI/2){
 					alpha-=0.05;
+				}
+				else {
+					doorSound.stop();
 				}
 			}
 		}
@@ -509,16 +676,34 @@ function set_FPS_mode(scene, canvas, camera){
 				if(alpha<0.05){
 					alpha-=0.05;
 				}
+				else {
+					doorSound.stop();
+				}
 				porte1=false;
 				porte2=false;
+				if (!doorSound.isPlaying){
+					doorSound.play();}
+				if (!africaSound.isPlaying){
+					africaSound.play();
+				}
+
 			}
 			else if (porte2) 
 			{
 				if(alpha<Math.PI/2){
 					alpha+=0.05;
 				}
+				else {
+					doorSound.stop();
+				}
 				porte1=false;
 				porte2=false;
+				if (!doorSound.isPlaying){
+					doorSound.play();}
+				if (!africaSound.isPlaying){
+					africaSound.play();
+				}
+
 			}
 			else
 			{	
@@ -552,7 +737,6 @@ function set_FPS_mode(scene, canvas, camera){
 			}
 		});
 
-
 		//animation pendule
 		if (beta2<=	0 && !tape2 && gauche==true){
 			beta2+=0.04;
@@ -560,8 +744,23 @@ function set_FPS_mode(scene, canvas, camera){
 		else if (!tape2 && beta2>-1 && gauche==false){
 			beta2-=0.04;
 		}
-		if (beta2>=0 && gauche==true){
+		if (beta2>=0 && gauche==true && !newton1Sound.isPlaying){
 			tape2=true;
+			if (boxCamera.intersectsMesh(contactBoxMezzanine,false) && stopNewton==false){
+				newton1Sound.setVolume(0.3);
+				newton1Sound.play();
+			}
+			else if (boxCamera.intersectsMesh(contactBoxHall,false) && stopNewton==false){
+				newton1Sound.setVolume(0.3);
+				newton1Sound.play();
+			}
+			else if (boxCamera.intersectsMesh(contactBoxDoorCentrale1,false) && stopNewton==false){
+				newton1Sound.setVolume(0.2);
+				newton1Sound.play();
+			}
+			else{
+				newton1Sound.stop();
+			}
 		}
 		else if (beta2<=-1 && gauche==false){
 			gauche=true;
@@ -572,8 +771,23 @@ function set_FPS_mode(scene, canvas, camera){
 		else if (tape2 && beta>=0 && gauche==false ){
 			beta-=0.04;
 		}
-		if (gauche==false && beta<=0 ){
+		if (gauche==false && beta<=0 &&!newton2Sound.isPlaying){
 			tape2=false;
+			if (boxCamera.intersectsMesh(contactBoxMezzanine,false) && stopNewton==false){
+				newton2Sound.setVolume(0.3);
+				newton2Sound.play();
+			}
+			else if (boxCamera.intersectsMesh(contactBoxHall,false) && stopNewton==false){
+				newton2Sound.setVolume(0.3);
+				newton2Sound.play();
+			}
+			else if (boxCamera.intersectsMesh(contactBoxDoorCentrale1,false) && stopNewton==false){
+				newton2Sound.setVolume(0.2);
+				newton2Sound.play();
+			}
+			else{
+				newton2Sound.stop();
+			}
 		}
 		else if (beta>=1 && gauche==true){
 			gauche=false;
