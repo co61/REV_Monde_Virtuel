@@ -6,6 +6,7 @@ var Tableaux= new Array();
 var Headers= new Array();
 var Descriptions= new Array();
 var Sounds= new Array();
+var Spots= new Array();
 
 
 function init(){
@@ -18,7 +19,7 @@ function init(){
 
 	scene.gravity = new BABYLON.Vector3(0, -0.10, 0);
 	camera.applyGravity = true;
-	camera._needMoveForGravity = true;
+	camera._needMoveForGravity = false;
 	camera.ellipsoid = new BABYLON.Vector3(1.1, .8, 1.1); 
 	boxCamera=BABYLON.Mesh.CreateBox("boxCamera",0.5,scene);
 	boxCamera.scaling=new BABYLON.Vector3(2,2,2);
@@ -47,24 +48,15 @@ function init(){
 
 function createLights(){
 	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
-
-	// https://doc.babylonjs.com/divingDeeper/lights/shadows
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(15, 10, 15), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(180) , 0.1, scene);
-	var lightScene1 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(30,30,30), scene) ; 
 	var lightScene2 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(0,30,0), scene) ; 
-	// var lightHall = new BABYLON.PointLight("lightHall", new BABYLON.Vector3(15,9,22.5), scene) ;
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(29.5, 9.8, 29.5), new BABYLON.Vector3(-1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0.5, 9.8, 29.5), new BABYLON.Vector3(1, -0.5, -1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(29.5, 9.8, 0.5), new BABYLON.Vector3(1, -0.5, 1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// lightHall = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0.5, 9.8, 0.5), new BABYLON.Vector3(-1, -0.5, 1), BABYLON.Tools.ToRadians(90) , 0.5, scene);
-	// var lightSalle1 = new BABYLON.PointLight("lightSalle1", new BABYLON.Vector3(5,4.5,7.5), scene) ; 
-	// var lightSalle2 = new BABYLON.PointLight("lightSalle2", new BABYLON.Vector3(15,4.5,7.5), scene) ; 
-	// var lightSalle3 = new BABYLON.PointLight("lightSalle3", new BABYLON.Vector3(25,4.5,7.5), scene) ; 
-	// lightEntrance.intensity=2;
-	// lightSalle1.intensity=0.5;
-	// lightSalle2.intensity=0.5;
-	// lightSalle3.intensity=0.5;
-
+	// var spot = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0,5,-1), new BABYLON.Vector3(0, -1, 0), 0.75, 0.0, scene);
+	// spot.intensity=20;
+	// var spot = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0,5,-5), new BABYLON.Vector3(0, -1, 0), 0.75, 0.0, scene);
+	// spot.intensity=20;
+	// var spot = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0,5,-10), new BABYLON.Vector3(0, -1, 0), 0.75, 0.0, scene);
+	// spot.intensity=20;
+	// var spot = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0,5,-15), new BABYLON.Vector3(0, -1, 0), 0.75, 0.0, scene);
+	// spot.intensity=20;
 }
 
 
@@ -204,18 +196,6 @@ function peuplerScene(){
 	curs.height='10px';
 	curs.color='red';
 	advancedDynamicTexture.addControl(curs);
-	//shadow Hall
-	// shadowGeneratorHall = new BABYLON.ShadowGenerator(1024, lightHall);
-	// shadowGeneratorHall.usePoissonSampling = true;
- 	// shadowGeneratorHall.transparencyShadow = true;
- 	// shadowGeneratorHall.enableSoftTransparentShadow = true;
-	// shadowGeneratorHall.addShadowCaster(cloisonDown);
-	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonFloor);
-	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonLeft);
-	// shadowGeneratorHall.getShadowMap().renderList.push(cloisonRight);
-	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallLeft);
-	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallMid);
-	// shadowGeneratorHall.getShadowMap().renderList.push(doorwallRight);
 
 	
 	//North America salle droite
@@ -325,7 +305,7 @@ function placeTableau(name, file, parent, position, rotation){
 	plane.isPickable=false;
 	var header = BABYLON.GUI.Button.CreateSimpleButton(name, name);
 	header.width = "200px";
-	header.height = "25px";
+	header.height = "40px";
 	header.color = "black";
 	header.fontSize = 18 ;
 	header.background = "white";
@@ -350,23 +330,20 @@ function placeTableau(name, file, parent, position, rotation){
 	advancedDynamicTexture.addControl(description);
 	description.linkWithMesh(planedescription);
 
-    //sound and lights
-    // var sound = new BABYLON.Sound("gunshot", "assets/NorthAmerica/Sounds/creepySoundsTest.mp3", scene);
-    // sound.play();
+
+	var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,5,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
+	spot.parent = tableau;
+	spot.intensity=20;
+	// console.log("spotLight "+name+" parent : " + spot.intensity);
 
 	Tableaux.push(tableau);
 	Headers.push(header);
 	Descriptions.push(description);
-	// Sounds.push(sound);
 }
 
 var isLocked = false ;
 
-function vecToLocal(vector, mesh){
-    var m = mesh.getWorldMatrix();
-    var v = BABYLON.Vector3.TransformCoordinates(vector, m);
-	return v;		 
-}
+
 
 function set_FPS_mode(scene, canvas, camera){
 	// https://stackoverflow.com/questions/47116383/babylonjs-how-to-move-the-camera-in-front-of-a-mesh
@@ -390,7 +367,6 @@ function set_FPS_mode(scene, canvas, camera){
 				// console.log("hit "+item.name);
 				// console.log("hit "+Headers[i].isVisible);
 				Descriptions[i].isVisible = !Descriptions[i].isVisible ;
-
 			}else{
 			}
 		});
@@ -510,9 +486,14 @@ function set_FPS_mode(scene, canvas, camera){
 				// console.log("intersection "+item.name);
 				Headers[i].isVisible = true;
 				// Descriptions[i].isVisible = true;
+				// spot = new BABYLON.SpotLight("spotLight", new BABYLON.Vector3(0,5,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
+				// spot.parent = item.getChildren()[0];
+				// spot.intensity=0;	
+
 			}else{
 				Headers[i].isVisible = false;
 				Descriptions[i].isVisible = false;
+				// spot=null;
 			}
 		});
 
