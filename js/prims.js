@@ -203,14 +203,16 @@ function createCentraleDoor(scene){
 	porteCentrale2.setPivotPoint(porteCentrale2relativePosition);
 
 	contactBoxDoorCentrale1=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale1", 1,scene);
-	contactBoxDoorCentrale1.scaling = new BABYLON.Vector3(6,4,2.5);
-	contactBoxDoorCentrale1.position=new BABYLON.Vector3(15,0,31.25);
+	contactBoxDoorCentrale1.scaling = new BABYLON.Vector3(6,4,3);
+	contactBoxDoorCentrale1.position=new BABYLON.Vector3(15,0,31.5);
 	contactBoxDoorCentrale1.visibility = 0;
+	contactBoxDoorCentrale1.setPickable=false;
 
 	contactBoxDoorCentrale2=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale2", 1,scene);
 	contactBoxDoorCentrale2.scaling = new BABYLON.Vector3(6,4,2.5);
 	contactBoxDoorCentrale2.position=new BABYLON.Vector3(15,0,28.75);
 	contactBoxDoorCentrale2.visibility = 0;
+	contactBoxDoorCentrale2.setPickable=false;
 }
 function createRoomDoors(scene){
 	porteGauche=creerPorte("porteGauche",{hauteur:2.52, largeur:1.5,epaisseur:0.04,materiau2:materiauPorteG,materiau:materiauPorte},scene);
@@ -223,6 +225,7 @@ function createRoomDoors(scene){
 	contactBoxPorte.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte.position=new BABYLON.Vector3(25.75,-0.2,15.085);
 	contactBoxPorte.visibility = 0;
+	contactBoxPorte.setPickable=false;
 
 	porteGauche2=creerPorte("porteGauche2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
 	porteDroite2=creerPorte("porteDroite2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
@@ -234,6 +237,7 @@ function createRoomDoors(scene){
 	contactBoxPorte2.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte2.position=new BABYLON.Vector3(15.75,-0.2,15.075);
 	contactBoxPorte2.visibility = 0;
+	contactBoxPorte2.setPickable=false;
 
 	porteGauche3=creerPorte("porteGauche3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
 	porteDroite3=creerPorte("porteDroite3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
@@ -245,6 +249,7 @@ function createRoomDoors(scene){
 	contactBoxPorte3.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte3.position=new BABYLON.Vector3(5.75,-0.2,15.075);
 	contactBoxPorte3.visibility = 0;
+	contactBoxPorte3.setPickable=false;
 }
 
 function creerEscalier(nom,opts,scn){
@@ -276,10 +281,10 @@ function creerEscalier(nom,opts,scn){
 		poteaug.position = new BABYLON.Vector3(-largeur/2+0.08,hauteur/nbMarche*i+1/2,longueur/nbMarche*i+hauteur/nbMarche) ; 
 		poteaug.parent=groupe;
 	}
-	let barreg =creerCylindre("barreg",{height:longueur, diameter: 0.12,materiau:materiauWood});
-	barreg.position = new BABYLON.Vector3(-largeur/2-0.08,hauteur/2,1/2) ; 
-	barreg.rotation.x=Math.atan(hauteur/longueur);
-	barreg.parent=groupe;
+	// let barreg =creerCylindre("barreg",{height:longueur, diameter: 0.12,materiau:materiauWood});
+	// barreg.position = new BABYLON.Vector3(-largeur/2-0.08,hauteur/2,1/2) ; 
+	// barreg.rotation.x=Math.atan(hauteur/longueur);
+	// barreg.parent=groupe;
     return groupe ;  
 }
 
