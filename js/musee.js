@@ -145,13 +145,13 @@ function peuplerScene(){
 
 	var doorwallLeft = createDoorWall("doorwallLeft", {hauteur:5.7, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauCloison }, scene);
     doorwallLeft.position=new BABYLON.Vector3(25,-0.2,15.075);
-	doorwallLeft.rotation.x=-90;
+	doorwallLeft.rotation.x=-Math.PI/2;
     var doorwallMid = createDoorWall("doorwallMid", {hauteur:5.7, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauCloison ,materiau2:materiauMarbre}, scene);
     doorwallMid.position=new BABYLON.Vector3(15,-0.2,15.075);
-	doorwallMid.rotation.x=-90;
+	doorwallMid.rotation.x=-Math.PI/2;
     const doorwallRight = createDoorWall("doorwallRight", {hauteur:5.7, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauCloison }, scene);
     doorwallRight.position=new BABYLON.Vector3(5,-0.2,15.075);
-	doorwallRight.rotation.x=-90;
+	doorwallRight.rotation.x=-Math.PI/2;
 
 
 	//creation d'un plafond
@@ -263,7 +263,7 @@ function creerSons(){
 
 function creerEntree(){
 
-	var plafondEntree = creerCloison("plafondEntree",{hauteur:4.5, largeur:10,materiau:materiauCloison},scene) ;
+	var plafondEntree = creerCloison("plafondEntree",{hauteur:5, largeur:10,materiau:materiauCloison},scene) ;
 	plafondEntree.position = new BABYLON.Vector3(15,4.6,30) ; 
 	plafondEntree.rotation.x = 1/2*Math.PI;
 

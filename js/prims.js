@@ -218,9 +218,9 @@ function createRoomDoors(scene){
 	porteGauche=creerPorte("porteGauche",{hauteur:2.52, largeur:1.5,epaisseur:0.04,materiau2:materiauPorteG,materiau:materiauPorte},scene);
 	porteDroite=creerPorte("porteDroite",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
 	porteGauche.position=new BABYLON.Vector3(25.75,-0.2,15.085);
-	porteGauche.rotation.x=-3*Math.PI/20;
+	porteGauche.rotation.x=0;
 	porteDroite.position=new BABYLON.Vector3(24.25,-0.2,15.085);
-	porteDroite.rotation.x=-3*Math.PI/20;
+	porteDroite.rotation.x=0;
 	contactBoxPorte=BABYLON.Mesh.CreateBox("contactBoxPorte", 1,scene);
 	contactBoxPorte.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte.position=new BABYLON.Vector3(25.75,-0.2,15.085);
@@ -230,9 +230,9 @@ function createRoomDoors(scene){
 	porteGauche2=creerPorte("porteGauche2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
 	porteDroite2=creerPorte("porteDroite2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
 	porteGauche2.position=new BABYLON.Vector3(15.75,-0.2,15.075);
-	porteGauche2.rotation.x=-3*Math.PI/20;
+	porteGauche2.rotation.x=0;
 	porteDroite2.position=new BABYLON.Vector3(14.25,-0.2,15.075);
-	porteDroite2.rotation.x=-3*Math.PI/20;	
+	porteDroite2.rotation.x=0;	
 	contactBoxPorte2=BABYLON.Mesh.CreateBox("contactBoxPorte2", 1,scene);
 	contactBoxPorte2.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte2.position=new BABYLON.Vector3(15.75,-0.2,15.075);
@@ -242,9 +242,9 @@ function createRoomDoors(scene){
 	porteGauche3=creerPorte("porteGauche3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
 	porteDroite3=creerPorte("porteDroite3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
 	porteGauche3.position=new BABYLON.Vector3(5.75,-0.2,15.075);
-	porteGauche3.rotation.x=-3*Math.PI/20;
+	porteGauche3.rotation.x=0;
 	porteDroite3.position=new BABYLON.Vector3(4.25,-0.2,15.075);
-	porteDroite3.rotation.x=-3*Math.PI/20;
+	porteDroite3.rotation.x=0;
 	contactBoxPorte3=BABYLON.Mesh.CreateBox("contactBoxPorte3", 1,scene);
 	contactBoxPorte3.scaling = new BABYLON.Vector3(2,3,5);
 	contactBoxPorte3.position=new BABYLON.Vector3(5.75,-0.2,15.075);
