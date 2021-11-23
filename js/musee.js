@@ -48,7 +48,10 @@ function init(){
 function createLights(){
 	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
 
-	var lightScene1 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(30,30,30), scene) ; 
+	var lightScene1 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(0,30,0), scene) ; 
+	// var lightScene2 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,15,-15), scene) ;
+	// lightScene1.intensity=2;
+	// lightScene2.intensity=2;
 	
 
 }
@@ -390,59 +393,59 @@ function creerTableaux(){
 	
 	
 	//North America salle droite
-	placeTableau("Cap Canaveral", "assets/NorthAmerica/Images/Cap Canaveral.jpg", cloisonRightSalle3, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
-	placeTableau("Grand Canyon", "assets/NorthAmerica/Images/Grand Canyon.jpg", cloisonRightSalle3, new BABYLON.Vector3(0,1.5,0.2), Math.PI );
-	placeTableau("National Park", "assets/NorthAmerica/Images/Nationnal Park.jpg", cloisonRightSalle3, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
-	placeTableau("Niagara Falls", "assets/NorthAmerica/Images/Niagara Falls.jpg", cloisonUpRight, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI );
-	placeTableau("Pentagone", "assets/NorthAmerica/Images/Pentagone.jpg", cloisonUpRight, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI );
-	placeTableau("San Francisco Bridge", "assets/NorthAmerica/Images/San Francisco Bridge.jpg", cloisonNord1, new BABYLON.Vector3(3.6,1.5,-0.2), 0);
-	placeTableau("Yellowstone", "assets/NorthAmerica/Images/Yellowstone.jpg", cloisonNord1, new BABYLON.Vector3(0,1.5,-0.2), 0 );
-	placeTableau("Yosemite", "assets/NorthAmerica/Images/Yosemite.jpg", cloisonNord1, new BABYLON.Vector3(-3.6,1.5,-0.2), 0 );
+	placeTableau("Cap Canaveral", "assets/NorthAmerica/Images/Cap Canaveral.jpg", cloisonRightSalle3, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI ,"Cap Canaveral est le domaine américain de lancement de fusées pour l'espace, il s'etend sur de nombreux kilomètres et à une forte capacité de lancement.");
+	placeTableau("Grand Canyon", "assets/NorthAmerica/Images/Grand Canyon.jpg", cloisonRightSalle3, new BABYLON.Vector3(0,1.5,0.2), Math.PI,"Le grand cayon est un des plus célèbre lieux touristique située aux Etats-Unis dans le sud ouest. Le colorado à creusé ce magnifique serpent dans la roche si spéciale par ces couleurs");
+	placeTableau("National Park", "assets/NorthAmerica/Images/Central Park.jpg", cloisonRightSalle3, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI ," Central Park se trouve au milieu de New York, dans Manhattan. C'est un immense jardin public au milieu des grattes ciel.");
+	placeTableau("Niagara Falls", "assets/NorthAmerica/Images/Niagara Falls.jpg", cloisonUpRight, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI , "Les chutes du Niagara se trouve à la frontière des Etats Unis et du Canada, célèbre lieu touristique, les chutes tombes dans les grands lacs américains.");
+	placeTableau("Pentagone", "assets/NorthAmerica/Images/Pentagone.jpg", cloisonUpRight, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI ,"Pentagone, batiment probablemnt le plus sécurisé des Etats Unis car il renferme les secrets militaire, cible de nombreux Hackers qui veulent dominer leur domaine.");
+	placeTableau("San Francisco Bridge", "assets/NorthAmerica/Images/San Francisco Bridge.jpg", cloisonNord1, new BABYLON.Vector3(3.6,1.5,-0.2), 0 ,"Pont séparant San Fransisco de l'ile voisine, présent sur de nombreuse carte postale grâce à sa construction et le paysage environnant.");
+	placeTableau("Yellowstone", "assets/NorthAmerica/Images/Yellowstone.jpg", cloisonNord1, new BABYLON.Vector3(0,1.5,-0.2), 0 , "Parc National où sont présent des nombreux lacs au couleurs unique, des gésers, et le volcan le plus dangereux au monde s'il venait à se réveiller.");
+	placeTableau("Yosemite", "assets/NorthAmerica/Images/Yosemite.jpg", cloisonNord1, new BABYLON.Vector3(-3.6,1.5,-0.2), 0 , "Célèbre montagne qui défie les grimpeurs depuis les prémices de l'alpinisme, El Capitan a été grimpé en free solo par Alexender Honnold.");
 
 	//South America salle milieu
-	placeTableau("Amazone", "assets/SouthAmerica/Images/Amazone.jpg", cloisonNord1, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
-	placeTableau("Chute d'Iguazu", "assets/SouthAmerica/Images/Chute d'Iguazu.jpg", cloisonNord1, new BABYLON.Vector3(0,1.5,0.2), Math.PI );
-	placeTableau("Machu Picchu", "assets/SouthAmerica/Images/Machu Picchu.jpg", cloisonNord1, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
-	placeTableau("Perito Moreno Glacier", "assets/SouthAmerica/Images/Perito Moreno Glacier.jpg", cloisonUpMid, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI );
-	placeTableau("Rio", "assets/SouthAmerica/Images/Rio.jpg", cloisonUpMid, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI );
-	placeTableau("Salar d'Uyuni", "assets/SouthAmerica/Images/Salar d'Uyuni.jpg", cloisonNord2, new BABYLON.Vector3(3.6,1.5,-0.2), 0);
-	placeTableau("Arecibo", "assets/SouthAmerica/Images/Arecibo.jpg", cloisonNord2, new BABYLON.Vector3(0,1.5,-0.2), 0 );
-	placeTableau("Mont Roraima", "assets/SouthAmerica/Images/Mont Roraima.jpg", cloisonNord2, new BABYLON.Vector3(-3.6,1.5,-0.2), 0 );
+	placeTableau("Amazone", "assets/SouthAmerica/Images/Amazone.jpg", cloisonNord1, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI , "Le plus long, large et puissant fleuve trouve sa source en amazonie et se déverse dans l'océan Atlantique.");
+	placeTableau("Chute d'Iguazu", "assets/SouthAmerica/Images/Chute d'Iguazu.jpg", cloisonNord1, new BABYLON.Vector3(0,1.5,0.2), Math.PI , "Les chutes d'Iguazu se trouve à la frontière entre le Brésil et l'Argentine, lieux naturel, parc nationnal, les touristes se massent pour les découvrir et les prendres sous tous les angles.");
+	placeTableau("Machu Picchu", "assets/SouthAmerica/Images/Machu Picchu.jpg", cloisonNord1, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI, "Machu Picchu est une ancienne cit é inca du XV e siècle au Pérou, perchée sur un promontoire rocheux qui unit les monts Machu Picchu et Huayna Picchu (« le Jeune Pic » en quechua) sur le versant oriental des Andes centrales." );
+	placeTableau("Perito Moreno Glacier", "assets/SouthAmerica/Images/Perito Moreno Glacier.jpg", cloisonUpMid, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI , "Le glacier Perito Moreno, en espagnol Glaciar Perito Moreno, est un glacier d'Argentine situé dans le parc national Los Glaciares de la province de Santa Cruz, à 78 kilomètres d'El Calafate, en Patagonie argentine. Son front glaciaire de 5 000 mètres de longueur et de 60 mètres de hauteur s'étend dans le lac Argentino.");
+	placeTableau("Rio", "assets/SouthAmerica/Images/Rio.jpg", cloisonUpMid, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI, "Rio de Janeiro, souvent désignée simplement sous le nom de Rio, et archaïquement Riogénaire en français, est la deuxième plus grande ville du Brésil après São Paulo. Située dans le Sud-Est du pays, elle est la capitale de l'État de Rio de Janeiro. Avec ses 6,1 millions d'habitants intra-muros (communément appelés Cariocas, la variante Carioques existant aussi en français) et 12,62 millions dans l'aire urbaine, Rio de Janeiro est l'une des métropoles les plus importantes du continent américain." );
+	placeTableau("Salar d'Uyuni", "assets/SouthAmerica/Images/Salar d'Uyuni.jpg", cloisonNord2, new BABYLON.Vector3(3.6,1.5,-0.2), 0, "Cette étendue de sel est située à 3 658 mètres d'altitude. Avec une superficie de 10 582 km21, elle constitue le plus vaste désert de sel du monde1,2 et représente la moitié des réserves de lithium exploitables de la planète. Ses dimensions sont de 150 kilomètres sur 100.");
+	placeTableau("Arecibo", "assets/SouthAmerica/Images/Arecibo.jpg", cloisonNord2, new BABYLON.Vector3(0,1.5,-0.2), 0 ,"Le radiotélescope d’Arecibo est situé à Arecibo sur la côte nord de l’île de Porto Rico. Depuis février 2018, il est exploité par l’université de Floride centrale en association avec Yang Enterprises et l'université Ana G. Méndez de San Juan (Porto Rico) sous contrat de la National Science Foundation. Il avait précédemment été exploité par l’université Cornell, de sa construction dans les années 1960 jusqu'en 2011. L’observatoire fonctionne sous le nom de National Astronomy and Ionosphere Center (NAIC) même si les deux noms sont officiellement utilisés.");
+	placeTableau("Mont Roraima", "assets/SouthAmerica/Images/Mont Roraima.jpg", cloisonNord2, new BABYLON.Vector3(-3.6,1.5,-0.2), 0, "Le mont Roraima est une montagne d'Amérique du Sud partagée entre le Brésil, le Guyana et le Venezuela. Il s'agit d'un tepuy, une montagne tabulaire caractéristique du plateau des Guyanes. Délimité par des falaises d'environ 1 000 mètres de hauteur, son plateau sommital présente un environnement totalement différent de la forêt tropicale humide et de la savane qui s'étendent à ses pieds. " );
 
 	//Asia salle gauche
-	placeTableau("Bumbay", "assets/Asia/Images/Bumbay.jpg", cloisonNord2, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI );
-	placeTableau("Himalaya", "assets/Asia/Images/Himalaya.jpg", cloisonNord2, new BABYLON.Vector3(0,1.5,0.2), Math.PI );
-	placeTableau("Hong Kong", "assets/Asia/Images/Hong Kong.jpg", cloisonNord2, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI );
-	placeTableau("Port Shanghai", "assets/Asia/Images/Port Shanghai.jpg", cloisonUpLeft, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI );
-	placeTableau("Taj Mahal", "assets/Asia/Images/Taj Mahal.jpg", cloisonUpLeft, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI );
-	placeTableau("Toundra", "assets/Asia/Images/Toundra.jpg", cloisonLeftSalle1, new BABYLON.Vector3(3.6,1.5,-0.2), 0);
-	placeTableau("Yourte Mongolie", "assets/Asia/Images/Yourte Mongolie.jpg", cloisonLeftSalle1, new BABYLON.Vector3(0,1.5,-0.2), 0 );
-	placeTableau("La Grande Muraille de Chine", "assets/Asia/Images/La Grande Muraille de Chine.jpg", cloisonLeftSalle1, new BABYLON.Vector3(-3.6,1.5,-0.2), 0 );
+	placeTableau("Bumbay", "assets/Asia/Images/Bumbay.jpg", cloisonNord2, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI, "Bombay ou Mumbai, est la capitale de l'État indien du Maharashtra. La métropole compte 12 478 447 habitants en 2011. Ville d'Inde la plus peuplée, elle forme avec ses villes satellites de Navi Mumbai, Bhiwandi, Kalyan, Ulhasnagar et Thane, une agglomération de 18 414 288 habitants, soit la dixième plus peuplée au monde." );
+	placeTableau("Himalaya", "assets/Asia/Images/Himalaya.jpg", cloisonNord2, new BABYLON.Vector3(0,1.5,0.2), Math.PI , "L'Himalaya Écouter, littéralement « demeure des neiges », ou chaîne de l'Himalaya, est un ensemble de chaînes de montagnes s'étirant sur plus de 2 400 km de long et large de 250 à 400 km, qui sépare le sous-continent indien du plateau tibétain dans le Sud de l'Asie. Au sens strict, il débute à l'ouest au Nanga Parbat au Pakistan et se termine à l'est au Namche Barwa au Tibet. Cet ensemble montagneux, délimité à l'ouest par la vallée du fleuve Indus et à l'est par la vallée du fleuve Brahmapoutre, couvre une aire d'environ 600 000 km2.");
+	placeTableau("Hong Kong", "assets/Asia/Images/Hong Kong.jpg", cloisonNord2, new BABYLON.Vector3(-3.6,1.5,0.2), Math.PI ,"Hong Kong, officiellement la région administrative spéciale de Hong Kong de la république populaire de Chine, est la plus grande et la plus peuplée des deux régions administratives spéciales (RAS) de la république populaire de Chine, l'autre étant Macao. Au sein de la mégalopole du delta de la Rivière des Perles, elle compte environ sept millions d'habitants que l'on appelle Hongkongais (en anglais : Hongkongers) dont l'espérance de vie, de 84,2 ans, est la plus longue au monde en 2017");
+	placeTableau("Port Shanghai", "assets/Asia/Images/Port Shanghai.jpg", cloisonUpLeft, new BABYLON.Vector3(1.6,1.5,0.2), Math.PI ,"C'est, depuis 2005, le plus grand port du monde en tonnage. En 2010, le trafic de conteneurs y a atteint 29,05 millions d'EVP (équivalent vingt pieds), selon le gouvernement municipal. Shanghai a ainsi dépassé Singapour de 500 000 EVP. En 2017, ce trafic de conteneurs atteint 40,233 millions d'EVP, et 42,010 en 2018, soit un peu moins de 5 millions d'EVP de plus que Singapour (36,600 en 2019).");
+	placeTableau("Taj Mahal", "assets/Asia/Images/Taj Mahal.jpg", cloisonUpLeft, new BABYLON.Vector3(-1.6,1.5,0.2), Math.PI, "Le Taj Mahal est considéré comme un joyau de l'architecture moghole, un style qui combine des éléments architecturaux des architectures islamique, iranienne, ottomane et indienne." );
+	placeTableau("Toundra", "assets/Asia/Images/Toundra.jpg", cloisonLeftSalle1, new BABYLON.Vector3(3.6,1.5,-0.2), 0, "La toundra, terme venant du russe : тундра, lui-même emprunté au same désigne l'un des quatorze grands biomes terrestres. C'est une formation végétale située dans les zones climatiques froides, polaires ou montagnardes, constituée d'une strate végétale unique principalement composée de graminées, de carex, de lichens, de mousses et de diverses variétés d'arbrisseaux. On distingue habituellement la toundra arctique, la toundra antarctique et la toundra alpine. Les deux premières sont influencées par un climat froid d'origine polaire tandis que le climat de la toundra alpine est lié à l'altitude.");
+	placeTableau("Yourte Mongolie", "assets/Asia/Images/Yourte Mongolie.jpg", cloisonLeftSalle1, new BABYLON.Vector3(0,1.5,-0.2), 0 , "Une yourte ou iourte est l'habitat traditionnel (tente avec une ossature démontable en bois recouvert de feutre) de nombreux nomades vivant en Asie centrale, notamment les Turcs, mongols et les wakhis . Elle est particulièrement utilisée au Kirghizstan, au Kazakhstan au Karakalpakistan mais aussi au Turkménistan, en Turquie en Afghanistan, en Iran, en Ouzbékistan et bien sûr en Mongolie.");
+	placeTableau("La Grande Muraille de Chine", "assets/Asia/Images/La Grande Muraille de Chine.jpg", cloisonLeftSalle1, new BABYLON.Vector3(-3.6,1.5,-0.2), 0, "La Grande Muraille, aussi appelé « Les Grandes Murailles » est un ensemble de fortifications militaires chinoises construites, détruites et reconstruites en plusieurs fois et à plusieurs endroits entre le IIIeme siècle av. J.-C. et le XVIIe siècle pour marquer et défendre la frontière nord de la Chine. C'est la structure architecturale la plus importante jamais construite par l’être humain à la fois en longueur, en surface et en masse." );
 
 	//Africa hall
-	placeTableau("Forêt Tropicale", "assets/Africa/Images/Forêt Tropicale.jpg", cloisonRightHall, new BABYLON.Vector3(5,1.5,0.2), Math.PI );
-	placeTableau("Cap de Bonne Espérance", "assets/Africa/Images/Cap de Bonne Espérance.jpg", cloisonRightHall, new BABYLON.Vector3(2,1.5,0.2), Math.PI );
-	placeTableau("Lake Victoria", "assets/Africa/Images/Lake Victoria.jpg", cloisonRightHall, new BABYLON.Vector3(-1,1.5,0.2), Math.PI );
-	placeTableau("Madagascar", "assets/Africa/Images/Madagascar.jpg", cloisonRightHall, new BABYLON.Vector3(-4,1.5,0.2), Math.PI );
-	placeTableau("Maroc teinture", "assets/Africa/Images/Maroc teinture.jpg", cloisonLeftHall, new BABYLON.Vector3(5,1.5,-0.2), 0 );
-	placeTableau("Nigeria Mine", "assets/Africa/Images/Nigeria Mine.jpg", cloisonLeftHall, new BABYLON.Vector3(2,1.5,-0.2), 0);
-	placeTableau("Nil", "assets/Africa/Images/Nil.jpg", cloisonLeftHall, new BABYLON.Vector3(-1,1.5,-0.2), 0 );
-	placeTableau("Sahara", "assets/Africa/Images/Sahara.jpg", cloisonLeftHall, new BABYLON.Vector3(-4,1.5,-0.2), 0 );
+	placeTableau("Forêt Tropicale", "assets/Africa/Images/Forêt Tropicale.jpg", cloisonRightHall, new BABYLON.Vector3(5,1.5,0.2), Math.PI, "La forêt tropicale est la forêt caractéristique des régions tropicales et équatoriales. Sous ce terme se cachent des réalités très différentes, des forêts tropophiles, composées d'arbres assez épars poussant sous un climat tropical de savane, à la forêt dite tropicale humide dans des zones à climat équatorial, en passant par les forêts de nuages relativement froides." );
+	placeTableau("Cap de Bonne Espérance", "assets/Africa/Images/Cap de Bonne Espérance.jpg", cloisonRightHall, new BABYLON.Vector3(2,1.5,0.2), Math.PI ," Le cap de Bonne-Espérance est un promontoire rocheux sur la côte atlantique de l'Afrique du Sud, à l'extrémité de la péninsule du Cap située au sud de la ville du Cap et qui ferme à l'ouest la False Bay (traduction anglaise du terme signifiant « fausse baie » ou Valsbaai en afrikaans). Ce promontoire rocheux se termine à Cape Point, à 2 km du cap de Bonne-Espérance proprement dit. C'est une réserve naturelle parcourue de sentiers côtiers.");
+	placeTableau("Lake Victoria", "assets/Africa/Images/Lake Victoria.jpg", cloisonRightHall, new BABYLON.Vector3(-1,1.5,0.2), Math.PI, "Le lac Victoria, ou Nyanza (encore appelé lac Ukéréoué — Ukerewe —, ou Nalubaale), est le plus grand lac d'Afrique et (selon les sources) le quatrième ou le deuxième au monde en superficie avec 68 100 km2. Il doit son nom occidental à l'explorateur britannique Speke qui fut en 1858 le premier Européen à l'atteindre, et qui le baptisa en l'honneur de la reine Victoria." );
+	placeTableau("Madagascar", "assets/Africa/Images/Madagascar.jpg", cloisonRightHall, new BABYLON.Vector3(-4,1.5,0.2), Math.PI, "Madagascar, en forme longue la république de Madagascar, en malgache : Madagasikara et Repoblikan'i Madagasikara, est un état insulaire situé dans l'Océan Indien et géographiquement rattaché au continent africain, dont il est séparé par le canal du Mozambique. C’est la cinquième plus grande île du monde après l'Australie, le Groenland, la Nouvelle-Guinée et Bornéo." );
+	placeTableau("Maroc teinture", "assets/Africa/Images/Maroc teinture.jpg", cloisonLeftHall, new BABYLON.Vector3(5,1.5,-0.2), 0 , "Les tanneries de Fès se composent de nombreux vases en pierre remplis avec une vaste gamme de teintures et de liquides divers répandus comme une grande palette d’aquarelles. Des dizaines d’hommes, dont beaucoup sont debout jusqu’à la taille dans les colorants, travaillent sous le soleil brûlant. Les tanneries traitent les peaux de vaches, de moutons, de chèvres et de chameaux, les transformant en articles en cuir de haute qualité tels que des sacs, manteaux, chaussures et souliers. Tout cela est réalisé à la main, sans nécessiter l’utilisation de machines modernes, et le processus n’a que très peu changé depuis l’époque médiévale, ce qui rend ces tanneries absolument fascinante à visiter.");
+	placeTableau("Nigeria Mine", "assets/Africa/Images/Nigeria Mine.jpg", cloisonLeftHall, new BABYLON.Vector3(2,1.5,-0.2), 0, "Les deux mines d’uranium nigériennes du français Orano (ex-Areva) sont mal en point. L'une, la Cominak, arrêtera sa production en mars 2021, a annoncé le 23 octobre dans un communiqué le groupe nucléaire français. L'autre, la Somaïr, également en fin de vie, a fortement réduit la voilure et le nombre de ses salariés en raison des cours bas de l’uranium.");
+	placeTableau("Nil", "assets/Africa/Images/Nil.jpg", cloisonLeftHall, new BABYLON.Vector3(-1,1.5,-0.2), 0 , "Le Nil est un fleuve d'Afrique. Avec une longueur d'environ 6 700 km, c'est avec le fleuve Amazone, le plus long fleuve du monde.");
+	placeTableau("Sahara", "assets/Africa/Images/Sahara.jpg", cloisonLeftHall, new BABYLON.Vector3(-4,1.5,-0.2), 0 , "Le Sahara est un vaste désert chaud situé dans la partie nord du continent africain. Il s'étend sur 5 000 km d'ouest en est, de l'océan Atlantique à la mer Rouge, et couvre plus de 8,5 millions de km2 (soit près de 30 % de la surface du continent africain), ce qui en fait la plus grande étendue de terre aride d'un seul tenant dans le monde.");
 
 
 	//Oceanie mezzanine
-	placeTableau("Atolls de Scilly", "assets/Oceanie/Images/Atolls de Scilly.jpg", cloisonUpTop, new BABYLON.Vector3(4,1.5,0.2), Math.PI );
-	placeTableau("Desert Australie", "assets/Oceanie/Images/Desert Australie.jpg", cloisonUpTop, new BABYLON.Vector3(10,1.5,0.2), Math.PI );
-	placeTableau("Ile de tasmanie", "assets/Oceanie/Images/Ile de tasmanie.jpg", cloisonUpTop, new BABYLON.Vector3(-4,1.5,0.2), Math.PI );
-	placeTableau("Moeraki Boulders", "assets/Oceanie/Images/Moeraki Boulders.jpg", cloisonUpTop, new BABYLON.Vector3(-10,1.5,0.2), Math.PI );
+	placeTableau("Atolls de Scilly", "assets/Oceanie/Images/Atolls de Scilly.jpg", cloisonUpTop, new BABYLON.Vector3(4,1.5,0.2), Math.PI, "Manuae, ou Scilly, est un atoll faisant partie des îles Sous-le-Vent dans l'archipel de la Société et dépendant administrativement de la commune de Maupiti.");
+	placeTableau("Desert Australie", "assets/Oceanie/Images/Desert Australie.jpg", cloisonUpTop, new BABYLON.Vector3(10,1.5,0.2), Math.PI, "Les déserts australiens couvrent, au total près de 1 371 000 km2, soit 18 % de l'Australie. La plupart des déserts se situent dans la partie centrale et au nord-ouest de l'île principale.");
+	placeTableau("Ile de tasmanie", "assets/Oceanie/Images/Ile de tasmanie.jpg", cloisonUpTop, new BABYLON.Vector3(-4,1.5,0.2), Math.PI, "L'île de Tasmanie est, avec 60 000 km2, la principale île formant l'État australien de Tasmanie, soit les trois quarts de son territoire et le 27e territoire insulaire le plus vaste de la planète. Elle est entourée par les océans Indien et Pacifique et est séparée de la partie continentale de l'Australie, par le détroit de Bass." );
+	placeTableau("Moeraki Boulders", "assets/Oceanie/Images/Moeraki Boulders.jpg", cloisonUpTop, new BABYLON.Vector3(-10,1.5,0.2), Math.PI, "Les Moeraki Boulders sont des rochers sphériques exceptionnellement grands situés le long d'un tronçon de la Koekohe Beach sur le platier de la baie d'Otago, entre Moeraki et Hampden, sur l'Île du Sud, en Nouvelle-Zélande. Les blocs les plus imposants pèsent plusieurs tonnes et vont jusqu'à trois mètres de diamètre." );
 	placeTableau("Nouvelle zélande", "assets/Oceanie/Images/Nouvelle zélande.jpg", cloisonRightMezzanine, new BABYLON.Vector3(2.5,1.5,0.2), Math.PI );
-	placeTableau("Sidney", "assets/Oceanie/Images/Sidney.jpg", cloisonRightMezzanine, new BABYLON.Vector3(-2.5,1.5,0.2), Math.PI);
-	placeTableau("Polynésie française", "assets/Oceanie/Images/Polynésie française.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(2.5,1.5,-0.2), 0 );
-	placeTableau("Philipines", "assets/Oceanie/Images/Philipines.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(-2.5,1.5,-0.2), 0 );
+	placeTableau("Sidney", "assets/Oceanie/Images/Sidney.jpg", cloisonRightMezzanine, new BABYLON.Vector3(-2.5,1.5,0.2), Math.PI, "La Nouvelle-Zélande est un État insulaire d'Océanie. Située dans le sud-ouest de l'océan Pacifique, la Nouvelle-Zélande est constituée de deux îles principales (l'île du Nord et l'île du Sud), et de nombreuses îles beaucoup plus petites (environ 600), notamment l'île Stewart/Rakiura et les îles Chatham.");
+	placeTableau("Polynésie française", "assets/Oceanie/Images/Polynésie française.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(2.5,1.5,-0.2), 0, "La Polynésie française est une collectivité d'outre-mer (plus spécifiquement pays d'outre-mer ou POM) au sein de la République française (code 987), composée de cinq archipels regroupant 118 îles dont 76 sont habitées : l'archipel de la Société avec les îles du Vent et les îles Sous-le-Vent, l'archipel des Tuamotu, l'archipel des Gambier, l'archipel des Australes et les îles Marquises. Les Polynésiens l'appellent aussi Fenua, mot signifiant « territoire » ou « pays » en tahitien." );
+	placeTableau("Philipines", "assets/Oceanie/Images/Philipines.jpg", cloisonLeftMezzanine, new BABYLON.Vector3(-2.5,1.5,-0.2), 0 , "Les Philippines, en forme longue la république des Philippines, est un pays d'Asie du Sud-Est constitué d'un archipel de 7 641 îles dont onze totalisent plus de 90 % des terres et dont un peu plus de 2 000 seulement sont habitées, alors qu'environ 2 400 îles n'ont même pas reçu de nom. On distingue trois zones géographiques : Luçon, Visayas et Mindanao.");
 
 }
 
-function placeTableau(name, file, parent, position, rotation){
+function placeTableau(name, file, parent, position, rotation, tableauDescription){
 	var tableau = creerPoster(name,{tableau:file},scene) ;
 	tableau.parent = parent ; // on accroche le tableau à la cloison parent
 	tableau.rotation.y=rotation;
@@ -468,12 +471,12 @@ function placeTableau(name, file, parent, position, rotation){
 	header.linkWithMesh(plane);
 	var planedescription = BABYLON.Mesh.CreatePlane("planedescription",0.1);
 	planedescription.parent=tableau;
-	planedescription.position.y = -0.35;
+	planedescription.position.y = -0.55;
 	planedescription.visibility = 0; 
 	planedescription.isPickable=false;
-	var description = BABYLON.GUI.Button.CreateSimpleButton(name, "C'est un très beau tableau qui représente une dame");
-	description.width = "350px";
-	description.height = "120px";
+	var description = BABYLON.GUI.Button.CreateSimpleButton(name, tableauDescription);
+	description.width = "450px";
+	description.height = "200px";
 	description.color = "white";
 	description.fontSize = 15 ;
 	description.background = "green";
@@ -483,8 +486,9 @@ function placeTableau(name, file, parent, position, rotation){
 	description.linkWithMesh(planedescription);
 
     var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,5,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
-	spot.parent = tableau
-	spot.diffuse=new BABYLON.Color3(1,0,0);
+	spot.parent = tableau;
+	// console.log(tableau.parent.position.x+tableau.position.x,tableau.parent.position.y+tableau.position.y,tableau.parent.position.z+tableau.position.z);
+	spot.diffuse=new BABYLON.Color3(0.8,0.5,0);
 	spot.intensity=20;
 	// console.log("spotLight "+name+" parent : " + spot.intensity);
 
@@ -704,7 +708,7 @@ function set_FPS_mode(scene, canvas, camera){
 				// console.log("intersection "+item.name);
 				Headers[i].isVisible = true;
 				// Descriptions[i].isVisible = true;
-				item.getChildren()[4].intensity=20;
+				item.getChildren()[4].intensity=100;
 			}else{
 				Headers[i].isVisible = false;
 				Descriptions[i].isVisible = false;
