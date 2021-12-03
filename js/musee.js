@@ -69,7 +69,7 @@ function peuplerScene(){
 	cloisonUpRight = creerCloison("cloisonUpRight",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
 	cloisonUpRight.position = new BABYLON.Vector3(5,0,0) ; 
 	cloisonUpRight.rotation.y = 0*Math.PI ;
-	cloisonUpMid = creerCloison("cloisonUpMid",{hauteur:5.0, largeur:10.0,materiau:materiauCloison,materiau2:materiauIllusion2},scene) ;
+	cloisonUpMid = creerCloison("cloisonUpMid",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
 	cloisonUpMid.position = new BABYLON.Vector3(15,0,0) ; 
 	cloisonUpMid.rotation.y = 0*Math.PI ;
 	cloisonUpLeft = creerCloison("cloisonUpLeft",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
@@ -115,14 +115,13 @@ function peuplerScene(){
 	var cloisonFloorHall = creerCloison("cloisonFloorHall",{hauteur:15.0, largeur:30.0,materiau:materiauWood},scene) ;
 	cloisonFloorHall.position = new BABYLON.Vector3(15,0,15) ; 
 	cloisonFloorHall.rotation.x = 1/2*Math.PI;
-	var cloisonFloorSalle1 = creerCloison("cloisonFloorSalle1",{hauteur:15.0, largeur:10.0,materiau:materiauCarrelage},scene) ;
+	var cloisonFloorSalle1 = creerCloison("cloisonFloorSalle1",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle1.position = new BABYLON.Vector3(5,0,0) ; 
 	cloisonFloorSalle1.rotation.x = 1/2*Math.PI;
-	var cloisonFloorSalle2 = creerCloison("cloisonFloorSalle2",{hauteur:15.0, largeur:10.0,materiau:materiauCloison},scene) ;
+
+	var cloisonFloorSalle2 = creerCloison("cloisonFloorSalle2",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle2.position = new BABYLON.Vector3(15,0,0) ; 
 	cloisonFloorSalle2.rotation.x = 1/2*Math.PI;
-
-
 	var cloisonFloorSalle3 = creerCloison("cloisonFloorSalle3",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle3.position = new BABYLON.Vector3(25,0,0) ; 
 	cloisonFloorSalle3.rotation.x = 1/2*Math.PI;
@@ -162,7 +161,8 @@ function peuplerScene(){
 	var escalierdoux = creerCloison("escalierdoux",{hauteur:Math.sqrt(43), largeur:3.0},scene) ;
 	escalierdoux.position = new BABYLON.Vector3(15,0.07,24.1)  ; 
 	escalierdoux.rotation = new BABYLON.Vector3(0.496+2*Math.PI/11,Math.PI,0);
-	escalierdoux.visibility=0;
+	escalierdoux.getChildren()[0].visibility=0;
+	escalierdoux.getChildren()[1].visibility=0;
 
 	let barreg1 =creerCylindre("barreg1",{height:Math.sqrt(43), diameter: 0.12,materiau:materiauWood});
 	barreg1.position = new BABYLON.Vector3(16.4,2.6,21) ; 
@@ -173,12 +173,20 @@ function peuplerScene(){
 	barred1.rotation = new BABYLON.Vector3(0.496+2*Math.PI/11,Math.PI,0);
 
 	let barred =creerCylindre("barred",{height:Math.sqrt(114), diameter: 0.12,materiau:materiauWood});
-	barred.position = new BABYLON.Vector3(7.5,7.6,17) ; 
-	barred.rotation = new BABYLON.Vector3(0,Math.PI,-9.2);
+	barred.rotation = new BABYLON.Vector3(0,0,-3.3*Math.PI/6);
+	barred.position = new BABYLON.Vector3(8.2,5.1,18.025) ; 
 
 	let barreg =creerCylindre("barreg",{height:Math.sqrt(114), diameter: 0.12,materiau:materiauWood});
-	barreg.position = new BABYLON.Vector3(22.5,2.6,17) ; 
-	barreg.rotation = new BABYLON.Vector3(Math.PI,0,9.2+2*Math.PI/11);
+	barreg.rotation = new BABYLON.Vector3(0,0,3.3*Math.PI/6);
+	barreg.position = new BABYLON.Vector3(21.8,5.1,18.025) ; 
+
+	let barredp =creerCylindre("barreg",{height:2.75, diameter: 0.12,materiau:materiauWood});
+	barredp.rotation = new BABYLON.Vector3(0,0,Math.PI/2);
+	barredp.position = new BABYLON.Vector3(1.5,5.95,18.025) ; 
+
+	let barregp =creerCylindre("barreg",{height:2.75, diameter: 0.12,materiau:materiauWood});
+	barregp.rotation = new BABYLON.Vector3(0,0,Math.PI/2);
+	barregp.position = new BABYLON.Vector3(28.5,5.95,18.025) ; 
 
 	var cloisonFloorEscalier = creerCloison("cloisonFloorEscalier",{hauteur:3.0, largeur:3.0,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
 	cloisonFloorEscalier.position = new BABYLON.Vector3(15,3.25,15) ; 
@@ -284,7 +292,7 @@ function creerMateriau(){
 		materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
 		materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
 		materiauNoir= creerMateriauSimple("mat-noir",{couleur:new BABYLON.Color3(0.1,0.1,0.1)},scene);
-		materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/murs.jpg"}, scene) ; 
+		materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/mur_bois.jpg"}, scene) ; 
 		materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
 		materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
 		materiauMer = creerMateriauSimple("mat-mer",{texture:"assets/textures/wave.jpg"}, scene) ;
@@ -317,11 +325,11 @@ function creerEntree(){
 	solEntree.rotation.x = 1/2*Math.PI;
 
 	var plafondGAucheEntree = creerCloison("plafondGAucheEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauCloison},scene) ;
-	plafondGAucheEntree.position = new BABYLON.Vector3(20,4.6,32.55) ; 
+	plafondGAucheEntree.position = new BABYLON.Vector3(20,4.6,32.6) ; 
 	plafondGAucheEntree.rotation = new BABYLON.Vector3(-0.15*Math.PI-Math.PI/4,1/2*Math.PI,0);
 
 	var plafondDroiteEntree = creerCloison("plafondDroiteEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauCloison},scene) ;
-	plafondDroiteEntree.position = new BABYLON.Vector3(10,4.6,32.55) ; 
+	plafondDroiteEntree.position = new BABYLON.Vector3(10,4.6,32.6) ; 
 	plafondDroiteEntree.rotation = new BABYLON.Vector3(0.15*Math.PI+Math.PI/4,1/2*Math.PI,0);
 
 	const corners = [ new BABYLON.Vector2(4.9, 0),
@@ -332,27 +340,27 @@ function creerEntree(){
 	const triangle = new BABYLON.PolygonMeshBuilder("triangleEntree",corners, scene);
 	const triangleEntree = triangle.build(false, 0.1); //updatable or not, depth
 	triangleEntree.rotation.x=-Math.PI/2;
-	triangleEntree.material=new BABYLON.StandardMaterial("materiauCloison", scene) ;
+	triangleEntree.material=materiauMarbre ;
 	triangleEntree.position= new BABYLON.Vector3(15,4.6,34.9) ; 
 
 
 	discGaucheSol = BABYLON.MeshBuilder.CreateDisc("discGaucheSol", {radius:1.02},scene);
-	discGaucheSol.material=new BABYLON.StandardMaterial("materiauNoir", scene) ;
+	discGaucheSol.material=materiauMarbre ;
 	discGaucheSol.position = new BABYLON.Vector3(18.7,0.08,34) ;
 	discGaucheSol.rotation.x = 1/2*Math.PI;
 
 	discGauchePlafond = BABYLON.MeshBuilder.CreateDisc("discGauchePlafond", {radius:1.02},scene);
-	discGauchePlafond.material=new BABYLON.StandardMaterial("materiauWood", scene) ;
+	discGauchePlafond.material=materiauMarbre ;
 	discGauchePlafond.position = new BABYLON.Vector3(18.7,4.54,34) ;
 	discGauchePlafond.rotation.x = -1/2*Math.PI;
 
 	discDroiteSol = BABYLON.MeshBuilder.CreateDisc("discDroiteSol", {radius:1.02},scene);
-	discDroiteSol.material=new BABYLON.StandardMaterial("materiauNoir", scene) ;
+	discDroiteSol.material=materiauMarbre ;
 	discDroiteSol.position = new BABYLON.Vector3(11.2,0.08,34) ;
 	discDroiteSol.rotation.x = 1/2*Math.PI;
 
 	discDroitePlafond = BABYLON.MeshBuilder.CreateDisc("discDroitePlafond", {radius:1.02},scene);
-	discDroitePlafond.material=new BABYLON.StandardMaterial("materiauWood", scene) ;
+	discDroitePlafond.material=materiauMarbre ;
 	discDroitePlafond.position = new BABYLON.Vector3(11.2,4.54,34) ;
 	discDroitePlafond.rotation.x = -1/2*Math.PI;
 
@@ -374,6 +382,7 @@ function creerEntree(){
 	ribbon1 = BABYLON.MeshBuilder.CreateRibbon("ribbon1", {pathArray: [pathHelix], offset: 10, closeArray: true});
 	ribbon1.position = new BABYLON.Vector3(18.7,-.1,34);
 	ribbon1.checkCollisions = true;
+	ribbon1.material=materiauMarbre ;
 
 	//show pathHelix
 	helix2 = BABYLON.MeshBuilder.CreateLines("helix2", {points: pathHelix});
@@ -384,6 +393,7 @@ function creerEntree(){
 	ribbon2 = BABYLON.MeshBuilder.CreateRibbon("ribbon2", {pathArray: [pathHelix], offset: 10, closeArray: true});
 	ribbon2.position = new BABYLON.Vector3(11.2,-.1,34);
 	ribbon2.checkCollisions = true;
+	ribbon2.material=materiauMarbre ;
 }
 function soundCheck(){
 	
@@ -518,7 +528,7 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	tableau.parent = parent ; // on accroche le tableau à la cloison parent
 	tableau.rotation.y=rotation;
 	tableau.position = position;
-	var boxCollision = BABYLON.MeshBuilder.CreateBox("box_"+name, {width:2,height:4,depth:3}, scene);
+	var boxCollision = BABYLON.MeshBuilder.CreateBox("box_"+name, {width:2,height:4,depth:5}, scene);
 	boxCollision.position=new BABYLON.Vector3(0,0,-2);
 	boxCollision.isPickable=false;
 	boxCollision.parent = tableau;
@@ -539,7 +549,7 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	header.linkWithMesh(plane);
 	var planedescription = BABYLON.Mesh.CreatePlane("planedescription",0.1);
 	planedescription.parent=tableau;
-	planedescription.position.y = -0.55;
+	planedescription.position.y = -0.65;
 	planedescription.visibility = 0; 
 	planedescription.isPickable=false;
 	var description = BABYLON.GUI.Button.CreateSimpleButton(name, tableauDescription);
@@ -547,17 +557,17 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	description.height = "200px";
 	description.color = "white";
 	description.fontSize = 15 ;
-	description.background = "green";
+	description.background = "";
 	description.cornerRadius = 10;
 	description.isVisible = false;
 	advancedDynamicTexture.addControl(description);
 	description.linkWithMesh(planedescription);
 
-    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,5,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
+    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
 	spot.parent = tableau;
 	// console.log(tableau.parent.position.x+tableau.position.x,tableau.parent.position.y+tableau.position.y,tableau.parent.position.z+tableau.position.z);
-	spot.diffuse=new BABYLON.Color3(0.8,0.5,0);
-	spot.intensity=20;
+	spot.diffuse=new BABYLON.Color3(0.2,0,0.2);
+	spot.intensity=10;
 	// console.log("spotLight "+name+" parent : " + spot.intensity);
 
 	Tableaux.push(tableau);
@@ -640,6 +650,10 @@ function set_FPS_mode(scene, canvas, camera){
 		ribbon1.rotation.y=alphaRibbon;
 		helix2.rotation.y=alphaRibbon;
 		ribbon2.rotation.y=alphaRibbon;
+		discDroiteSol.rotation.y=alphaRibbon;
+		discGaucheSol.rotation.y=alphaRibbon;
+		discDroitePlafond.rotation.y=alphaRibbon;
+		discGauchePlafond.rotation.y=alphaRibbon;
 
 
 
@@ -781,7 +795,7 @@ function set_FPS_mode(scene, canvas, camera){
 				// console.log("intersection "+item.name);
 				Headers[i].isVisible = true;
 				// Descriptions[i].isVisible = true;
-				item.getChildren()[4].intensity=100;
+				item.getChildren()[4].intensity=10;
 			}else{
 				Headers[i].isVisible = false;
 				Descriptions[i].isVisible = false;
