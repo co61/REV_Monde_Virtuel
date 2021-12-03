@@ -162,7 +162,8 @@ function peuplerScene(){
 	var escalierdoux = creerCloison("escalierdoux",{hauteur:Math.sqrt(43), largeur:3.0},scene) ;
 	escalierdoux.position = new BABYLON.Vector3(15,0.07,24.1)  ; 
 	escalierdoux.rotation = new BABYLON.Vector3(0.496+2*Math.PI/11,Math.PI,0);
-	escalierdoux.visibility=0;
+	escalierdoux.getChildren()[0].visibility=0;
+	escalierdoux.getChildren()[1].visibility=0;
 
 	let barreg1 =creerCylindre("barreg1",{height:Math.sqrt(43), diameter: 0.12,materiau:materiauWood});
 	barreg1.position = new BABYLON.Vector3(16.4,2.6,21) ; 
@@ -173,12 +174,20 @@ function peuplerScene(){
 	barred1.rotation = new BABYLON.Vector3(0.496+2*Math.PI/11,Math.PI,0);
 
 	let barred =creerCylindre("barred",{height:Math.sqrt(114), diameter: 0.12,materiau:materiauWood});
-	barred.position = new BABYLON.Vector3(7.5,7.6,17) ; 
-	barred.rotation = new BABYLON.Vector3(0,Math.PI,-9.2);
+	barred.rotation = new BABYLON.Vector3(0,0,-3.3*Math.PI/6);
+	barred.position = new BABYLON.Vector3(8.2,5.1,18.025) ; 
 
 	let barreg =creerCylindre("barreg",{height:Math.sqrt(114), diameter: 0.12,materiau:materiauWood});
-	barreg.position = new BABYLON.Vector3(22.5,2.6,17) ; 
-	barreg.rotation = new BABYLON.Vector3(Math.PI,0,9.2+2*Math.PI/11);
+	barreg.rotation = new BABYLON.Vector3(0,0,3.3*Math.PI/6);
+	barreg.position = new BABYLON.Vector3(21.8,5.1,18.025) ; 
+
+	let barredp =creerCylindre("barreg",{height:2.75, diameter: 0.12,materiau:materiauWood});
+	barredp.rotation = new BABYLON.Vector3(0,0,Math.PI/2);
+	barredp.position = new BABYLON.Vector3(1.5,5.95,18.025) ; 
+
+	let barregp =creerCylindre("barreg",{height:2.75, diameter: 0.12,materiau:materiauWood});
+	barregp.rotation = new BABYLON.Vector3(0,0,Math.PI/2);
+	barregp.position = new BABYLON.Vector3(28.5,5.95,18.025) ; 
 
 	var cloisonFloorEscalier = creerCloison("cloisonFloorEscalier",{hauteur:3.0, largeur:3.0,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
 	cloisonFloorEscalier.position = new BABYLON.Vector3(15,3.25,15) ; 
@@ -289,27 +298,27 @@ function creerEntree(){
 	const triangle = new BABYLON.PolygonMeshBuilder("triangleEntree",corners, scene);
 	const triangleEntree = triangle.build(false, 0.1); //updatable or not, depth
 	triangleEntree.rotation.x=-Math.PI/2;
-	triangleEntree.material=new BABYLON.StandardMaterial("materiauCloison", scene) ;
+	triangleEntree.material=materiauMarbre ;
 	triangleEntree.position= new BABYLON.Vector3(15,4.6,34.9) ; 
 
 
 	discGaucheSol = BABYLON.MeshBuilder.CreateDisc("discGaucheSol", {radius:1.02},scene);
-	discGaucheSol.material=new BABYLON.StandardMaterial("materiauNoir", scene) ;
+	discGaucheSol.material=materiauMarbre ;
 	discGaucheSol.position = new BABYLON.Vector3(18.7,0.08,34) ;
 	discGaucheSol.rotation.x = 1/2*Math.PI;
 
 	discGauchePlafond = BABYLON.MeshBuilder.CreateDisc("discGauchePlafond", {radius:1.02},scene);
-	discGauchePlafond.material=new BABYLON.StandardMaterial("materiauWood", scene) ;
+	discGauchePlafond.material=materiauMarbre ;
 	discGauchePlafond.position = new BABYLON.Vector3(18.7,4.54,34) ;
 	discGauchePlafond.rotation.x = -1/2*Math.PI;
 
 	discDroiteSol = BABYLON.MeshBuilder.CreateDisc("discDroiteSol", {radius:1.02},scene);
-	discDroiteSol.material=new BABYLON.StandardMaterial("materiauNoir", scene) ;
+	discDroiteSol.material=materiauMarbre ;
 	discDroiteSol.position = new BABYLON.Vector3(11.2,0.08,34) ;
 	discDroiteSol.rotation.x = 1/2*Math.PI;
 
 	discDroitePlafond = BABYLON.MeshBuilder.CreateDisc("discDroitePlafond", {radius:1.02},scene);
-	discDroitePlafond.material=new BABYLON.StandardMaterial("materiauWood", scene) ;
+	discDroitePlafond.material=materiauMarbre ;
 	discDroitePlafond.position = new BABYLON.Vector3(11.2,4.54,34) ;
 	discDroitePlafond.rotation.x = -1/2*Math.PI;
 
@@ -331,6 +340,7 @@ function creerEntree(){
 	ribbon1 = BABYLON.MeshBuilder.CreateRibbon("ribbon1", {pathArray: [pathHelix], offset: 10, closeArray: true});
 	ribbon1.position = new BABYLON.Vector3(18.7,-.1,34);
 	ribbon1.checkCollisions = true;
+	ribbon1.material=materiauMarbre ;
 
 	//show pathHelix
 	helix2 = BABYLON.MeshBuilder.CreateLines("helix2", {points: pathHelix});
@@ -341,6 +351,7 @@ function creerEntree(){
 	ribbon2 = BABYLON.MeshBuilder.CreateRibbon("ribbon2", {pathArray: [pathHelix], offset: 10, closeArray: true});
 	ribbon2.position = new BABYLON.Vector3(11.2,-.1,34);
 	ribbon2.checkCollisions = true;
+	ribbon2.material=materiauMarbre ;
 }
 function soundCheck(){
 	
@@ -475,7 +486,7 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	tableau.parent = parent ; // on accroche le tableau à la cloison parent
 	tableau.rotation.y=rotation;
 	tableau.position = position;
-	var boxCollision = BABYLON.MeshBuilder.CreateBox("box_"+name, {width:2,height:4,depth:3}, scene);
+	var boxCollision = BABYLON.MeshBuilder.CreateBox("box_"+name, {width:2,height:4,depth:5}, scene);
 	boxCollision.position=new BABYLON.Vector3(0,0,-2);
 	boxCollision.isPickable=false;
 	boxCollision.parent = tableau;
@@ -496,7 +507,7 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	header.linkWithMesh(plane);
 	var planedescription = BABYLON.Mesh.CreatePlane("planedescription",0.1);
 	planedescription.parent=tableau;
-	planedescription.position.y = -0.55;
+	planedescription.position.y = -0.65;
 	planedescription.visibility = 0; 
 	planedescription.isPickable=false;
 	var description = BABYLON.GUI.Button.CreateSimpleButton(name, tableauDescription);
@@ -504,13 +515,13 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	description.height = "200px";
 	description.color = "white";
 	description.fontSize = 15 ;
-	description.background = "green";
+	description.background = "";
 	description.cornerRadius = 10;
 	description.isVisible = false;
 	advancedDynamicTexture.addControl(description);
 	description.linkWithMesh(planedescription);
 
-    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,5,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
+    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
 	spot.parent = tableau;
 	// console.log(tableau.parent.position.x+tableau.position.x,tableau.parent.position.y+tableau.position.y,tableau.parent.position.z+tableau.position.z);
 	spot.diffuse=new BABYLON.Color3(0.8,0.5,0);
@@ -597,6 +608,10 @@ function set_FPS_mode(scene, canvas, camera){
 		ribbon1.rotation.y=alphaRibbon;
 		helix2.rotation.y=alphaRibbon;
 		ribbon2.rotation.y=alphaRibbon;
+		discDroiteSol.rotation.y=alphaRibbon;
+		discGaucheSol.rotation.y=alphaRibbon;
+		discDroitePlafond.rotation.y=alphaRibbon;
+		discGauchePlafond.rotation.y=alphaRibbon;
 
 		//animation 3 portes
 		if(boxCamera.intersectsMesh(contactBoxPorte,false)){ i=1;	}

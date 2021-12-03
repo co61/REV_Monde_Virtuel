@@ -117,6 +117,7 @@ function creerCylindre(nom,opts,scn){
 
 	let cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", {height:height,diameter:diameter,diameterTop:diameterTop,diameterBottom:diameterBottom},scn);
 	cylinder.material              = materiau;
+	cylinder.checkCollisions = true;
 	//cylinder.material.diffuseColor  = new BABYLON.Color3(1.0,1.0,1.0) ;
 	return cylinder;
 }
@@ -124,8 +125,8 @@ function creerCylindre(nom,opts,scn){
 function creerPoster(nom,opts,scn){
 
 	let options = opts || {} ; 
-	let hauteur = options["hauteur"] || 1.0 ; 
-	let largeur = options["largeur"] || 1.0 ; 	
+	let hauteur = options["hauteur"] || 2.5 ; 
+	let largeur = options["largeur"] || 2 ; 	
 	let textureName = options["tableau"] || ""; 
 
 	var group = new BABYLON.TransformNode(nom)
@@ -136,7 +137,6 @@ function creerPoster(nom,opts,scn){
 	var mat = new BABYLON.StandardMaterial("tex-tableau-" + nom, scn);
 	mat.diffuseTexture = new BABYLON.Texture(textureName, scn);
 	tableau1.material = mat;
-
 
 
 	return group ; 
@@ -161,6 +161,7 @@ function creerCloison(nom,opts,scn){
 	cloison1.position.z=-epaisseur/4;
 	cloison1.position.y = hauteur / 2.0 ; 
 	cloison1.checkCollisions = true;
+	
 
 	let cloison2 = BABYLON.MeshBuilder.CreateBox(nom,{width:largeur,height:hauteur,depth:epaisseur/2},scn) ;
 	cloison2.material = materiau2 ; 
