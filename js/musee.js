@@ -69,7 +69,7 @@ function peuplerScene(){
 	cloisonUpRight = creerCloison("cloisonUpRight",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
 	cloisonUpRight.position = new BABYLON.Vector3(5,0,0) ; 
 	cloisonUpRight.rotation.y = 0*Math.PI ;
-	cloisonUpMid = creerCloison("cloisonUpMid",{hauteur:5.0, largeur:10.0,materiau:materiauCloison,materiau2:materiauIllusion2},scene) ;
+	cloisonUpMid = creerCloison("cloisonUpMid",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
 	cloisonUpMid.position = new BABYLON.Vector3(15,0,0) ; 
 	cloisonUpMid.rotation.y = 0*Math.PI ;
 	cloisonUpLeft = creerCloison("cloisonUpLeft",{hauteur:5.0, largeur:10.0,materiau:materiauCloison},scene) ;
@@ -115,14 +115,12 @@ function peuplerScene(){
 	var cloisonFloorHall = creerCloison("cloisonFloorHall",{hauteur:15.0, largeur:30.0,materiau:materiauWood},scene) ;
 	cloisonFloorHall.position = new BABYLON.Vector3(15,0,15) ; 
 	cloisonFloorHall.rotation.x = 1/2*Math.PI;
-	var cloisonFloorSalle1 = creerCloison("cloisonFloorSalle1",{hauteur:15.0, largeur:10.0,materiau:materiauCarrelage},scene) ;
+	var cloisonFloorSalle1 = creerCloison("cloisonFloorSalle1",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle1.position = new BABYLON.Vector3(5,0,0) ; 
 	cloisonFloorSalle1.rotation.x = 1/2*Math.PI;
-	var cloisonFloorSalle2 = creerCloison("cloisonFloorSalle2",{hauteur:15.0, largeur:10.0,materiau:materiauIllusion},scene) ;
+	var cloisonFloorSalle2 = creerCloison("cloisonFloorSalle2",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle2.position = new BABYLON.Vector3(15,0,0) ; 
 	cloisonFloorSalle2.rotation.x = 1/2*Math.PI;
-
-
 	var cloisonFloorSalle3 = creerCloison("cloisonFloorSalle3",{hauteur:15.0, largeur:10.0,materiau:materiauWood},scene) ;
 	cloisonFloorSalle3.position = new BABYLON.Vector3(25,0,0) ; 
 	cloisonFloorSalle3.rotation.x = 1/2*Math.PI;
@@ -253,7 +251,7 @@ function creerMateriau(){
 		materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
 		materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
 		materiauNoir= creerMateriauSimple("mat-noir",{couleur:new BABYLON.Color3(0.1,0.1,0.1)},scene);
-		materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/murs.jpg"}, scene) ; 
+		materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/mur_bois.jpg"}, scene) ; 
 		materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
 		materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
 		materiauIllusion = creerMateriauSimple("mat-illusion",{texture:"assets/textures/illusion.jpg"}, scene) ;
@@ -283,11 +281,11 @@ function creerEntree(){
 	solEntree.rotation.x = 1/2*Math.PI;
 
 	var plafondGAucheEntree = creerCloison("plafondGAucheEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauCloison},scene) ;
-	plafondGAucheEntree.position = new BABYLON.Vector3(20,4.6,32.55) ; 
+	plafondGAucheEntree.position = new BABYLON.Vector3(20,4.6,32.6) ; 
 	plafondGAucheEntree.rotation = new BABYLON.Vector3(-0.15*Math.PI-Math.PI/4,1/2*Math.PI,0);
 
 	var plafondDroiteEntree = creerCloison("plafondDroiteEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauCloison},scene) ;
-	plafondDroiteEntree.position = new BABYLON.Vector3(10,4.6,32.55) ; 
+	plafondDroiteEntree.position = new BABYLON.Vector3(10,4.6,32.6) ; 
 	plafondDroiteEntree.rotation = new BABYLON.Vector3(0.15*Math.PI+Math.PI/4,1/2*Math.PI,0);
 
 	const corners = [ new BABYLON.Vector2(4.9, 0),
@@ -524,8 +522,8 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
     var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
 	spot.parent = tableau;
 	// console.log(tableau.parent.position.x+tableau.position.x,tableau.parent.position.y+tableau.position.y,tableau.parent.position.z+tableau.position.z);
-	spot.diffuse=new BABYLON.Color3(0.8,0.5,0);
-	spot.intensity=20;
+	spot.diffuse=new BABYLON.Color3(0.2,0,0.2);
+	spot.intensity=10;
 	// console.log("spotLight "+name+" parent : " + spot.intensity);
 
 	Tableaux.push(tableau);
@@ -748,7 +746,7 @@ function set_FPS_mode(scene, canvas, camera){
 				// console.log("intersection "+item.name);
 				Headers[i].isVisible = true;
 				// Descriptions[i].isVisible = true;
-				item.getChildren()[4].intensity=100;
+				item.getChildren()[4].intensity=10;
 			}else{
 				Headers[i].isVisible = false;
 				Descriptions[i].isVisible = false;
