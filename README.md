@@ -3,21 +3,21 @@
 L'objectif de ce projet est de créer un environnement virtuel permettant à un avatar de se déplacer dans une reconstitution de musée. 
 
 Logiciels et librarie utilisés :
-	- Sublime Text pour l'édition du code
-	- Firefox pour l'exécution du fichier HTML
-	- Java Script pour le corps du code et la mise en place de l'environnement virtuel
-	- Babylon.js est la librairie utilisée pour réaliser cet environnement virtuel
+- Sublime Text pour l'édition du code
+- Firefox pour l'exécution du fichier HTML
+- Java Script pour le corps du code et la mise en place de l'environnement virtuel
+- Babylon.js est la librairie utilisée pour réaliser cet environnement virtuel
 
 ## Le musée
 
 Notre musée porte sur la représentation de lieux touristiques sur 5 continents de notre planète terre, nous avons décidé d'exclure l'Europe.
 
 Le musée comporte 5 pièces : 
-	-Le Hall qui comporte 10 tableaux portant sur l'Afrique
-	-La Mézanine qui comporte 10 tableaux portant sur l'Océanie
-	-La salle de gauche qui comporte 10 tableaux portant sur l'Asie
-	-La salle du milieu qui comporte 10 tableaux portant sur l'Amérique du Sud 
-	-La salle de droite qui comporte 10 tableaux portant sur l'Amérique du Nord
+-Le Hall qui comporte 10 tableaux portant sur l'Afrique
+-La Mézanine qui comporte 10 tableaux portant sur l'Océanie
+-La salle de gauche qui comporte 10 tableaux portant sur l'Asie
+-La salle du milieu qui comporte 10 tableaux portant sur l'Amérique du Sud 
+-La salle de droite qui comporte 10 tableaux portant sur l'Amérique du Nord
 
 
 ### Les tableaux
@@ -39,6 +39,8 @@ En face des portes d'entrées se trouve l'escalier double menant à la mézanine
 Dans le hall une animation 3D représentant un pendule de Newton est présente au plafond. Cette animation génère un son de choc lorsque une bille en tape un autre.
 Une autre statue d'un bateau naviguant sur un plan de vagues est présente dans la mézanine.
 De plus la porte d'entrée est entouré de spirales animées. 
+![image](https://user-images.githubusercontent.com/59872748/145187892-0f82a9cb-bad7-4a7c-bb66-0e0370817a2b.png)
+
 Toutes ces statues ont été construite est énimé grâce aux modules mis a disposition par Babylon.js
 
 
