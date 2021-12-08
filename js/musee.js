@@ -46,12 +46,9 @@ function init(){
 
 
 function createLights(){
-	// https://doc.babylonjs.com/divingDeeper/lights/lights_introduction
-
 	var lightScene1 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(0,30,0), scene) ; 
 	// var lightScene2 = new BABYLON.HemisphericLight("lightHall", new BABYLON.Vector3(15,15,-15), scene) ;
-	// lightScene1.intensity=2;
-	// lightScene2.intensity=2;
+	var spot = new BABYLON.SpotLight("spotLightPendule", new BABYLON.Vector3(15,5,21), new BABYLON.Vector3(0, 1, 0), BABYLON.Tools.ToRadians(180), 1, scene);
 	
 
 }
@@ -290,7 +287,7 @@ function creerMateriau(){
 		materiauPorte = creerMateriauSimple("mat-porte",{texture:"assets/textures/porte.jpeg"},scene) ;
 		materiauPorteG = creerMateriauSimple("mat-porteg",{texture:"assets/textures/portegauche.jpeg"},scene) ;
 		materiauWood = creerMateriauSimple("mat-wood",{texture:"assets/textures/WOOD.png"},scene);
-		materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
+		// materiauIllusion2 = creerMateriauSimple("mat-illusion2",{texture:"assets/textures/illusion2.jpg"},scene);
 		materiauNoir= creerMateriauSimple("mat-noir",{couleur:new BABYLON.Color3(0.1,0.1,0.1)},scene);
 		materiauCloison = creerMateriauSimple("mat-cloison",{texture:"assets/textures/mur_bois.jpg"}, scene) ; 
 		materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
@@ -568,6 +565,7 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	// console.log(tableau.parent.position.x+tableau.position.x,tableau.parent.position.y+tableau.position.y,tableau.parent.position.z+tableau.position.z);
 	spot.diffuse=new BABYLON.Color3(0.2,0,0.2);
 	spot.intensity=10;
+	spot.setEnabled(false);
 	// console.log("spotLight "+name+" parent : " + spot.intensity);
 
 	Tableaux.push(tableau);
@@ -796,10 +794,12 @@ function set_FPS_mode(scene, canvas, camera){
 				Headers[i].isVisible = true;
 				// Descriptions[i].isVisible = true;
 				item.getChildren()[4].intensity=10;
+				item.getChildren()[4].setEnabled(true);
 			}else{
 				Headers[i].isVisible = false;
 				Descriptions[i].isVisible = false;
 				item.getChildren()[4].intensity=0;
+				item.getChildren()[4].setEnabled(false);
 			}
 		});
 
