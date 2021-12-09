@@ -124,17 +124,17 @@ function peuplerScene(){
 	cloisonFloorSalle3.rotation.x = 1/2*Math.PI;
 
 	//Création d'un mur avec une porte
-	var cloisonDown = createDoorWall("cloisonDown",{hauteur:10.2, largeur:30.0,hauteurPorte:4, largeurPorte:6,materiau:materiauCloison},scene) ;
+	var cloisonDown = createDoorWall("cloisonDown",{hauteur:10.2, largeur:30.0,hauteurPorte:4, largeurPorte:6,materiau:materiauCloison,materiau2:materiauMonde},scene) ;
 	cloisonDown.position = new BABYLON.Vector3(15,-0.2,30) ; 
 	cloisonDown.rotation.x=-Math.PI/2;
 
-	var doorwallLeft = createDoorWall("doorwallLeft", {hauteur:5.06, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauCloison }, scene);
+	var doorwallLeft = createDoorWall("doorwallLeft", {hauteur:5.06, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauAsie,materiau2:materiauCloison }, scene);
     doorwallLeft.position=new BABYLON.Vector3(25,0,15);
 	doorwallLeft.rotation.x=-Math.PI/2;
-    var doorwallMid = createDoorWall("doorwallMid", {hauteur:5.06, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauCloison ,materiau2:materiauMarbre}, scene);
+    var doorwallMid = createDoorWall("doorwallMid", {hauteur:5.06, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauAmeriqueSud ,materiau2:materiauCloison}, scene);
     doorwallMid.position=new BABYLON.Vector3(15,0,15);
 	doorwallMid.rotation.x=-Math.PI/2;
-    const doorwallRight = createDoorWall("doorwallRight", {hauteur:5.06, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauCloison }, scene);
+    const doorwallRight = createDoorWall("doorwallRight", {hauteur:5.06, largeur:10.0, hauteurPorte:2.5, largeurPorte:3.0, materiau:materiauAmeriqueNord,materiau2:materiauCloison }, scene);
     doorwallRight.position=new BABYLON.Vector3(5,0,15);
 	doorwallRight.rotation.x=-Math.PI/2;
 
@@ -177,13 +177,25 @@ function peuplerScene(){
 	barreg.rotation = new BABYLON.Vector3(0,0,3.3*Math.PI/6);
 	barreg.position = new BABYLON.Vector3(21.8,5.1,18.025) ; 
 
-	let barredp =creerCylindre("barreg",{height:2.75, diameter: 0.12,materiau:materiauWood});
+	let barredp =creerCylindre("barredp",{height:2.75, diameter: 0.12,materiau:materiauWood});
 	barredp.rotation = new BABYLON.Vector3(0,0,Math.PI/2);
-	barredp.position = new BABYLON.Vector3(1.5,5.95,18.025) ; 
+	barredp.position = new BABYLON.Vector3(1.5,5.95,17.95) ; 
 
-	let barregp =creerCylindre("barreg",{height:2.75, diameter: 0.12,materiau:materiauWood});
+	let barregp =creerCylindre("barregp",{height:2.75, diameter: 0.12,materiau:materiauWood});
 	barregp.rotation = new BABYLON.Vector3(0,0,Math.PI/2);
-	barregp.position = new BABYLON.Vector3(28.5,5.95,18.025) ; 
+	barregp.position = new BABYLON.Vector3(28.5,5.95,17.95) ; 
+
+	let poteaud1= creerCylindre("poteaud1",{height:1, diameter: 0.09,materiau:materiauNoir});
+	poteaud1.position = new BABYLON.Vector3(1,5.45,17.95) ;
+
+	let poteaud2= creerCylindre("poteaud2",{height:1, diameter: 0.09,materiau:materiauNoir});
+	poteaud2.position = new BABYLON.Vector3(2,5.45,17.95) ;
+
+	let poteaug1= creerCylindre("poteaug1",{height:1, diameter: 0.09,materiau:materiauNoir});
+	poteaug1.position = new BABYLON.Vector3(28,5.45,17.95) ;
+
+	let poteaug2= creerCylindre("poteaug2",{height:1, diameter: 0.09,materiau:materiauNoir});
+	poteaug2.position = new BABYLON.Vector3(29,5.45,17.95) ;
 
 	var cloisonFloorEscalier = creerCloison("cloisonFloorEscalier",{hauteur:3.0, largeur:3.0,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
 	cloisonFloorEscalier.position = new BABYLON.Vector3(15,3.25,15) ; 
@@ -216,6 +228,7 @@ function peuplerScene(){
 	sphere2.position = new BABYLON.Vector3(3,1,27);
 	sphere2.visibility=0.7;
 
+	
 	//creation d'une porte
 	createCentraleDoor(scene);
 	createRoomDoors(scene);	
@@ -233,7 +246,7 @@ function peuplerScene(){
 
 	creerEntree();
 	bateau=creerBateau();
-	bateau.position = new BABYLON.Vector3(15,4.9,4);
+	bateau.position = new BABYLON.Vector3(15,4.9,5);
 	const bateaupivotAt = new BABYLON.Vector3(15,4.9,5);
 	const bateaurelativePosition = bateaupivotAt.subtract(bateau.position)
 	bateau.setPivotPoint(bateaurelativePosition);
@@ -269,7 +282,7 @@ function creerBateau(){
 	voile.rotation = new BABYLON.Vector3(0,Math.PI/2,0);
 
 	var mer = creerCloison("mer",{hauteur:1.5, largeur:2.2, epaisseur: 0.02, materiau2:materiauMer,materiau:materiauMer},scene) ;
-	mer.position = new BABYLON.Vector3(0,0.2,-.7) ; 
+	mer.position = new BABYLON.Vector3(0,0.15,-.7) ; 
 	mer.rotation = new BABYLON.Vector3(Math.PI/2,0,0);
 
 	rondin1.parent=groupe;
@@ -296,8 +309,14 @@ function creerMateriau(){
 		materiauCarrelage = creerMateriauSimple("mat-carrelage",{texture:"assets/textures/solCarrelage.jpg"}, scene) ;
 		materiauMarbre = creerMateriauSimple("mat-marbre",{texture:"assets/textures/marbre.jpg"}, scene) ;
 		materiauMer = creerMateriauSimple("mat-mer",{texture:"assets/textures/wave.jpg"}, scene) ;
+		materiauMur = creerMateriauSimple("mat-mur",{texture:"assets/textures/murs.jpg"}, scene) ;
 		materiauBois = creerMateriauSimple("mat-bois",{texture:"assets/textures/bois.jpg"}, scene) ;
 		materiauVoile = creerMateriauSimple("mat-voile",{texture:"assets/textures/voile.jpeg"}, scene) ;
+		materiauAsie = creerMateriauSimple("mat-asie",{texture:"assets/textures/asie2.png"}, scene) ;
+		materiauAmeriqueNord = creerMateriauSimple("mat-north",{texture:"assets/textures/north.png"}, scene) ;
+		materiauAmeriqueSud = creerMateriauSimple("mat-sud",{texture:"assets/textures/south.png"}, scene) ;
+		materiauMonde = creerMateriauSimple("mat-monde",{texture:"assets/textures/monde.jpg"}, scene) ;
+		
 
 }
 function creerSons(){
@@ -324,11 +343,11 @@ function creerEntree(){
 	solEntree.position = new BABYLON.Vector3(15,0,30) ; 
 	solEntree.rotation.x = 1/2*Math.PI;
 
-	var plafondGAucheEntree = creerCloison("plafondGAucheEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauCloison},scene) ;
+	var plafondGAucheEntree = creerCloison("plafondGAucheEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauMur},scene) ;
 	plafondGAucheEntree.position = new BABYLON.Vector3(20,4.6,32.6) ; 
 	plafondGAucheEntree.rotation = new BABYLON.Vector3(-0.15*Math.PI-Math.PI/4,1/2*Math.PI,0);
 
-	var plafondDroiteEntree = creerCloison("plafondDroiteEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauCloison},scene) ;
+	var plafondDroiteEntree = creerCloison("plafondDroiteEntree",{hauteur:Math.sqrt(28), largeur:5.2,materiau:materiauMur},scene) ;
 	plafondDroiteEntree.position = new BABYLON.Vector3(10,4.6,32.6) ; 
 	plafondDroiteEntree.rotation = new BABYLON.Vector3(0.15*Math.PI+Math.PI/4,1/2*Math.PI,0);
 
@@ -563,13 +582,18 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	advancedDynamicTexture.addControl(description);
 	description.linkWithMesh(planedescription);
 
-    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1), new BABYLON.Vector3(0, -1, 0), BABYLON.Tools.ToRadians(45), 0.0, scene);
+    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1.8), new BABYLON.Vector3(0, -Math.PI/4, 0.2), BABYLON.Tools.ToRadians(31), 0.0, scene);
 	spot.parent = tableau;
 	// console.log(tableau.parent.position.x+tableau.position.x,tableau.parent.position.y+tableau.position.y,tableau.parent.position.z+tableau.position.z);
-	spot.diffuse=new BABYLON.Color3(0.2,0,0.2);
-	spot.intensity=10;
+	spot.diffuse=new BABYLON.Color3(0.4,0.5,0.6);
+	spot.intensity=0;
 	spot.setEnabled(false);
 	// console.log("spotLight "+name+" parent : " + spot.intensity);
+
+	var lamp= creerCylindre("lamp",{height:0.7, diameter: 0.2,materiau:materiauNoir});
+	lamp.rotation = new BABYLON.Vector3(Math.PI/2,0,Math.PI/2);
+	lamp.position=new BABYLON.Vector3(0,3.4,0);
+	lamp.parent=tableau;
 
 	Tableaux.push(tableau);
 	Headers.push(header);
@@ -634,10 +658,32 @@ function set_FPS_mode(scene, canvas, camera){
 	alphaRibbon=0;
 	alphaRibbon2=100;
 
+	aller=true;
+	retour=false;
+
 
     scene.registerBeforeRender( function()  {
+		if (5<=bateau.position.x<=25 && aller){
+			bateau.position.x+=0.05
+		}
+		else if (5<=bateau.position.x<=25 && retour){
+			bateau.position.x-=0.05
+		}
+		if (bateau.position.x>=25){
+			bateau.rotation.y-=0.015;
+			aller=false;
+			if(bateau.rotation.y<=-Math.PI){
+				retour=true;
+			}
+		}
+		else if (bateau.position.x<=5){
+			bateau.rotation.y+=0.015;
+			retour=false;
+			if(bateau.rotation.y>=0.0){
+				aller=true;
+			}
+		}
 		
-		bateau.rotation.y-=0.01;
 		if (alphaRibbon<=100)
 		{
 			alphaRibbon+=0.2;
@@ -792,7 +838,7 @@ function set_FPS_mode(scene, canvas, camera){
 				// console.log("intersection "+item.name);
 				Headers[i].isVisible = true;
 				// Descriptions[i].isVisible = true;
-				item.getChildren()[4].intensity=10;
+				item.getChildren()[4].intensity=4;
 				item.getChildren()[4].setEnabled(true);
 			}else{
 				Headers[i].isVisible = false;
