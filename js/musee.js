@@ -236,7 +236,10 @@ function peuplerScene(){
 
 	creerEntree();
 	bateau=creerBateau();
-	bateau.position = new BABYLON.Vector3(15,4.9,5);
+	bateau.position = new BABYLON.Vector3(15,4.9,4);
+	const bateaupivotAt = new BABYLON.Vector3(15,4.9,5);
+	const bateaurelativePosition = bateaupivotAt.subtract(bateau.position)
+	bateau.setPivotPoint(bateaurelativePosition);
 
 }
 
@@ -636,6 +639,7 @@ function set_FPS_mode(scene, canvas, camera){
 
     scene.registerBeforeRender( function()  {
 		
+		bateau.rotation.y-=0.01;
 		if (alphaRibbon<=100)
 		{
 			alphaRibbon+=0.2;
@@ -654,11 +658,6 @@ function set_FPS_mode(scene, canvas, camera){
 		discGaucheSol.rotation.y=alphaRibbon;
 		discDroitePlafond.rotation.y=alphaRibbon;
 		discGauchePlafond.rotation.y=alphaRibbon;
-
-
-
-		bateau.rotation.y= alphaRibbon;
-		bateau.position+=1;
 
 		//animation 3 portes
 		if(boxCamera.intersectsMesh(contactBoxPorte,false)){ i=1;	}

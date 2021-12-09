@@ -207,13 +207,13 @@ function createCentraleDoor(scene){
 	contactBoxDoorCentrale1.scaling = new BABYLON.Vector3(6,4,3);
 	contactBoxDoorCentrale1.position=new BABYLON.Vector3(15,0,31.5);
 	contactBoxDoorCentrale1.visibility = 0;
-	contactBoxDoorCentrale1.setPickable=false;
+	contactBoxDoorCentrale1.isPickable=false;
 
 	contactBoxDoorCentrale2=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale2", 1,scene);
 	contactBoxDoorCentrale2.scaling = new BABYLON.Vector3(6,4,2.5);
 	contactBoxDoorCentrale2.position=new BABYLON.Vector3(15,0,28.75);
 	contactBoxDoorCentrale2.visibility = 0;
-	contactBoxDoorCentrale2.setPickable=false;
+	contactBoxDoorCentrale2.isPickable=false;
 }
 function createRoomDoors(scene){
 	porteGauche=creerPorte("porteGauche",{hauteur:2.52, largeur:1.5,epaisseur:0.04,materiau2:materiauPorteG,materiau:materiauPorte},scene);
