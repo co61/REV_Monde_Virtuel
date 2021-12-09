@@ -207,13 +207,13 @@ function createCentraleDoor(scene){
 	contactBoxDoorCentrale1.scaling = new BABYLON.Vector3(6,4,3);
 	contactBoxDoorCentrale1.position=new BABYLON.Vector3(15,0,31.5);
 	contactBoxDoorCentrale1.visibility = 0;
-	contactBoxDoorCentrale1.setPickable=false;
+	contactBoxDoorCentrale1.isPickable=false;
 
 	contactBoxDoorCentrale2=BABYLON.Mesh.CreateBox("contactBoxDoorCentrale2", 1,scene);
 	contactBoxDoorCentrale2.scaling = new BABYLON.Vector3(6,4,2.5);
 	contactBoxDoorCentrale2.position=new BABYLON.Vector3(15,0,28.75);
 	contactBoxDoorCentrale2.visibility = 0;
-	contactBoxDoorCentrale2.setPickable=false;
+	contactBoxDoorCentrale2.isPickable=false;
 }
 function createRoomDoors(scene){
 	porteGauche=creerPorte("porteGauche",{hauteur:2.52, largeur:1.5,epaisseur:0.04,materiau2:materiauPorteG,materiau:materiauPorte},scene);
@@ -223,10 +223,10 @@ function createRoomDoors(scene){
 	porteDroite.position=new BABYLON.Vector3(24.25,0,15);
 	porteDroite.rotation.x=0;
 	contactBoxPorte=BABYLON.Mesh.CreateBox("contactBoxPorte", 1,scene);
-	contactBoxPorte.scaling = new BABYLON.Vector3(2,3,5);
-	contactBoxPorte.position=new BABYLON.Vector3(25.75,0,15);
+	contactBoxPorte.scaling = new BABYLON.Vector3(3,3,5);
+	contactBoxPorte.position=new BABYLON.Vector3(25.0,0,15);
 	contactBoxPorte.visibility = 0;
-	contactBoxPorte.setPickable=false;
+	contactBoxPorte.isPickable=false;
 
 	porteGauche2=creerPorte("porteGauche2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
 	porteDroite2=creerPorte("porteDroite2",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
@@ -235,10 +235,10 @@ function createRoomDoors(scene){
 	porteDroite2.position=new BABYLON.Vector3(14.25,0,15);
 	porteDroite2.rotation.x=0;	
 	contactBoxPorte2=BABYLON.Mesh.CreateBox("contactBoxPorte2", 1,scene);
-	contactBoxPorte2.scaling = new BABYLON.Vector3(2,3,5);
-	contactBoxPorte2.position=new BABYLON.Vector3(15.75,0,15);
+	contactBoxPorte2.scaling = new BABYLON.Vector3(3,3,5);
+	contactBoxPorte2.position=new BABYLON.Vector3(15.0,0,15);
 	contactBoxPorte2.visibility = 0;
-	contactBoxPorte2.setPickable=false;
+	contactBoxPorte2.isPickable=false;
 
 	porteGauche3=creerPorte("porteGauche3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorteG,materiau:materiauPorte,epaisseur:0.04},scene);
 	porteDroite3=creerPorte("porteDroite3",{hauteur:2.52, largeur:1.5,materiau2:materiauPorte,materiau:materiauPorteG,epaisseur:0.04},scene);
@@ -247,10 +247,10 @@ function createRoomDoors(scene){
 	porteDroite3.position=new BABYLON.Vector3(4.25,0,15);
 	porteDroite3.rotation.x=0;
 	contactBoxPorte3=BABYLON.Mesh.CreateBox("contactBoxPorte3", 1,scene);
-	contactBoxPorte3.scaling = new BABYLON.Vector3(2,3,5);
-	contactBoxPorte3.position=new BABYLON.Vector3(5.75,0,15);
+	contactBoxPorte3.scaling = new BABYLON.Vector3(3,3,5);
+	contactBoxPorte3.position=new BABYLON.Vector3(5,0,15);
 	contactBoxPorte3.visibility = 0;
-	contactBoxPorte3.setPickable=false;
+	contactBoxPorte3.isPickable=false;
 }
 
 function creerEscalier(nom,opts,scn){
