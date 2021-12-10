@@ -63,23 +63,17 @@ Les portes détectent automatiquement si l'avatar se trouve proche en rentrant e
 
 Lorsque l'avatar sort de la zone la porte se referme. La porte d'entrée a la spécialité de détecter le sens de marche de l'avatar et son sens d'ouverture en dépend. C'est la seule porte à double battants s'ouvrant différemment selon le sens de l'avatar 
 
-![image](https://user-images.githubusercontent.com/63447104/145598063-9e34a847-cd48-45c2-81f0-9c972c8bdc3e.png)
-
 ```
 //animation porte centrale
         if (boxCamera.intersectsMesh(contactBoxDoorCentrale1, false)) {
-			if (!porte2)
-			{
+			if (!porte2){
 				porte1=true;
-
 				if(!africaSound.isPlaying){
 					africaSound.play();
 				}
-
 				if (!doorSound.isPlaying){
 					doorSound.play();
 				}
-				
 				if(alpha<Math.PI/2){
 					alpha+=0.05;
 				}
@@ -88,13 +82,12 @@ Lorsque l'avatar sort de la zone la porte se referme. La porte d'entrée a la sp
 				}
 			}
         }
-		else if (boxCamera.intersectsMesh(contactBoxDoorCentrale2,false))
-		{
+		else if (boxCamera.intersectsMesh(contactBoxDoorCentrale2,false)){
 			if (!porte1){
 				porte2=true; 
 				if (!doorSound.isPlaying){
-					doorSound.play();}
-
+					doorSound.play();
+				}
 				if(alpha>-Math.PI/2){
 					alpha-=0.05;
 				}
@@ -105,8 +98,7 @@ Lorsque l'avatar sort de la zone la porte se referme. La porte d'entrée a la sp
 		}
 		
 		else{
-			if (porte1) 
-			{
+			if (porte1){
 				if(alpha<0.05){
 					alpha-=0.05;
 				}
@@ -120,10 +112,8 @@ Lorsque l'avatar sort de la zone la porte se referme. La porte d'entrée a la sp
 				if (!africaSound.isPlaying){
 					africaSound.play();
 				}
-
 			}
-			else if (porte2) 
-			{
+			else if (porte2){
 				if(alpha<Math.PI/2){
 					alpha+=0.05;
 				}
@@ -137,10 +127,8 @@ Lorsque l'avatar sort de la zone la porte se referme. La porte d'entrée a la sp
 				if (!africaSound.isPlaying){
 					africaSound.play();
 				}
-
 			}
-			else
-			{	
+			else{	
 				if(alpha<-0.02){
 					alpha+=0.05;
 				}
@@ -149,7 +137,6 @@ Lorsque l'avatar sort de la zone la porte se referme. La porte d'entrée a la sp
 					alpha-=0.05;
 				}
 			}
-			
 		}
 
 		porteCentrale.rotation.y=alpha;
@@ -162,13 +149,11 @@ Les 3 autres sont coulissantes.
 ![image](https://user-images.githubusercontent.com/63447104/145600463-32ee8869-e914-42a4-a849-aa2b8cdb607f.png)
 
 
-
 ### L'escalier 
 
 En face des portes d'entrées se trouve l'escalier double menant à la mezanine. Les rambardes ajoutées empèche la chute de l'avatar en dehors de l'escalier. Celui-ci peut être parcouru par l'avatar. Une pente lisse invisible a été rajouté sur la première partie de l'escalier pour permettre un déplacement plus simple, plus fluide et moins dépendant du regard de l'avatar.
 
 ![image](https://user-images.githubusercontent.com/63447104/145600351-99db7447-8511-4fcc-935a-9aca42254c56.png)
-
 
 
 ### Les animations
