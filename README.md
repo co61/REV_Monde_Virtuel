@@ -55,15 +55,12 @@ Les tableaux sont choisis suivant les thèmes des salles. Ce sont des photos de 
 ![image](https://user-images.githubusercontent.com/63447104/145600176-fd636a61-d24f-4511-95a6-545287013d9b.png)
 
    ```
-   function creerTableaux(){
-	
-	
-	
+function creerTableaux(){
 	placeTableau("Cap Canaveral", "assets/NorthAmerica/Images/Cap Canaveral.jpg", cloisonRightSalle3, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI ,"Cap Canaveral est le domaine américain de lancement de fusées pour l'espace, il s'etend sur de nombreux kilomètres et à une forte capacité de lancement.");
-	....
-    }
+	...
+}
     
-    function placeTableau(name, file, parent, position, rotation, tableauDescription){
+function placeTableau(name, file, parent, position, rotation, tableauDescription){
 	//Le tableau
 	var tableau = creerPoster(name,{tableau:file},scene) ;
 	tableau.parent = parent ; // on accroche le tableau à la cloison parent
@@ -106,7 +103,7 @@ Les tableaux sont choisis suivant les thèmes des salles. Ce sont des photos de 
 	advancedDynamicTexture.addControl(description);
 	description.linkWithMesh(planedescription);
 	// Sa lumière 
-        var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1.8), new BABYLON.Vector3(0, -Math.PI/4, 0.2), BABYLON.Tools.ToRadians(31), 0.0, scene);
+	var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1.8), new BABYLON.Vector3(0, -Math.PI/4, 0.2), BABYLON.Tools.ToRadians(31), 0.0, scene);
 	spot.parent = tableau;
 	spot.diffuse=new BABYLON.Color3(0.4,0.5,0.6);
 	spot.intensity=0;
@@ -116,13 +113,13 @@ Les tableaux sont choisis suivant les thèmes des salles. Ce sont des photos de 
 	lamp.rotation = new BABYLON.Vector3(Math.PI/2,0,Math.PI/2);
 	lamp.position=new BABYLON.Vector3(0,3.4,0);
 	lamp.parent=tableau;
-	
+
 	Tableaux.push(tableau);
 	Headers.push(header);
 	Descriptions.push(description);
 	// Sounds.push(sound);
 }
-	
+
   ```
 
 
