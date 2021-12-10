@@ -59,6 +59,7 @@ function peuplerScene(){
 	// Création du sol global
 	var sol = creerSol("sol",{},scene) ; 
 	sol.receiveShadows = true;
+	var ciel = creerCiel("ciel",scene);
 
 	creerMateriau();
 
@@ -144,6 +145,51 @@ function peuplerScene(){
 	plafond.position = new BABYLON.Vector3(15,10,0) ; 
 	plafond.rotation.x = 1/2*Math.PI;
 
+
+	advancedDynamicTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
+	curs = new BABYLON.GUI.Rectangle("curs");
+	curs.width='10px';
+	curs.height='10px';
+	curs.color='red';
+	advancedDynamicTexture.addControl(curs);
+
+	// Création d une sphere
+	var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere1", {diameter:1.0}, scene) ; 
+	sphere1.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
+	sphere1.position = new BABYLON.Vector3(15,6,14);
+	sphere1.visibility=0.7;
+
+	var sphere2 = BABYLON.MeshBuilder.CreateSphere("sphere2", {diameter:1.0}, scene) ; 
+	sphere2.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
+	sphere2.position = new BABYLON.Vector3(3,1,27);
+	sphere2.visibility=0.7;
+
+	
+	//creation d'une porte
+	createCentraleDoor(scene);
+	createRoomDoors(scene);	
+	creerEscalierCentral();
+	creerContactBoxes();
+
+	creerTableaux();
+
+	creerPendule("pendule",scene);
+	var penduleBox = BABYLON.Mesh.CreateBox("penduleBox",1, scene); 
+	penduleBox.scaling = new BABYLON.Vector3(5,4,2);
+	penduleBox.position = new BABYLON.Vector3(15,8,22);
+	penduleBox.visibility=0;
+	creerSons();
+
+	creerEntree();
+	bateau=creerBateau();
+	bateau.position = new BABYLON.Vector3(15,4.9,5);
+	const bateaupivotAt = new BABYLON.Vector3(15,4.9,5);
+	const bateaurelativePosition = bateaupivotAt.subtract(bateau.position)
+	bateau.setPivotPoint(bateaurelativePosition);
+
+}
+
+function creerEscalierCentral(){
 	//creation d'un escalier
 	var escalier2 = creerEscalier("escalier",{hauteur:3.25, largeur:3.0, longueur : 6, nbmarches:12,materiau2:materiauWood,materiau:materiauMarbre,poteau:"dg"},scene) ;
 	escalier2.position = new BABYLON.Vector3(15,0.1,24) ; 
@@ -207,52 +253,7 @@ function peuplerScene(){
 	var cloisonFloorEscalier2 = creerCloison("cloisonFloorEscalier2",{hauteur:3.0, largeur:3.0,materiau2:materiauWood,materiau:materiauMarbre},scene) ;
 	cloisonFloorEscalier2.position = new BABYLON.Vector3(28.5,5,15) ; 
 	cloisonFloorEscalier2.rotation.x = 1/2*Math.PI;
-
-
-
-	advancedDynamicTexture = new BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI('UI');
-	curs = new BABYLON.GUI.Rectangle("curs");
-	curs.width='10px';
-	curs.height='10px';
-	curs.color='red';
-	advancedDynamicTexture.addControl(curs);
-
-	// Création d une sphere
-	var sphere1 = BABYLON.MeshBuilder.CreateSphere("sphere1", {diameter:1.0}, scene) ; 
-	sphere1.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
-	sphere1.position = new BABYLON.Vector3(15,6,14);
-	sphere1.visibility=0.7;
-
-	var sphere2 = BABYLON.MeshBuilder.CreateSphere("sphere2", {diameter:1.0}, scene) ; 
-	sphere2.material = new BABYLON.StandardMaterial("materiauMarbre", scene) ;
-	sphere2.position = new BABYLON.Vector3(3,1,27);
-	sphere2.visibility=0.7;
-
-	
-	//creation d'une porte
-	createCentraleDoor(scene);
-	createRoomDoors(scene);	
-
-	creerContactBoxes();
-
-	creerTableaux();
-
-	creerPendule("pendule",scene);
-	var penduleBox = BABYLON.Mesh.CreateBox("penduleBox",1, scene); 
-	penduleBox.scaling = new BABYLON.Vector3(5,4,2);
-	penduleBox.position = new BABYLON.Vector3(15,8,22);
-	penduleBox.visibility=0;
-	creerSons();
-
-	creerEntree();
-	bateau=creerBateau();
-	bateau.position = new BABYLON.Vector3(15,4.9,5);
-	const bateaupivotAt = new BABYLON.Vector3(15,4.9,5);
-	const bateaurelativePosition = bateaupivotAt.subtract(bateau.position)
-	bateau.setPivotPoint(bateaurelativePosition);
-
 }
-
 function creerBateau(){
 	var groupe = new BABYLON.TransformNode("groupe-bateau") ; 
 
@@ -316,7 +317,7 @@ function creerMateriau(){
 		materiauAmeriqueNord = creerMateriauSimple("mat-north",{texture:"assets/textures/north.png"}, scene) ;
 		materiauAmeriqueSud = creerMateriauSimple("mat-sud",{texture:"assets/textures/south.png"}, scene) ;
 		materiauMonde = creerMateriauSimple("mat-monde",{texture:"assets/textures/monde.jpg"}, scene) ;
-		
+		materiauCadre = creerMateriauSimple("mat-cadre",{texture:"assets/textures/cadre.jpg"}, scene) ;
 
 }
 function creerSons(){
@@ -582,18 +583,23 @@ function placeTableau(name, file, parent, position, rotation, tableauDescription
 	advancedDynamicTexture.addControl(description);
 	description.linkWithMesh(planedescription);
 
-    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1.8), new BABYLON.Vector3(0, -Math.PI/4, 0.2), BABYLON.Tools.ToRadians(31), 0.0, scene);
+    var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,6.75,-1.8), new BABYLON.Vector3(0, -Math.PI/4, 0.2), BABYLON.Tools.ToRadians(35), 0.0, scene);
 	spot.parent = tableau;
 	// console.log(tableau.parent.position.x+tableau.position.x,tableau.parent.position.y+tableau.position.y,tableau.parent.position.z+tableau.position.z);
 	spot.diffuse=new BABYLON.Color3(0.4,0.5,0.6);
 	spot.intensity=0;
 	spot.setEnabled(false);
-	// console.log("spotLight "+name+" parent : " + spot.intensity);
+	//console.log("spotLight "+name+" parent : " + spot.intensity);
 
 	var lamp= creerCylindre("lamp",{height:0.7, diameter: 0.2,materiau:materiauNoir});
 	lamp.rotation = new BABYLON.Vector3(Math.PI/2,0,Math.PI/2);
 	lamp.position=new BABYLON.Vector3(0,3.4,0);
 	lamp.parent=tableau;
+
+	var cadre = creerCloison("cadre_"+name,{hauteur:2.7, largeur:2.2, epaisseur:0.01, materiau:materiauCadre},scene);
+	cadre.parent=tableau;
+	cadre.position.z+=0.01;
+	cadre.position.y-=0.1; 
 
 	Tableaux.push(tableau);
 	Headers.push(header);
