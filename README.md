@@ -54,6 +54,76 @@ Les tableaux sont choisis suivant les thèmes des salles. Ce sont des photos de 
 
 ![image](https://user-images.githubusercontent.com/63447104/145600176-fd636a61-d24f-4511-95a6-545287013d9b.png)
 
+   ```
+   function creerTableaux(){
+	
+	
+	
+	placeTableau("Cap Canaveral", "assets/NorthAmerica/Images/Cap Canaveral.jpg", cloisonRightSalle3, new BABYLON.Vector3(3.6,1.5,0.2), Math.PI ,"Cap Canaveral est le domaine américain de lancement de fusées pour l'espace, il s'etend sur de nombreux kilomètres et à une forte capacité de lancement.");
+	....
+    }
+    
+    function placeTableau(name, file, parent, position, rotation, tableauDescription){
+	//Le tableau
+	var tableau = creerPoster(name,{tableau:file},scene) ;
+	tableau.parent = parent ; // on accroche le tableau à la cloison parent
+	tableau.rotation.y=rotation;
+	tableau.position = position;
+	// Sa box de collision
+	var boxCollision = BABYLON.MeshBuilder.CreateBox("box_"+name, {width:2,height:4,depth:5}, scene);
+	boxCollision.position=new BABYLON.Vector3(0,0,-2);
+	boxCollision.isPickable=false;
+	boxCollision.parent = tableau;
+	boxCollision.visibility = 0;
+	// Son titre 
+	var plane = BABYLON.Mesh.CreatePlane("plane",0.1);
+	plane.parent=tableau;
+	plane.position.y = -0.07;
+	plane.visibility = 0; 
+	plane.isPickable=false;
+	var header = BABYLON.GUI.Button.CreateSimpleButton(name, name);
+	header.width = "200px";
+	header.height = "40px";
+	header.color = "black";
+	header.fontSize = 18 ;
+	header.background = "white";
+	header.isVisible = false;
+	advancedDynamicTexture.addControl(header);
+	header.linkWithMesh(plane);
+	// Sa description 
+	var planedescription = BABYLON.Mesh.CreatePlane("planedescription",0.1);
+	planedescription.parent=tableau;
+	planedescription.position.y = -0.65;
+	planedescription.visibility = 0; 
+	planedescription.isPickable=false;
+	var description = BABYLON.GUI.Button.CreateSimpleButton(name, tableauDescription);
+	description.width = "450px";
+	description.height = "200px";
+	description.color = "white";
+	description.fontSize = 15 ;
+	description.cornerRadius = 10;
+	description.isVisible = false;
+	advancedDynamicTexture.addControl(description);
+	description.linkWithMesh(planedescription);
+	// Sa lumière 
+        var spot = new BABYLON.SpotLight("spotLight"+name, new BABYLON.Vector3(0,7,-1.8), new BABYLON.Vector3(0, -Math.PI/4, 0.2), BABYLON.Tools.ToRadians(31), 0.0, scene);
+	spot.parent = tableau;
+	spot.diffuse=new BABYLON.Color3(0.4,0.5,0.6);
+	spot.intensity=0;
+	spot.setEnabled(false);
+	// Sa lampe
+	var lamp= creerCylindre("lamp",{height:0.7, diameter: 0.2,materiau:materiauNoir});
+	lamp.rotation = new BABYLON.Vector3(Math.PI/2,0,Math.PI/2);
+	lamp.position=new BABYLON.Vector3(0,3.4,0);
+	lamp.parent=tableau;
+	
+	Tableaux.push(tableau);
+	Headers.push(header);
+	Descriptions.push(description);
+	// Sounds.push(sound);
+}
+	
+  ```
 
 
 ### Les portes 
@@ -262,11 +332,40 @@ Toutes ces statues ont été construites et animées à la main grâce aux modul
 
 ### Les balises
 
-Des sphères blanche partiellement transparentes sont placées dans un coin du hall ainsi qu'au bord de la mezzanine. Ces dernières sont des balises permettant à l'avatar de se téléporter à la position des balises lorsqu'il clique dessus grâce au curseur ajouté au milieu de l'écrant (Carré rouge). Ces balises permettent une simplicité de déplacement entre la mezzanine et le hall mais n'ont pas été jugées nécessaires en d'autres lieux étant donné la facilité de déplacement.
+Des sphères blanche partiellement transparentes sont placées dans un coin du hall ainsi qu'au bord de la mezzanine. Ces dernières sont des balises permettant à l'avatar de se téléporter à la position des balises lorsqu'il clique dessus grâce au curseur ajouté au milieu de l'écrant (Carré rouge). Ces balises permettent une simplicité de déplacement entre la mezzanine et le hall mais n'ont pas été jugées nécessaires en d'autres lieux étant donné la facilité de déplacement. Pour leur réalisation, des shpère semi transparantes ont été générées puis nous détectons ensuite si au clique de la souris le curseur rouge central croise le Mesh d'une sphère, si oui nous changeons les coordonnées de l'avatar en celle de la sphère.
 
 ![image](https://user-images.githubusercontent.com/63447104/145600228-4227e81c-73cc-429e-bb6e-8d9fcf981926.png)
 
+```
+scene.onPointerDown = function (evt, pickResult) {
+		//true/false check if we're locked, faster than checking pointerlock on each single click.
+		if (!isLocked) {
+			canvas.requestPointerLock = canvas.requestPointerLock || canvas.msRequestPointerLock || canvas.mozRequestPointerLock || canvas.webkitRequestPointerLock || false;
+			if (canvas.requestPointerLock) {
+				canvas.requestPointerLock();
+			}
+		}
+		// console.log(pickResult.pickedMesh.name);
+		
+		var resultat = scene.pick(window.innerWidth/2, window.innerHeight/2);
+		if(resultat.pickedMesh.name=='sphere1' || resultat.pickedMesh.name=='sphere2'){
+			camera.position= new BABYLON.Vector3(resultat.pickedMesh.position.x,resultat.pickedMesh.position.y+1,resultat.pickedMesh.position.z);
+		}
+		if (resultat.pickedMesh.name=="penduleBox"){
+			stopNewton=!stopNewton;
+		}
+		Tableaux.forEach(function (item, i){
+			if(resultat.pickedMesh.name==item.getChildren()[0].name){
+				// console.log("hit "+item.name);
+				// console.log("hit "+Headers[i].isVisible);
+				Descriptions[i].isVisible = !Descriptions[i].isVisible ;
 
+			}else{
+			}
+		});
+
+	};
+```
 ### Les sons 
 
 Nous avons choisi de lier les sons aux différentes salles plutôt qu'aux tableaux. Ces musiques se lancent suivant la pièce où se trouve l'avatar grâce à une box de collision qui est générée pour chaque salle. Chaque son est en rapport avec le continent de la salle où il se trouve. 
