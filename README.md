@@ -8,6 +8,12 @@ Logiciels et librarie utilisés :
 - Java Script pour le corps du code et la mise en place de l'environnement virtuel
 - Babylon.js est la librairie utilisée pour réaliser cet environnement virtuel
 
+## Procédure de démarage 
+
+Télécharger le dossier complet puis ouvrir le fichier index.html
+L'avatar arrivera devant la porte d'entrée du musée il suffit d'avancer et la porte s'ouvrira.
+Ensuite libre à vous de vous promener dans le musée
+
 ## Le musée
 
 Notre musée porte sur la représentation de lieux touristiques sur 5 continents de notre planète Terre, nous avons décidé d'exclure l'Europe et l'Antarctique par rapport au nombre de pièces.
